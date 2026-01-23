@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Layout } from "@/components/Layout";
+import { LazyImage } from "@/components/LazyImage";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { galleryImages } from "@/data/siteData";
 import heroDome from "@/assets/hero-dome.jpg";
@@ -202,11 +203,10 @@ const Gallery = () => {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <img
+                    <LazyImage
                       src={imageData.src}
                       alt={image.alt}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
                     />
                     
                     {/* Overlay Gradient */}

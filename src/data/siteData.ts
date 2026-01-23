@@ -27,6 +27,7 @@ export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Rooms", href: "/rooms" },
+  { label: "Events", href: "/events" },
   { label: "Experiences", href: "/experiences" },
   { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
@@ -120,20 +121,334 @@ export const roomsPage = {
     subtitle: "Our Collection",
     title: "Choose Your Sanctuary",
     description: "Each dome is uniquely designed to offer distinct experiences while maintaining our commitment to sustainability and comfort."
-  }
+  },
+  commonAmenities: {
+    subtitle: "Common Amenities",
+    title: "Shared Spaces for Every Guest",
+    items: [
+      {
+        title: "Beach-themed Swimming Pool",
+        description: "Enjoy a refreshing dip in our beautiful beach-themed swimming pool.",
+        icon: "🏊"
+      },
+      {
+        title: "Community Kitchen",
+        description: "Well-equipped kitchen for self-cooking with all essential amenities.",
+        icon: "👨‍🍳"
+      },
+      {
+        title: "Spacious Dining Area",
+        description: "Comfortable dining space perfect for group meals and conversations.",
+        icon: "🍽️"
+      },
+      {
+        title: "Open Lawn",
+        description: "Expansive open lawn perfect for relaxation and gatherings.",
+        icon: "🌿"
+      },
+      {
+        title: "Music System",
+        description: "Quality music system available in common areas for entertainment.",
+        icon: "🎵"
+      },
+      {
+        title: "Projector",
+        description: "Projector setup for movie nights and group screenings.",
+        icon: "🎬"
+      },
+      {
+        title: "Indoor Board Games",
+        description: "Collection of board games for fun indoor activities.",
+        icon: "🎲"
+      },
+      {
+        title: "Outdoor Games",
+        description: "Cricket, badminton, and other outdoor games available.",
+        icon: "🏏"
+      }
+    ]
+  },
+  gstPercentage: 18
 };
+
+// Booking Add-Ons Configuration
+export interface BookingAddOn {
+  id: string;
+  name: string;
+  price: number;
+  icon: string;
+  features: string[];
+}
+
+export const bookingAddOns: BookingAddOn[] = [
+  {
+    id: "candle-light-dinner",
+    name: "Candle Light Dinner",
+    price: 2500,
+    icon: "🕯️",
+    features: [
+      "Romantic setup with candles & flowers",
+      "3-course gourmet meal for 2",
+      "Premium non-alcoholic beverages",
+      "Dedicated service staff",
+      "Personalized menu options available",
+      "Scenic outdoor or private deck location"
+    ]
+  },
+  {
+    id: "birthday-celebration",
+    name: "Birthday Celebration",
+    price: 3000,
+    icon: "🎂",
+    features: [
+      "Customized birthday decoration",
+      "Theme-based balloon setup",
+      "Premium birthday cake (1 kg)",
+      "Photo props & accessories",
+      "Birthday banner with name",
+      "Confetti & party poppers",
+      "Birthday cap for the guest of honor"
+    ]
+  },
+  {
+    id: "anniversary-decor",
+    name: "Anniversary / Special Event Decor",
+    price: 3500,
+    icon: "💐",
+    features: [
+      "Elegant floral arrangements",
+      "Romantic lighting setup",
+      "Heart-shaped balloon decoration",
+      "Rose petal bed decoration",
+      "Customized banner",
+      "Champagne or sparkling juice",
+      "Photo corner setup",
+      "Complimentary couple photoshoot (30 mins)"
+    ]
+  }
+];
+
+// Events Page Configuration
+export const eventsPage = {
+  hero: {
+    subtitle: "Celebrate at Idika",
+    title: "Where Nature Hosts Your Moments",
+    description: "Create unforgettable memories in our nature-immersed event spaces. From intimate gatherings to grand celebrations, let the earth cradle your special moments."
+  },
+  poeticSection: {
+    title: "Experience the Essence",
+    lines: [
+      "Celebrate life with your loved ones in beautiful indoor and outdoor spaces, immersed in nature.",
+      "Come. Take off your shoes.",
+      "Lie down on the earth that cradles you like a mother.",
+      "Let the mud walls whisper you back to what's real."
+    ]
+  },
+  tags: [
+    "#NatureEvents",
+    "#WeddingsAtIdika",
+    "#BirthdayCelebrations",
+    "#PreWeddingShoot",
+    "#PrivateParties"
+  ]
+};
+
+// Event Types
+export interface EventType {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  image: string;
+  tags: string[];
+  basePrice: number;
+  priceNote: string;
+}
+
+export const eventTypes: EventType[] = [
+  {
+    id: "parties",
+    name: "Parties",
+    description: "Host memorable get-togethers with friends and family in our serene natural setting.",
+    icon: "🎉",
+    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop",
+    tags: ["#PrivateParties", "#NatureEvents"],
+    basePrice: 15000,
+    priceNote: "Basic package • Customizations available"
+  },
+  {
+    id: "birthday",
+    name: "Birthday Celebrations",
+    description: "Make birthdays special with nature as your backdrop. Perfect for all ages.",
+    icon: "🎂",
+    image: "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=800&h=600&fit=crop",
+    tags: ["#BirthdayCelebrations", "#NatureEvents"],
+    basePrice: 12000,
+    priceNote: "Basic package • Customizations available"
+  },
+  {
+    id: "pre-wedding",
+    name: "Pre-Wedding Shoots",
+    description: "Capture your love story amidst lush greenery, rustic domes, and golden sunsets.",
+    icon: "📸",
+    image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop",
+    tags: ["#PreWeddingShoot", "#WeddingsAtIdika"],
+    basePrice: 10000,
+    priceNote: "Location fee only • Customizations available"
+  },
+  {
+    id: "wedding",
+    name: "Wedding Celebrations",
+    description: "Exchange vows surrounded by nature. An intimate, earthy celebration of love.",
+    icon: "💒",
+    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop",
+    tags: ["#WeddingsAtIdika", "#NatureEvents"],
+    basePrice: 50000,
+    priceNote: "Basic package • Customizations available"
+  },
+  {
+    id: "private-gathering",
+    name: "Private Gatherings",
+    description: "Corporate retreats, family reunions, or friend circles—find your space here.",
+    icon: "👥",
+    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop",
+    tags: ["#PrivateParties", "#NatureEvents"],
+    basePrice: 20000,
+    priceNote: "Basic package • Customizations available"
+  }
+];
+
+// Event Venues
+export interface EventVenue {
+  id: string;
+  name: string;
+  type: "indoor" | "outdoor";
+  capacity: number;
+  description: string;
+  features: string[];
+  suitableFor: string[];
+  basePrice: number;
+  image: string;
+}
+
+export const eventVenues: EventVenue[] = [
+  {
+    id: "indoor-hall",
+    name: "Indoor AC Hall",
+    type: "indoor",
+    capacity: 50,
+    description: "A climate-controlled space with elegant earthen aesthetics, perfect for intimate celebrations.",
+    features: [
+      "Air-conditioned comfort",
+      "Ambient lighting options",
+      "Sound system included",
+      "Flexible seating arrangements",
+      "Attached restrooms",
+      "Catering setup area"
+    ],
+    suitableFor: ["Birthdays", "Private Parties", "Ceremonies", "Corporate Events"],
+    basePrice: 25000,
+    image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&h=600&fit=crop"
+  },
+  {
+    id: "garden-stage",
+    name: "Garden & Stage",
+    type: "outdoor",
+    capacity: 100,
+    description: "An expansive outdoor space with a dedicated stage, surrounded by lush greenery and open skies.",
+    features: [
+      "Covered stage area",
+      "Open lawn seating",
+      "Natural ambiance",
+      "String lights setup",
+      "Bonfire area available",
+      "Ample parking space"
+    ],
+    suitableFor: ["Weddings", "Receptions", "Large Celebrations", "Pre-Wedding Shoots"],
+    basePrice: 45000,
+    image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop"
+  }
+];
+
+// Event Add-ons/Services
+export interface EventAddOn {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  icon: string;
+}
+
+export const eventAddOns: EventAddOn[] = [
+  {
+    id: "decor-basic",
+    name: "Basic Decor Package",
+    price: 5000,
+    description: "Balloon arrangements, flower vases, and table decorations",
+    icon: "🎈"
+  },
+  {
+    id: "decor-premium",
+    name: "Premium Decor Package",
+    price: 15000,
+    description: "Themed decorations, floral arches, drapes, and centerpieces",
+    icon: "💐"
+  },
+  {
+    id: "lighting",
+    name: "Professional Lighting",
+    price: 8000,
+    description: "String lights, spotlights, and ambient lighting setup",
+    icon: "💡"
+  },
+  {
+    id: "sound-system",
+    name: "DJ & Sound System",
+    price: 10000,
+    description: "Professional DJ setup with speakers and microphones",
+    icon: "🎵"
+  },
+  {
+    id: "photography",
+    name: "Event Photography",
+    price: 12000,
+    description: "Professional photographer for 4 hours with edited photos",
+    icon: "📷"
+  },
+  {
+    id: "catering",
+    name: "Catering (Per Plate)",
+    price: 500,
+    description: "Veg/Non-veg menu options with starters, main course, and dessert",
+    icon: "🍽️"
+  },
+  {
+    id: "seating",
+    name: "Premium Seating",
+    price: 3000,
+    description: "Cushioned chairs and decorated tables",
+    icon: "🪑"
+  },
+  {
+    id: "stage-decor",
+    name: "Stage Decoration",
+    price: 8000,
+    description: "Floral backdrop, lighting, and stage props",
+    icon: "🎭"
+  }
+];
 
 export const rooms = [
   {
     id: 1,
-    name: "The Sun-Drenched Dome",
-    category: "Signature Suite",
-    description: "Experience the signature Idika experience with 360° skylights and natural cooling.",
-    fullDescription: "Our flagship dome featuring expansive skylights that fill the space with natural light. The curved earthbag walls create a cocoon-like environment that naturally maintains a comfortable temperature year-round.",
+    name: "Tvara",
+    category: "Regular Dome",
+    description: "Experience tranquility in our air-conditioned dome with plush bedding and modern amenities.",
+    fullDescription: "Tvara offers a perfect blend of comfort and nature. This air-conditioned dome features a plush bed with bunk bed options, a spacious bathroom with natural bathing tub, and high-speed Wi-Fi connectivity for your convenience.",
     images: [
       {
         src: "https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=800&h=600&fit=crop",
-        alt: "Luxury dome exterior at golden hour"
+        alt: "Tvara dome exterior"
       },
       {
         src: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&h=600&fit=crop",
@@ -154,37 +469,33 @@ export const rooms = [
     ],
     youtubeVideoId: "dQw4w9WgXcQ",
     amenities: [
-      { icon: "Sun", title: "360° Skylight", description: "Natural light and stargazing" },
-      { icon: "Thermometer", title: "Natural Cooling", description: "24°C year-round without AC" },
-      { icon: "Bed", title: "King Bed", description: "Premium organic mattress" },
-      { icon: "Waves", title: "Rainwater Shower", description: "Cold and hot water available" },
-      { icon: "UtensilsCrossed", title: "Kitchenette", description: "Farm-fresh cooking space" },
-      { icon: "Trees", title: "Garden Access", description: "Pick your own herbs" }
+      { icon: "Wind", title: "Air-conditioned Dome", description: "Climate controlled comfort" },
+      { icon: "Bed", title: "Plush Bed with Bunk Bed", description: "Comfortable sleeping arrangements" },
+      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" },
+      { icon: "Zap", title: "High-speed 4G/5G Wi-Fi", description: "Stay connected always" }
     ],
     maxGuests: 5,
-    pricing: {
-      2: 4000,
-      3: 5000,
-      4: 7000,
-      5: 9000
-    },
+    baseGuests: 2,
+    basePrice: 7000,
+    extraGuestCharge: 1000,
     gstPercentage: 18,
-    highlights: ["Largest dome", "Best for stargazing", "Premium amenities", "Perfect for couples or small groups"]
+    roomType: "regular",
+    highlights: ["Air-conditioned", "Bunk bed option", "Natural bathing tub", "High-speed Wi-Fi"]
   },
   {
     id: 2,
-    name: "The Forest Whisper",
-    category: "Retreat Suite",
-    description: "Nestled among trees with forest views and natural ventilation.",
-    fullDescription: "Surrounded by native trees, this dome offers the most immersive forest experience. Strategic window placements frame the woodland views while maintaining privacy and natural air circulation.",
+    name: "Neer",
+    category: "Regular Dome",
+    description: "Immerse yourself in serenity with our water-themed dome featuring premium amenities.",
+    fullDescription: "Neer, meaning water, offers a calming retreat with its soothing ambiance. Enjoy air-conditioned comfort, plush bedding with bunk bed options, and a spa-like bathroom experience with natural bathing tub.",
     images: [
       {
         src: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=600&fit=crop",
-        alt: "Treehouse style accommodation"
+        alt: "Neer dome exterior"
       },
       {
         src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop",
-        alt: "Resort room with forest view"
+        alt: "Resort room with serene view"
       },
       {
         src: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&h=600&fit=crop",
@@ -196,93 +507,85 @@ export const rooms = [
       },
       {
         src: "https://images.unsplash.com/photo-1518733057094-95b53143d2a7?w=800&h=600&fit=crop",
-        alt: "Forest deck morning view"
+        alt: "Morning deck view"
       }
     ],
     youtubeVideoId: "5qap5aO4i9A",
     amenities: [
-      { icon: "Trees", title: "Forest Views", description: "Surrounded by native trees" },
-      { icon: "Wind", title: "Natural Ventilation", description: "Cross breeze throughout" },
-      { icon: "Bed", title: "Queen Bed", description: "Orthopedic organic mattress" },
-      { icon: "Droplets", title: "Outdoor Shower", description: "Nature-immersed bathing" },
-      { icon: "Flame", title: "Fire Pit Access", description: "Evening gatherings" },
-      { icon: "Music", title: "Nature Sounds", description: "Bird calls and wind chimes" }
+      { icon: "Wind", title: "Air-conditioned Dome", description: "Climate controlled comfort" },
+      { icon: "Bed", title: "Plush Bed with Bunk Bed", description: "Comfortable sleeping arrangements" },
+      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" },
+      { icon: "Zap", title: "High-speed 4G/5G Wi-Fi", description: "Stay connected always" }
     ],
-    maxGuests: 4,
-    pricing: {
-      2: 4000,
-      3: 5000,
-      4: 7000,
-      5: 9000
-    },
+    maxGuests: 5,
+    baseGuests: 2,
+    basePrice: 7000,
+    extraGuestCharge: 1000,
     gstPercentage: 18,
-    highlights: ["Best forest experience", "Quietest location", "Great for meditation", "Morning bird watching"]
+    roomType: "regular",
+    highlights: ["Air-conditioned", "Bunk bed option", "Natural bathing tub", "High-speed Wi-Fi"]
   },
   {
     id: 3,
-    name: "The Horizon Dome",
-    category: "Vista Suite",
-    description: "Panoramic views of rolling hills and valley landscapes.",
-    fullDescription: "Positioned on elevated terrain, this dome offers breathtaking views of the surrounding hills and valleys. Perfect for sunrise and sunset viewing with minimal obstruction.",
+    name: "Vana",
+    category: "Regular Dome",
+    description: "Connect with nature in our forest-inspired dome surrounded by lush greenery.",
+    fullDescription: "Vana, meaning forest, brings you closer to nature while providing all modern comforts. The air-conditioned dome features plush bedding, bunk bed options, and a luxurious bathroom with natural bathing tub.",
     images: [
       {
         src: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&h=600&fit=crop",
-        alt: "Luxury hotel with mountain view"
+        alt: "Vana dome exterior"
       },
       {
         src: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&h=600&fit=crop",
-        alt: "Resort room panorama"
+        alt: "Room with forest view"
       },
       {
         src: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&h=600&fit=crop",
-        alt: "Bedroom with valley view"
+        alt: "Bedroom with nature views"
       },
       {
         src: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&h=600&fit=crop",
-        alt: "Living space overlooking hills"
+        alt: "Living space with greenery"
       },
       {
         src: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&h=600&fit=crop",
-        alt: "Terrace with panoramic views"
+        alt: "Terrace with garden views"
       }
     ],
     youtubeVideoId: "lTxn2BuqyzU",
     amenities: [
-      { icon: "Mountain", title: "Panoramic Views", description: "360° landscape vistas" },
-      { icon: "Eye", title: "Observation Deck", description: "Premium viewing platform" },
-      { icon: "Bed", title: "Double Bed", description: "Premium natural fiber mattress" },
-      { icon: "MapPin", title: "Location", description: "Elevated position" },
-      { icon: "Wind", title: "Gentle Breezes", description: "Cooling valley winds" },
-      { icon: "Moon", title: "Astronomy Setup", description: "Telescope provided" }
+      { icon: "Wind", title: "Air-conditioned Dome", description: "Climate controlled comfort" },
+      { icon: "Bed", title: "Plush Bed with Bunk Bed", description: "Comfortable sleeping arrangements" },
+      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" },
+      { icon: "Zap", title: "High-speed 4G/5G Wi-Fi", description: "Stay connected always" }
     ],
-    maxGuests: 3,
-    pricing: {
-      2: 4000,
-      3: 5000,
-      4: 7000,
-      5: 9000
-    },
+    maxGuests: 5,
+    baseGuests: 2,
+    basePrice: 7000,
+    extraGuestCharge: 1000,
     gstPercentage: 18,
-    highlights: ["Best views", "Perfect for photography", "Ideal for couples", "Sunrise/sunset paradise"]
+    roomType: "regular",
+    highlights: ["Air-conditioned", "Bunk bed option", "Natural bathing tub", "High-speed Wi-Fi"]
   },
   {
     id: 4,
-    name: "The Wellness Sanctuary",
-    category: "Spa Suite",
-    description: "Dedicated wellness space with spa amenities and meditation areas.",
-    fullDescription: "Designed for holistic rejuvenation, this dome includes a dedicated spa area, meditation nook, and wellness features. The layout promotes relaxation and inner peace.",
+    name: "Oorja",
+    category: "Regular Dome",
+    description: "Energize your spirit in our vibrant dome designed for rejuvenation and wellness.",
+    fullDescription: "Oorja, meaning energy, is designed to revitalize your senses. This air-conditioned dome offers plush bedding with bunk bed options, a spa-inspired bathroom with natural bathing tub, and seamless connectivity.",
     images: [
       {
         src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&h=600&fit=crop",
-        alt: "Spa and wellness retreat"
+        alt: "Oorja dome exterior"
       },
       {
         src: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&h=600&fit=crop",
-        alt: "Meditation corner setup"
+        alt: "Wellness corner setup"
       },
       {
         src: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&h=600&fit=crop",
-        alt: "Luxury spa room"
+        alt: "Luxury room interior"
       },
       {
         src: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=800&h=600&fit=crop",
@@ -290,38 +593,34 @@ export const rooms = [
       },
       {
         src: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop",
-        alt: "Wellness sanctuary entrance"
+        alt: "Dome entrance"
       }
     ],
     youtubeVideoId: "inpok4MKVLM",
     amenities: [
-      { icon: "Heart", title: "Spa Amenities", description: "Massage corner available" },
-      { icon: "Smile", title: "Meditation Space", description: "Dedicated yoga area" },
-      { icon: "Bed", title: "Platform Bed", description: "Elevated sleeping space" },
-      { icon: "Flower2", title: "Aromatherapy", description: "Natural essential oils" },
-      { icon: "Waves", title: "Wellness Bath", description: "Deep soaking tub" },
-      { icon: "Music", title: "Sound System", description: "Meditation music enabled" }
+      { icon: "Wind", title: "Air-conditioned Dome", description: "Climate controlled comfort" },
+      { icon: "Bed", title: "Plush Bed with Bunk Bed", description: "Comfortable sleeping arrangements" },
+      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" },
+      { icon: "Zap", title: "High-speed 4G/5G Wi-Fi", description: "Stay connected always" }
     ],
-    maxGuests: 2,
-    pricing: {
-      2: 4000,
-      3: 5000,
-      4: 7000,
-      5: 9000
-    },
+    maxGuests: 5,
+    baseGuests: 2,
+    basePrice: 7000,
+    extraGuestCharge: 1000,
     gstPercentage: 18,
-    highlights: ["Wellness focused", "Perfect for solo retreats", "Spa treatments available", "Premium relaxation"]
+    roomType: "regular",
+    highlights: ["Air-conditioned", "Bunk bed option", "Natural bathing tub", "High-speed Wi-Fi"]
   },
   {
     id: 5,
-    name: "The Family Gathering",
-    category: "Group Suite",
-    description: "Spacious dome with multiple sleeping areas ideal for families.",
-    fullDescription: "Our largest and most versatile dome, featuring multiple sleeping zones, a common living space, and full amenities. Perfect for families or small groups seeking shared experiences.",
+    name: "Antara",
+    category: "Large Dome",
+    description: "Our largest dome perfect for groups and families seeking shared experiences.",
+    fullDescription: "Antara, meaning inner space, is our most spacious dome designed for groups and families. Featuring extra-large living areas, large bed with huge bunk bed, air-conditioned comfort, and a luxurious bathroom with natural bathing tub.",
     images: [
       {
         src: "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=800&h=600&fit=crop",
-        alt: "Spacious family suite"
+        alt: "Antara large dome exterior"
       },
       {
         src: "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=800&h=600&fit=crop",
@@ -329,7 +628,7 @@ export const rooms = [
       },
       {
         src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-        alt: "Living and dining area"
+        alt: "Living and gathering area"
       },
       {
         src: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
@@ -342,22 +641,18 @@ export const rooms = [
     ],
     youtubeVideoId: "L_LUpnjgPso",
     amenities: [
-      { icon: "Users", title: "Family Spaces", description: "Multiple sleeping areas" },
-      { icon: "Home", title: "Common Area", description: "Shared living room" },
-      { icon: "UtensilsCrossed", title: "Full Kitchen", description: "Group cooking space" },
-      { icon: "Bath", title: "Multiple Baths", description: "2 full bathrooms" },
-      { icon: "Play", title: "Recreation", description: "Board games and activities" },
-      { icon: "Zap", title: "Entertainment", description: "Projector available" }
+      { icon: "Home", title: "Extra-spacious Dome", description: "Perfect for groups" },
+      { icon: "Bed", title: "Large Bed + Huge Bunk Bed", description: "Ample sleeping space" },
+      { icon: "Wind", title: "Air-conditioned Comfort", description: "Climate controlled" },
+      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" }
     ],
-    maxGuests: 5,
-    pricing: {
-      2: 4000,
-      3: 5000,
-      4: 7000,
-      5: 9000
-    },
+    maxGuests: 8,
+    baseGuests: 6,
+    basePrice: 12000,
+    extraGuestCharge: 1000,
     gstPercentage: 18,
-    highlights: ["Largest capacity", "Perfect for families", "Group activities", "Shared experiences"]
+    roomType: "large",
+    highlights: ["Extra spacious", "Up to 8 guests", "Group friendly", "Large bunk bed"]
   }
 ];
 

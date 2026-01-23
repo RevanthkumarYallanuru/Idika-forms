@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, ArrowRight, MessageCircle, Maximize2, Volume2, VolumeX, User, Phone, MapPin as MapPinIcon, Users as UsersIcon, Calendar } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, X, ArrowRight, MessageCircle, Maximize2, Volume2, VolumeX, User, Phone, MapPin as MapPinIcon, Users as UsersIcon, Calendar, Check, Eye, Plus, Minus } from "lucide-react";
 import { LazyImage } from "./LazyImage";
 import {
   Dialog,
@@ -9,6 +9,13 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+} from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -19,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { bookingAddOns, BookingAddOn } from "@/data/siteData";
 import {
   Sun,
   Thermometer,
@@ -27,7 +35,6 @@ import {
   UtensilsCrossed,
   Trees,
   Mountain,
-  Eye,
   Wind,
   Moon,
   Heart,
@@ -65,8 +72,11 @@ interface Room {
   youtubeVideoId: string;
   amenities: Amenity[];
   maxGuests: number;
-  pricing: Record<number, number>;
+  baseGuests: number;
+  basePrice: number;
+  extraGuestCharge: number;
   gstPercentage: number;
+  roomType: "regular" | "large";
   highlights?: string[];
 }
 
@@ -96,6 +106,12 @@ const iconMap: Record<string, React.ReactNode> = {
   Cloud: <Cloud className="w-5 h-5" />,
 };
 
+// Helper function to calculate room price based on guest count
+const calculateRoomPrice = (room: Room, guestCount: number) => {
+  const extraGuests = Math.max(0, guestCount - room.baseGuests);
+  return room.basePrice + (extraGuests * room.extraGuestCharge);
+};
+
 interface RoomCardProps {
   room: Room;
 }
@@ -104,9 +120,11 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [selectedGuestCount, setSelectedGuestCount] = useState(2);
+  const [selectedGuestCount, setSelectedGuestCount] = useState(room.baseGuests);
   const [isInView, setIsInView] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+  const [viewingAddOn, setViewingAddOn] = useState<BookingAddOn | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   // Booking form state
@@ -114,23 +132,33 @@ export const RoomCard = ({ room }: RoomCardProps) => {
     guestName: "",
     mobileNumber: "",
     arrivingFrom: "",
-    numberOfGuests: "2",
+    numberOfGuests: String(room.baseGuests),
     checkInDate: "",
     checkOutDate: "",
   });
 
-  const pricing = useMemo(() => ({
-    2: room.pricing[2] || 4000,
-    3: room.pricing[3] || 5000,
-    4: room.pricing[4] || 7000,
-    5: room.pricing[5] || 9000,
-  }), [room.pricing]);
+  // Generate guest count options based on room type
+  const guestOptions = useMemo(() => {
+    const options = [];
+    for (let i = room.baseGuests; i <= room.maxGuests; i++) {
+      options.push(i);
+    }
+    return options;
+  }, [room.baseGuests, room.maxGuests]);
 
   const currentPrice = useMemo(() => {
-    const base = pricing[selectedGuestCount as keyof typeof pricing] || pricing[2];
+    const base = calculateRoomPrice(room, selectedGuestCount);
     const gst = base * (room.gstPercentage / 100);
     return { base, gst, total: base + gst };
-  }, [pricing, selectedGuestCount, room.gstPercentage]);
+  }, [selectedGuestCount, room]);
+
+  // Calculate add-ons total
+  const addOnsTotal = useMemo(() => {
+    return selectedAddOns.reduce((total, addOnId) => {
+      const addOn = bookingAddOns.find(a => a.id === addOnId);
+      return total + (addOn?.price || 0);
+    }, 0);
+  }, [selectedAddOns]);
 
   // Intersection Observer for auto-play video when in view
   useEffect(() => {
@@ -187,8 +215,17 @@ export const RoomCard = ({ room }: RoomCardProps) => {
     setBookingForm(prev => ({ ...prev, [field]: value }));
     // Update guest count for pricing calculation
     if (field === "numberOfGuests") {
-      setSelectedGuestCount(parseInt(value) || 2);
+      setSelectedGuestCount(parseInt(value) || room.baseGuests);
     }
+  };
+
+  // Toggle add-on selection
+  const toggleAddOn = (addOnId: string) => {
+    setSelectedAddOns(prev => 
+      prev.includes(addOnId) 
+        ? prev.filter(id => id !== addOnId)
+        : [...prev, addOnId]
+    );
   };
 
   const calculateNights = () => {
@@ -203,13 +240,27 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   };
 
   const bookingPrice = useMemo(() => {
-    const guests = parseInt(bookingForm.numberOfGuests) || 2;
-    const base = pricing[guests as keyof typeof pricing] || pricing[2];
+    const guests = parseInt(bookingForm.numberOfGuests) || room.baseGuests;
+    const roomBase = calculateRoomPrice(room, guests);
     const nights = calculateNights();
-    const totalBase = base * nights;
-    const gst = totalBase * (room.gstPercentage / 100);
-    return { base, nights, totalBase, gst, total: totalBase + gst };
-  }, [bookingForm.numberOfGuests, bookingForm.checkInDate, bookingForm.checkOutDate, pricing, room.gstPercentage]);
+    const totalRoomPrice = roomBase * nights;
+    const addOnsPrice = addOnsTotal;
+    const subtotal = totalRoomPrice + addOnsPrice;
+    const gst = subtotal * (room.gstPercentage / 100);
+    const extraGuests = Math.max(0, guests - room.baseGuests);
+    const extraGuestTotal = extraGuests * room.extraGuestCharge * nights;
+    return { 
+      roomBase, 
+      nights, 
+      totalRoomPrice, 
+      addOnsPrice,
+      subtotal,
+      gst, 
+      total: subtotal + gst,
+      extraGuests,
+      extraGuestTotal
+    };
+  }, [bookingForm.numberOfGuests, bookingForm.checkInDate, bookingForm.checkOutDate, room, addOnsTotal]);
 
   const handleWhatsAppBooking = () => {
     // Validate form
@@ -231,6 +282,21 @@ export const RoomCard = ({ room }: RoomCardProps) => {
       year: 'numeric' 
     });
 
+    // Build add-ons list for message
+    const selectedAddOnsList = selectedAddOns
+      .map(id => bookingAddOns.find(a => a.id === id))
+      .filter(Boolean)
+      .map(addon => `  • ${addon!.name} - ₹${addon!.price.toLocaleString("en-IN")}`)
+      .join('\n');
+
+    const addOnsSection = selectedAddOns.length > 0 
+      ? `\n*ADD-ONS SELECTED*\n${selectedAddOnsList}\nAdd-ons Total: ₹${bookingPrice.addOnsPrice.toLocaleString("en-IN")}\n` 
+      : '';
+
+    const extraGuestSection = bookingPrice.extraGuests > 0 
+      ? `Extra Guests (${bookingPrice.extraGuests}): ₹${bookingPrice.extraGuestTotal.toLocaleString("en-IN")}\n` 
+      : '';
+
     const message = `Hi Idika Team! 🌿
 
 I would like to make a booking:
@@ -248,17 +314,20 @@ No. of Guests: ${bookingForm.numberOfGuests}
 Check-in: ${checkInFormatted}
 Check-out: ${checkOutFormatted}
 Nights: ${bookingPrice.nights}
-
-*PRICING*
-₹${bookingPrice.base.toLocaleString("en-IN")} × ${bookingPrice.nights} night(s) = ₹${bookingPrice.totalBase.toLocaleString("en-IN")}
+${addOnsSection}
+*PRICING BREAKDOWN*
+Base Price (${room.baseGuests} guests): ₹${room.basePrice.toLocaleString("en-IN")}/night
+${extraGuestSection}Room Total: ₹${bookingPrice.totalRoomPrice.toLocaleString("en-IN")}
+${bookingPrice.addOnsPrice > 0 ? `Add-ons: ₹${bookingPrice.addOnsPrice.toLocaleString("en-IN")}\n` : ''}Subtotal: ₹${bookingPrice.subtotal.toLocaleString("en-IN")}
 GST (${room.gstPercentage}%): ₹${Math.round(bookingPrice.gst).toLocaleString("en-IN")}
-*Total: ₹${Math.round(bookingPrice.total).toLocaleString("en-IN")}*
+*TOTAL: ₹${Math.round(bookingPrice.total).toLocaleString("en-IN")}*
 
 Please confirm availability. Thank you!`;
 
     const whatsappLink = `https://wa.me/917207357312?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
     setIsBookingModalOpen(false);
+    setSelectedAddOns([]);
   };
 
   const toggleMute = (e: React.MouseEvent) => {
@@ -269,7 +338,8 @@ Please confirm availability. Thank you!`;
   const displayImages = room.images.slice(0, 5);
 
   // YouTube embed URL with autoplay (muted for browser compliance)
-  const youtubeEmbedUrl = `https://www.youtube.com/embed/${room.youtubeVideoId}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${room.youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
+  // Using youtube-nocookie.com for privacy-enhanced mode (reduces tracking warnings)
+  const youtubeEmbedUrl = `https://www.youtube-nocookie.com/embed/${room.youtubeVideoId}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${room.youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`;
 
   return (
     <>
@@ -290,6 +360,8 @@ Please confirm availability. Thank you!`;
                       className="absolute inset-0 w-full h-full"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      loading="lazy"
                       allowFullScreen
                     />
                     {/* Mute/Unmute Button */}
@@ -374,42 +446,25 @@ Please confirm availability. Thank you!`;
                 ))}
               </div>
 
-              {/* Pricing Grid */}
-              <div className="grid grid-cols-2 gap-x-8 gap-y-4 mb-4 py-4 border-t border-border">
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">2 Guests</p>
-                  <p className="text-lg font-display">
-                    <span className="text-secondary">₹{pricing[2].toLocaleString("en-IN")}</span>
+              {/* Pricing Section */}
+              <div className="mb-4 py-4 border-t border-border">
+                <div className="mb-3">
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
+                    {room.roomType === "large" ? `Up to ${room.baseGuests} Guests` : `${room.baseGuests} Guests`}
+                  </p>
+                  <p className="text-2xl font-display">
+                    <span className="text-secondary">₹{room.basePrice.toLocaleString("en-IN")}</span>
                     <span className="text-sm text-muted-foreground">/night</span>
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">3 Guests</p>
-                  <p className="text-lg font-display">
-                    <span className="text-secondary">₹{pricing[3].toLocaleString("en-IN")}</span>
-                    <span className="text-sm text-muted-foreground">/night</span>
-                  </p>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Plus className="w-4 h-4" />
+                  <span>₹{room.extraGuestCharge.toLocaleString("en-IN")} per extra guest</span>
                 </div>
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">4 Guests</p>
-                  <p className="text-lg font-display">
-                    <span className="text-secondary">₹{pricing[4].toLocaleString("en-IN")}</span>
-                    <span className="text-sm text-muted-foreground">/night</span>
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">5 Guests (Max)</p>
-                  <p className="text-lg font-display">
-                    <span className="text-secondary">₹{pricing[5].toLocaleString("en-IN")}</span>
-                    <span className="text-sm text-muted-foreground">/night</span>
-                  </p>
-                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Max {room.maxGuests} guests • +{room.gstPercentage}% GST
+                </p>
               </div>
-
-              {/* GST Note */}
-              <p className="text-xs text-muted-foreground mb-6">
-                +18% GST applicable at checkout
-              </p>
 
               {/* Book Now Button */}
               <motion.button
@@ -459,6 +514,8 @@ Please confirm availability. Thank you!`;
                   className="absolute inset-0 w-full h-full"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  loading="lazy"
                   allowFullScreen
                 />
                 {/* Mute/Unmute Button */}
@@ -555,14 +612,14 @@ Please confirm availability. Thank you!`;
             {/* Guest Selector */}
             <div className="mb-4">
               <label className="text-sm font-medium text-foreground mb-2 block">
-                Select Guests
+                Select Guests (Max {room.maxGuests})
               </label>
-              <div className="grid grid-cols-4 gap-2">
-                {[2, 3, 4, 5].map((guests) => (
+              <div className="flex flex-wrap gap-2">
+                {guestOptions.map((guests) => (
                   <motion.button
                     key={guests}
                     onClick={() => setSelectedGuestCount(guests)}
-                    className={`py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
+                    className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
                       selectedGuestCount === guests
                         ? "bg-secondary text-secondary-foreground"
                         : "bg-background-secondary text-foreground hover:bg-secondary/20"
@@ -579,11 +636,23 @@ Please confirm availability. Thank you!`;
             {/* Pricing */}
             <div className="bg-background-secondary p-4 rounded-lg mb-4">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-muted-foreground">Base Price:</span>
+                <span className="text-sm text-muted-foreground">
+                  Base ({room.baseGuests} guests):
+                </span>
                 <span className="font-semibold text-foreground">
-                  ₹{currentPrice.base.toLocaleString("en-IN")}
+                  ₹{room.basePrice.toLocaleString("en-IN")}
                 </span>
               </div>
+              {selectedGuestCount > room.baseGuests && (
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-muted-foreground">
+                    Extra ({selectedGuestCount - room.baseGuests} guests):
+                  </span>
+                  <span className="font-semibold text-foreground">
+                    +₹{((selectedGuestCount - room.baseGuests) * room.extraGuestCharge).toLocaleString("en-IN")}
+                  </span>
+                </div>
+              )}
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm text-muted-foreground">
                   GST ({room.gstPercentage}%):
@@ -619,163 +688,313 @@ Please confirm availability. Thank you!`;
 
       {/* Booking Form Modal */}
       <Dialog open={isBookingModalOpen} onOpenChange={setIsBookingModalOpen}>
-        <DialogContent className="max-w-md w-[95vw] max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-display flex items-center gap-2">
-              <MessageCircle className="w-5 h-5 text-primary" />
+        <DialogContent className="max-w-lg w-[96vw] sm:w-[90vw] max-h-[95vh] sm:max-h-[90vh] overflow-hidden flex flex-col p-0">
+          {/* Close Button - Fixed Position for Mobile */}
+          <button
+            onClick={() => setIsBookingModalOpen(false)}
+            className="absolute right-3 top-3 sm:right-4 sm:top-4 z-20 rounded-full p-1.5 sm:p-2 bg-muted/80 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
+          
+          <DialogHeader className="px-4 pt-4 pb-2 sm:px-6 sm:pt-6 pr-12 sm:pr-14 border-b border-border sticky top-0 bg-background z-10">
+            <DialogTitle className="text-lg sm:text-xl font-display flex items-center gap-2">
+              <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
               Book {room.name}
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-xs sm:text-sm">
               Fill in your details and we'll send your booking request via WhatsApp
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-4 py-4">
-            {/* Guest Name */}
-            <div className="space-y-2">
-              <Label htmlFor="guestName" className="flex items-center gap-2">
-                <User className="w-4 h-4 text-muted-foreground" />
-                Guest Name *
-              </Label>
-              <Input
-                id="guestName"
-                placeholder="Enter your full name"
-                value={bookingForm.guestName}
-                onChange={(e) => handleBookingFormChange("guestName", e.target.value)}
-                className="w-full"
-              />
-            </div>
-
-            {/* Mobile Number */}
-            <div className="space-y-2">
-              <Label htmlFor="mobileNumber" className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-muted-foreground" />
-                Mobile Number *
-              </Label>
-              <Input
-                id="mobileNumber"
-                type="tel"
-                placeholder="+91 98765 43210"
-                value={bookingForm.mobileNumber}
-                onChange={(e) => handleBookingFormChange("mobileNumber", e.target.value)}
-                className="w-full"
-              />
-            </div>
-
-            {/* Arriving From */}
-            <div className="space-y-2">
-              <Label htmlFor="arrivingFrom" className="flex items-center gap-2">
-                <MapPinIcon className="w-4 h-4 text-muted-foreground" />
-                Arriving From
-              </Label>
-              <Input
-                id="arrivingFrom"
-                placeholder="City / Location"
-                value={bookingForm.arrivingFrom}
-                onChange={(e) => handleBookingFormChange("arrivingFrom", e.target.value)}
-                className="w-full"
-              />
-            </div>
-
-            {/* Number of Guests */}
-            <div className="space-y-2">
-              <Label htmlFor="numberOfGuests" className="flex items-center gap-2">
-                <UsersIcon className="w-4 h-4 text-muted-foreground" />
-                Number of Guests *
-              </Label>
-              <Select
-                value={bookingForm.numberOfGuests}
-                onValueChange={(value) => handleBookingFormChange("numberOfGuests", value)}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select guests" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="2">2 Guests - ₹{pricing[2].toLocaleString("en-IN")}/night</SelectItem>
-                  <SelectItem value="3">3 Guests - ₹{pricing[3].toLocaleString("en-IN")}/night</SelectItem>
-                  <SelectItem value="4">4 Guests - ₹{pricing[4].toLocaleString("en-IN")}/night</SelectItem>
-                  <SelectItem value="5">5 Guests - ₹{pricing[5].toLocaleString("en-IN")}/night</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Check-in Date */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="checkInDate" className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-muted-foreground" />
-                  Check-in *
+          <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-4 sm:pb-6">
+            <div className="space-y-3 sm:space-y-4 py-3 sm:py-4">
+              {/* Guest Name */}
+              <div className="space-y-1.5 sm:space-y-2">
+                <Label htmlFor="guestName" className="flex items-center gap-2 text-sm">
+                  <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground" />
+                  Guest Name *
                 </Label>
                 <Input
-                  id="checkInDate"
-                  type="date"
-                  value={bookingForm.checkInDate}
-                  min={new Date().toISOString().split('T')[0]}
-                  onChange={(e) => handleBookingFormChange("checkInDate", e.target.value)}
-                  className="w-full"
+                  id="guestName"
+                  placeholder="Enter your full name"
+                  value={bookingForm.guestName}
+                  onChange={(e) => handleBookingFormChange("guestName", e.target.value)}
+                  className="w-full h-10 sm:h-11 text-base"
                 />
               </div>
 
-              {/* Check-out Date */}
-              <div className="space-y-2">
-                <Label htmlFor="checkOutDate" className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-muted-foreground" />
-                  Check-out *
+              {/* Mobile Number */}
+              <div className="space-y-1.5 sm:space-y-2">
+                <Label htmlFor="mobileNumber" className="flex items-center gap-2 text-sm">
+                  <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground" />
+                  Mobile Number *
                 </Label>
                 <Input
-                  id="checkOutDate"
-                  type="date"
-                  value={bookingForm.checkOutDate}
-                  min={bookingForm.checkInDate || new Date().toISOString().split('T')[0]}
-                  onChange={(e) => handleBookingFormChange("checkOutDate", e.target.value)}
-                  className="w-full"
+                  id="mobileNumber"
+                  type="tel"
+                  placeholder="+91 98765 43210"
+                  value={bookingForm.mobileNumber}
+                  onChange={(e) => handleBookingFormChange("mobileNumber", e.target.value)}
+                  className="w-full h-10 sm:h-11 text-base"
                 />
               </div>
-            </div>
 
-            {/* Pricing Summary */}
-            <div className="bg-background-secondary p-4 rounded-lg mt-4">
-              <h4 className="font-semibold text-foreground mb-3">Pricing Summary</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Rate per night:</span>
-                  <span className="font-medium">₹{bookingPrice.base.toLocaleString("en-IN")}</span>
+              {/* Arriving From */}
+              <div className="space-y-1.5 sm:space-y-2">
+                <Label htmlFor="arrivingFrom" className="flex items-center gap-2 text-sm">
+                  <MapPinIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground" />
+                  Arriving From
+                </Label>
+                <Input
+                  id="arrivingFrom"
+                  placeholder="City / Location"
+                  value={bookingForm.arrivingFrom}
+                  onChange={(e) => handleBookingFormChange("arrivingFrom", e.target.value)}
+                  className="w-full h-10 sm:h-11 text-base"
+                />
+              </div>
+
+              {/* Number of Guests */}
+              <div className="space-y-1.5 sm:space-y-2">
+                <Label htmlFor="numberOfGuests" className="flex items-center gap-2 text-sm">
+                  <UsersIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground" />
+                  Number of Guests *
+                </Label>
+                <Select
+                  value={bookingForm.numberOfGuests}
+                  onValueChange={(value) => handleBookingFormChange("numberOfGuests", value)}
+                >
+                  <SelectTrigger className="w-full h-10 sm:h-11 text-base">
+                    <SelectValue placeholder="Select guests" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {guestOptions.map((guests) => {
+                      const price = calculateRoomPrice(room, guests);
+                      return (
+                        <SelectItem key={guests} value={String(guests)} className="text-sm sm:text-base">
+                          {guests} Guests - ₹{price.toLocaleString("en-IN")}/night
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Check-in/Check-out Dates */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-4">
+                <div className="space-y-1.5 sm:space-y-2">
+                  <Label htmlFor="checkInDate" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
+                    Check-in *
+                  </Label>
+                  <Input
+                    id="checkInDate"
+                    type="date"
+                    value={bookingForm.checkInDate}
+                    min={new Date().toISOString().split('T')[0]}
+                    onChange={(e) => handleBookingFormChange("checkInDate", e.target.value)}
+                    className="w-full h-10 sm:h-11 text-sm sm:text-base"
+                  />
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Number of nights:</span>
-                  <span className="font-medium">{bookingPrice.nights}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Subtotal:</span>
-                  <span className="font-medium">₹{bookingPrice.totalBase.toLocaleString("en-IN")}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">GST ({room.gstPercentage}%):</span>
-                  <span className="font-medium">₹{Math.round(bookingPrice.gst).toLocaleString("en-IN")}</span>
-                </div>
-                <div className="border-t border-border pt-2 flex justify-between">
-                  <span className="font-semibold text-foreground">Total Amount:</span>
-                  <span className="text-lg font-display text-secondary">₹{Math.round(bookingPrice.total).toLocaleString("en-IN")}</span>
+
+                <div className="space-y-1.5 sm:space-y-2">
+                  <Label htmlFor="checkOutDate" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+                    <Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />
+                    Check-out *
+                  </Label>
+                  <Input
+                    id="checkOutDate"
+                    type="date"
+                    value={bookingForm.checkOutDate}
+                    min={bookingForm.checkInDate || new Date().toISOString().split('T')[0]}
+                    onChange={(e) => handleBookingFormChange("checkOutDate", e.target.value)}
+                    className="w-full h-10 sm:h-11 text-sm sm:text-base"
+                  />
                 </div>
               </div>
+
+              {/* Add-Ons Section */}
+              <div className="space-y-2 sm:space-y-3">
+                <Label className="flex items-center gap-2 text-sm">
+                  <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground" />
+                  Add-Ons (Optional)
+                </Label>
+                <div className="space-y-2">
+                  {bookingAddOns.map((addOn) => (
+                    <div
+                      key={addOn.id}
+                      className={`p-2.5 sm:p-3 rounded-lg border transition-all duration-200 ${
+                        selectedAddOns.includes(addOn.id)
+                          ? "border-primary bg-primary/5"
+                          : "border-border bg-background-secondary"
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                          <button
+                            type="button"
+                            onClick={() => toggleAddOn(addOn.id)}
+                            className={`w-5 h-5 flex-shrink-0 rounded border-2 flex items-center justify-center transition-all ${
+                              selectedAddOns.includes(addOn.id)
+                                ? "bg-primary border-primary"
+                                : "border-muted-foreground"
+                            }`}
+                          >
+                            {selectedAddOns.includes(addOn.id) && (
+                              <Check className="w-3 h-3 text-primary-foreground" />
+                            )}
+                          </button>
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span className="text-lg sm:text-xl flex-shrink-0">{addOn.icon}</span>
+                            <span className="font-medium text-xs sm:text-sm truncate">{addOn.name}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                          <span className="font-semibold text-secondary text-xs sm:text-sm whitespace-nowrap">
+                            ₹{addOn.price.toLocaleString("en-IN")}
+                          </span>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="h-7 w-7 sm:h-8 sm:w-8 p-0"
+                            onClick={() => setViewingAddOn(addOn)}
+                          >
+                            <Eye className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pricing Summary */}
+              <div className="bg-background-secondary p-3 sm:p-4 rounded-lg">
+                <h4 className="font-semibold text-foreground mb-2 sm:mb-3 text-sm sm:text-base">Pricing Summary</h4>
+                <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">
+                      Base ({room.baseGuests} guests):
+                    </span>
+                    <span className="font-medium">₹{room.basePrice.toLocaleString("en-IN")}/night</span>
+                  </div>
+                  {bookingPrice.extraGuests > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">
+                        Extra guests ({bookingPrice.extraGuests}):
+                      </span>
+                      <span className="font-medium">
+                        +₹{(bookingPrice.extraGuests * room.extraGuestCharge).toLocaleString("en-IN")}/night
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Number of nights:</span>
+                    <span className="font-medium">{bookingPrice.nights}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Room Total:</span>
+                    <span className="font-medium">₹{bookingPrice.totalRoomPrice.toLocaleString("en-IN")}</span>
+                  </div>
+                  {bookingPrice.addOnsPrice > 0 && (
+                    <div className="flex justify-between text-primary">
+                      <span>Add-ons:</span>
+                      <span className="font-medium">+₹{bookingPrice.addOnsPrice.toLocaleString("en-IN")}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between border-t border-border pt-1.5 sm:pt-2">
+                    <span className="text-muted-foreground">Subtotal:</span>
+                    <span className="font-medium">₹{bookingPrice.subtotal.toLocaleString("en-IN")}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">GST ({room.gstPercentage}%):</span>
+                    <span className="font-medium">₹{Math.round(bookingPrice.gst).toLocaleString("en-IN")}</span>
+                  </div>
+                  <div className="border-t border-border pt-1.5 sm:pt-2 flex justify-between">
+                    <span className="font-semibold text-foreground">Total Amount:</span>
+                    <span className="text-base sm:text-lg font-display text-secondary">₹{Math.round(bookingPrice.total).toLocaleString("en-IN")}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                <Button 
+                  onClick={() => setIsBookingModalOpen(false)}
+                  variant="outline"
+                  className="w-full sm:w-auto sm:flex-1 h-10 sm:h-12 text-sm sm:text-base order-2 sm:order-1"
+                  size="lg"
+                >
+                  Cancel
+                </Button>
+                <Button 
+                  onClick={handleWhatsAppBooking}
+                  className="w-full sm:flex-[2] btn-primary h-11 sm:h-12 text-sm sm:text-base order-1 sm:order-2"
+                  size="lg"
+                >
+                  <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  Send via WhatsApp
+                </Button>
+              </div>
+
+              <p className="text-[10px] sm:text-xs text-muted-foreground text-center">
+                By clicking above, your booking details will be sent to our WhatsApp for confirmation.
+              </p>
             </div>
-
-            {/* Submit Button */}
-            <Button 
-              onClick={handleWhatsAppBooking}
-              className="w-full btn-primary mt-4"
-              size="lg"
-            >
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Send Booking Request via WhatsApp
-            </Button>
-
-            <p className="text-xs text-muted-foreground text-center">
-              By clicking above, your booking details will be sent to our WhatsApp for confirmation.
-            </p>
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Add-On Features Bottom Sheet / Modal */}
+      <Drawer open={!!viewingAddOn} onOpenChange={(open) => !open && setViewingAddOn(null)}>
+        <DrawerContent className="max-h-[80vh]">
+          <DrawerHeader>
+            <DrawerTitle className="flex items-center gap-2">
+              <span className="text-2xl">{viewingAddOn?.icon}</span>
+              {viewingAddOn?.name}
+            </DrawerTitle>
+            <DrawerDescription>
+              ₹{viewingAddOn?.price.toLocaleString("en-IN")} per booking
+            </DrawerDescription>
+          </DrawerHeader>
+          <div className="px-4 pb-6">
+            <h4 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-3">
+              What's Included
+            </h4>
+            <ul className="space-y-2">
+              {viewingAddOn?.features.map((feature, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <span className="text-foreground">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex gap-3">
+              <Button
+                variant="outline"
+                className="flex-1"
+                onClick={() => setViewingAddOn(null)}
+              >
+                Close
+              </Button>
+              <Button
+                className="flex-1"
+                onClick={() => {
+                  if (viewingAddOn && !selectedAddOns.includes(viewingAddOn.id)) {
+                    toggleAddOn(viewingAddOn.id);
+                  }
+                  setViewingAddOn(null);
+                }}
+              >
+                {viewingAddOn && selectedAddOns.includes(viewingAddOn.id) ? "Already Added" : "Add to Booking"}
+              </Button>
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
 
       {/* Fullscreen Image Gallery Modal */}
       <Dialog open={isImageModalOpen} onOpenChange={setIsImageModalOpen}>

@@ -7,7 +7,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { roomsPage, rooms as allRooms } from "@/data/siteData";
 
-type RoomCategory = "all" | "Signature Suite" | "Retreat Suite" | "Vista Suite" | "Spa Suite" | "Group Suite";
+type RoomCategory = "all" | "Regular Dome" | "Large Dome";
 
 const Rooms = () => {
   const [selectedCategory, setSelectedCategory] = useState<RoomCategory>("all");
@@ -21,12 +21,9 @@ const Rooms = () => {
   }, [selectedCategory]);
 
   const categories: { value: RoomCategory; label: string }[] = [
-    { value: "all", label: "All Rooms" },
-    { value: "Signature Suite", label: "Signature Suite" },
-    { value: "Retreat Suite", label: "Retreat Suite" },
-    { value: "Vista Suite", label: "Vista Suite" },
-    { value: "Spa Suite", label: "Spa Suite" },
-    { value: "Group Suite", label: "Group Suite" },
+    { value: "all", label: "All Domes" },
+    { value: "Regular Dome", label: "Regular Domes" },
+    { value: "Large Dome", label: "Large Dome" },
   ];
 
   return (
@@ -162,49 +159,18 @@ const Rooms = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Common Amenities Section */}
       <section className="py-16 lg:py-20 bg-background-secondary">
         <div className="container-main">
           <ScrollReveal>
             <div className="text-center mb-12">
-              <p className="text-subtitle text-primary mb-2">Why Choose Idika Rooms</p>
-              <h2 className="text-display-lg mb-4">Premium Amenities for Every Guest</h2>
+              <p className="text-subtitle text-primary mb-2">{roomsPage.commonAmenities.subtitle}</p>
+              <h2 className="text-display-lg mb-4">{roomsPage.commonAmenities.title}</h2>
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Lazy Loading Technology",
-                description: "Ultra-fast image loading with intersection observer API ensures smooth browsing on all devices.",
-                icon: "⚡"
-              },
-              {
-                title: "Mobile-First Design",
-                description: "Fully responsive across all devices - from smartphones to desktops with optimized touch interactions.",
-                icon: "📱"
-              },
-              {
-                title: "Real-Time Video Tours",
-                description: "YouTube-integrated video previews auto-play on hover to showcase each room's unique charm.",
-                icon: "🎬"
-              },
-              {
-                title: "Dynamic Pricing",
-                description: "Transparent pricing with automatic GST calculation based on guest count (₹4k-₹9k + 18% GST).",
-                icon: "💰"
-              },
-              {
-                title: "WhatsApp Booking",
-                description: "Direct messaging integration for instant booking queries and personalized assistance.",
-                icon: "💬"
-              },
-              {
-                title: "Eco-Friendly Experience",
-                description: "All rooms feature sustainable architecture and materials with natural temperature regulation.",
-                icon: "🌿"
-              },
-            ].map((feature, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {roomsPage.commonAmenities.items.map((feature, idx) => (
               <motion.div
                 key={idx}
                 className="bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"

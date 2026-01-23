@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Star, CloudRain, Filter, Recycle, Droplets, LucideIcon } from "lucide-react";
 import { Layout } from "@/components/Layout";
+import { LazyImage } from "@/components/LazyImage";
 import { Dome3D } from "@/components/Dome3D";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { homePage, reviews, siteConfig } from "@/data/siteData";
@@ -24,7 +25,7 @@ const Index = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
+          <LazyImage
             src={heroDome}
             alt="Idika Earthbag Dome at twilight"
             className="w-full h-full object-cover"
@@ -98,7 +99,8 @@ const Index = () => {
               </div>
             </ScrollReveal>
 
-            <ScrollReveal direction="right" delay={0.2}>
+            {/* 3D Dome - Hidden on mobile for performance */}
+            <ScrollReveal direction="right" delay={0.2} className="hidden lg:block">
               <div className="aspect-square rounded-2xl overflow-hidden bg-background glow-terracotta">
                 <Dome3D className="w-full h-full" />
               </div>
@@ -113,7 +115,7 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <ScrollReveal className="order-2 lg:order-1">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
-                <img
+                <LazyImage
                   src={interiorBedroom}
                   alt="Interior of Idika dome bedroom"
                   className="w-full h-full object-cover img-warm"
@@ -191,7 +193,7 @@ const Index = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
                   <div className="rounded-xl overflow-hidden aspect-[3/4]">
-                    <img
+                    <LazyImage
                       src={naturalPool}
                       alt="Natural pool at Idika"
                       className="w-full h-full object-cover img-warm"
@@ -200,7 +202,7 @@ const Index = () => {
                 </div>
                 <div className="space-y-4 pt-8">
                   <div className="rounded-xl overflow-hidden aspect-[3/4]">
-                    <img
+                    <LazyImage
                       src={openLawns}
                       alt="Open lawns at Idika"
                       className="w-full h-full object-cover img-warm"
