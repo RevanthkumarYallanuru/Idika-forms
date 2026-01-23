@@ -41,10 +41,7 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [filter, setFilter] = useState<CategoryFilter>("all");
 
-  const categories = useMemo(() => 
-    ["all", ...Array.from(new Set(galleryImages.map(img => img.category)))],
-    []
-  );
+  const categories = ["all", "Architecture", "Amenities", "Views", "Experiences"];
   
   const filteredImages = useMemo(() => {
     if (filter === "all") return galleryImages;

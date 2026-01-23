@@ -44,7 +44,7 @@ export const homePage = {
     title: "Return to Earth",
     description: "Discover sustainable luxury at Idika — where earthbag architecture meets modern comfort, just moments from Hyderabad.",
     cta: {
-      primary: { label: "Explore Our Stay", href: "/stay" },
+      primary: { label: "Explore Our Stay", href: "/rooms" },
       secondary: { label: "View Gallery", href: "/gallery" }
     }
   },
@@ -753,7 +753,7 @@ export const galleryImages = [
   {
     id: 2,
     title: "Interior Sanctuary",
-    category: "Interiors",
+    category: "Architecture",
     alt: "Warm bedroom interior with natural lighting"
   },
   {
@@ -765,7 +765,7 @@ export const galleryImages = [
   {
     id: 4,
     title: "Open Lawns",
-    category: "Grounds",
+    category: "Amenities",
     alt: "Expansive green spaces at golden hour"
   },
   {
@@ -777,7 +777,7 @@ export const galleryImages = [
   {
     id: 6,
     title: "Organic Garden",
-    category: "Sustainability",
+    category: "Experiences",
     alt: "Herb and vegetable garden with morning dew"
   },
   {
