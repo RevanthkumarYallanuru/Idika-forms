@@ -438,7 +438,9 @@ export const eventAddOns: EventAddOn[] = [
   }
 ];
 
-export const rooms = [
+import type { Room } from "@/components/RoomCard";
+
+export const rooms: Room[] = [
   {
     id: 1,
     name: "Tvara",

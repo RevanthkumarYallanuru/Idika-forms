@@ -6,6 +6,7 @@ import { RoomCard } from "@/components/RoomCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
 import { roomsPage, rooms as allRooms } from "@/data/siteData";
+import type { Room } from "@/components/RoomCard";
 
 type RoomCategory = "all" | "Regular Dome" | "Large Dome";
 

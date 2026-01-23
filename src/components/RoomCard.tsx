@@ -62,7 +62,7 @@ interface Amenity {
   description?: string;
 }
 
-interface Room {
+export interface Room {
   id: number;
   name: string;
   category: string;

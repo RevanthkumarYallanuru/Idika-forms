@@ -237,6 +237,31 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* Google Maps Section */}
+      <section className="pb-20">
+        <div className="container-main">
+          <ScrollReveal>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-display mb-2">Find Us</h2>
+              <p className="text-muted-foreground">Located near Ananthagiri Hills, ~90 minutes from Hyderabad</p>
+            </div>
+            <div className="rounded-xl overflow-hidden border border-border/30">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3809.0692295554786!2d78.22567007493295!3d17.31220858356221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcbc1edff054f73%3A0xf53dce511bbfc52e!2sIdika!5e0!3m2!1sen!2sin!4v1769185870059!5m2!1sen!2sin" 
+                width="100%" 
+                height="450" 
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Idika Location on Google Maps"
+                className="w-full"
+              />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
     </Layout>
   );
 };
