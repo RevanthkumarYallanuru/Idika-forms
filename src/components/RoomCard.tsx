@@ -120,6 +120,8 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isAmenitiesModalOpen, setIsAmenitiesModalOpen] = useState(false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [selectedGuestCount, setSelectedGuestCount] = useState(room.baseGuests);
   const [isInView, setIsInView] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -433,7 +435,7 @@ Please confirm availability. Thank you!`;
               </h3>
 
               {/* Amenities - 2x2 Grid */}
-              <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-2 gap-4 mb-4">
                 {room.amenities.slice(0, 4).map((amenity, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <div className="text-secondary">
@@ -445,6 +447,15 @@ Please confirm availability. Thank you!`;
                   </div>
                 ))}
               </div>
+
+              {/* View All Amenities Button */}
+              <button
+                onClick={() => setIsAmenitiesModalOpen(true)}
+                className="text-sm text-primary hover:text-primary/80 font-medium mb-4 flex items-center gap-1 w-fit"
+              >
+                <Eye className="w-4 h-4" />
+                View All Amenities
+              </button>
 
               {/* Pricing Section */}
               <div className="mb-4 py-4 border-t border-border">
@@ -588,12 +599,22 @@ Please confirm availability. Thank you!`;
             <h3 className="text-xl font-display text-foreground mb-2">
               {room.name}
             </h3>
-            <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-              {room.description}
-            </p>
+            <div className="mb-4">
+              <p className={`text-sm text-muted-foreground ${isDescriptionExpanded ? '' : 'line-clamp-2'}`}>
+                {room.fullDescription || room.description}
+              </p>
+              {(room.fullDescription || room.description).length > 100 && (
+                <button
+                  onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                  className="text-xs text-primary font-medium mt-1 hover:text-primary/80"
+                >
+                  {isDescriptionExpanded ? 'Show Less' : 'Read More'}
+                </button>
+              )}
+            </div>
 
             {/* Amenities Grid */}
-            <div className="grid grid-cols-2 gap-2 mb-4">
+            <div className="grid grid-cols-2 gap-2 mb-2">
               {room.amenities.slice(0, 4).map((amenity, idx) => (
                 <div
                   key={idx}
@@ -602,12 +623,21 @@ Please confirm availability. Thank you!`;
                   <div className="text-secondary flex-shrink-0">
                     {iconMap[amenity.icon] || <Cloud className="w-4 h-4" />}
                   </div>
-                  <span className="text-muted-foreground truncate">
+                  <span className="text-muted-foreground">
                     {amenity.title}
                   </span>
                 </div>
               ))}
             </div>
+
+            {/* View All Amenities Button - Mobile */}
+            <button
+              onClick={() => setIsAmenitiesModalOpen(true)}
+              className="text-sm text-primary hover:text-primary/80 font-medium mb-4 flex items-center gap-1"
+            >
+              <Eye className="w-4 h-4" />
+              View All Amenities
+            </button>
 
             {/* Guest Selector */}
             <div className="mb-4">
@@ -766,7 +796,7 @@ Please confirm availability. Thank you!`;
                   value={bookingForm.numberOfGuests}
                   onValueChange={(value) => handleBookingFormChange("numberOfGuests", value)}
                 >
-                  <SelectTrigger className="w-full h-10 sm:h-11 text-base">
+                  <SelectTrigger id="numberOfGuests" className="w-full h-10 sm:h-11 text-base">
                     <SelectValue placeholder="Select guests" />
                   </SelectTrigger>
                   <SelectContent>
@@ -1063,6 +1093,54 @@ Please confirm availability. Thank you!`;
                 </button>
               ))}
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Amenities Modal */}
+      <Dialog open={isAmenitiesModalOpen} onOpenChange={setIsAmenitiesModalOpen}>
+        <DialogContent className="max-w-md w-[95vw] sm:max-w-lg max-h-[85vh] overflow-hidden flex flex-col">
+          <DialogHeader className="pb-4 border-b border-border">
+            <DialogTitle className="text-xl font-display flex items-center gap-2">
+              <Home className="w-5 h-5 text-primary" />
+              {room.name} - Amenities
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground text-sm">
+              All amenities included with your stay
+            </DialogDescription>
+          </DialogHeader>
+          <div className="overflow-y-auto flex-1 py-4">
+            <div className="grid grid-cols-1 gap-3">
+              {room.amenities.map((amenity, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-4 p-3 bg-background-secondary rounded-xl hover:bg-muted/50 transition-colors"
+                >
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div className="text-primary">
+                      {iconMap[amenity.icon] || <Check className="w-5 h-5" />}
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-medium text-foreground">{amenity.title}</h4>
+                    {amenity.description && (
+                      <p className="text-sm text-muted-foreground mt-0.5">
+                        {amenity.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="pt-4 border-t border-border">
+            <Button
+              onClick={() => setIsAmenitiesModalOpen(false)}
+              className="w-full"
+              variant="outline"
+            >
+              Close
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

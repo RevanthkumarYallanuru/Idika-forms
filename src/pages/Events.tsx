@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Users, MapPin, Check, MessageCircle, Sparkles, Heart, Calendar } from "lucide-react";
+import { Users, MapPin, Check, MessageCircle, Sparkles, Calendar } from "lucide-react";
 
 const Events = () => {
   const handleWhatsAppInquiry = (eventName: string, venueName?: string) => {
@@ -59,22 +59,24 @@ const Events = () => {
             </motion.p>
           </ScrollReveal>
 
-          {/* Tags */}
+          {/* Tags - Infinite Marquee */}
           <motion.div
-            className="flex flex-wrap justify-center gap-3 mt-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            className="mt-8 overflow-hidden w-full max-w-xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            {eventsPage.tags.map((tag, index) => (
-              <Badge
-                key={index}
-                variant="outline"
-                className="text-white border-white/40 bg-white/10 backdrop-blur-sm px-4 py-2 text-sm"
-              >
-                {tag}
-              </Badge>
-            ))}
+            <div className="flex animate-marquee whitespace-nowrap">
+              {[...eventsPage.tags, ...eventsPage.tags].map((tag, index) => (
+                <Badge
+                  key={index}
+                  variant="outline"
+                  className="text-white border-white/30 bg-white/10 backdrop-blur-sm px-3 py-1 text-xs mx-2 flex-shrink-0"
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -151,40 +153,7 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Poetic Section */}
-      <section className="py-20 bg-idika-brown text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <LazyImage
-            src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=1920&h=1080&fit=crop"
-            alt="Nature background"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <ScrollReveal>
-            <div className="max-w-3xl mx-auto text-center">
-              <Heart className="w-12 h-12 mx-auto mb-6 text-idika-accent" />
-              <h2 className="text-3xl md:text-4xl font-serif mb-8">
-                {eventsPage.poeticSection.title}
-              </h2>
-              <div className="space-y-6">
-                {eventsPage.poeticSection.lines.map((line, index) => (
-                  <motion.p
-                    key={index}
-                    className="text-lg md:text-xl font-serif italic text-gray-200"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.15 }}
-                    viewport={{ once: true }}
-                  >
-                    "{line}"
-                  </motion.p>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+
 
       {/* Venues Section */}
       <section className="py-20 bg-[#010101]">
@@ -307,8 +276,8 @@ const Events = () => {
               </p>
             </div>
           </ScrollReveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      
+          {/*<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {eventAddOns.map((addOn, index) => (
               <ScrollReveal key={addOn.id} delay={index * 0.05}>
                 <Card className="text-center hover:shadow-lg transition-shadow duration-300 h-full border-idika-sand/50">
@@ -323,7 +292,7 @@ const Events = () => {
                 </Card>
               </ScrollReveal>
             ))}
-          </div>
+          </div>*/}
         </div>
       </section>
 

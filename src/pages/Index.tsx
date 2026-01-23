@@ -89,9 +89,9 @@ const Index = () => {
               <h2 className="text-display-lg mb-6">{homePage.intro.title}</h2>
               <p className="text-body-lg mb-10">{homePage.intro.description}</p>
 
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
                 {homePage.intro.stats.map((stat, index) => (
-                  <div key={index} className="text-center">
+                  <div key={index} className="text-center px-1 sm:px-2">
                     <p className="stat-value">{stat.value}</p>
                     <p className="stat-label">{stat.label}</p>
                   </div>

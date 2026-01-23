@@ -240,11 +240,11 @@ html {
   /* Stats */
   .stat-value {
     font-family: var(--font-display);
-    @apply text-4xl md:text-5xl font-light text-secondary;
+    @apply text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light text-secondary leading-tight;
   }
 
   .stat-label {
-    @apply text-xs uppercase tracking-[0.2em] text-muted-foreground mt-2;
+    @apply text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.2em] text-muted-foreground mt-1 sm:mt-2 leading-tight;
   }
 }
 
@@ -354,5 +354,19 @@ html {
 
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Marquee Animation */
+  .animate-marquee {
+    animation: marquee 15s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 }
