@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, ChevronRight } from "lucide-react";
-import { chatbotConfig, siteConfig } from "@/data/siteData";
+import { chatbotConfig } from "@/data/siteData";
 
 interface Message {
   id: string;
@@ -43,39 +43,62 @@ export const Chatbot = () => {
   };
 
   const findAnswer = (query: string): string => {
-    const queryLower = query.toLowerCase();
+    const queryLower = query.toLowerCase().trim();
+    const queryWords = queryLower.split(/\s+/);
     
-    // Check FAQs
+    let bestMatch = { score: 0, answer: "" };
+    
+    // Search through all FAQs
     for (const faq of chatbotConfig.faqs) {
-      const keywords = faq.question.toLowerCase().split(" ");
-      const matchCount = keywords.filter(kw => 
-        queryLower.includes(kw) && kw.length > 3
-      ).length;
+      let score = 0;
       
-      if (matchCount >= 2 || queryLower.includes(faq.question.toLowerCase().slice(0, 15))) {
-        return faq.answer;
+      // Check keyword matches (primary matching)
+      if (faq.keywords) {
+        for (const keyword of faq.keywords) {
+          if (queryLower.includes(keyword.toLowerCase())) {
+            score += 3; // High weight for keyword match
+          }
+        }
+      }
+      
+      // Check question similarity
+      const questionWords = faq.question.toLowerCase().split(/\s+/);
+      for (const qWord of questionWords) {
+        if (qWord.length > 2 && queryLower.includes(qWord)) {
+          score += 1;
+        }
+      }
+      
+      // Exact phrase bonus
+      if (queryLower.includes(faq.question.toLowerCase().slice(0, 20))) {
+        score += 5;
+      }
+      
+      if (score > bestMatch.score) {
+        bestMatch = { score, answer: faq.answer };
       }
     }
-
-    // Keyword matching
-    if (queryLower.includes("book") || queryLower.includes("reservation") || queryLower.includes("stay")) {
-      return chatbotConfig.faqs.find(f => f.question.includes("book"))?.answer || "";
-    }
-    if (queryLower.includes("price") || queryLower.includes("cost") || queryLower.includes("rate")) {
-      return "Our rates start at ₹8,500 per night on weekdays and ₹10,500 on weekends, including breakfast and dinner. Visit our Stay page for full details, or contact us to book.";
-    }
-    if (queryLower.includes("location") || queryLower.includes("where") || queryLower.includes("address")) {
-      return chatbotConfig.faqs.find(f => f.question.includes("located"))?.answer || "";
-    }
-    if (queryLower.includes("sustain") || queryLower.includes("eco") || queryLower.includes("green")) {
-      return chatbotConfig.faqs.find(f => f.question.includes("sustainability"))?.answer || "";
-    }
-    if (queryLower.includes("what") && queryLower.includes("idika")) {
-      return chatbotConfig.faqs.find(f => f.question.includes("What is"))?.answer || "";
+    
+    // Return best match if score is good enough
+    if (bestMatch.score >= 3) {
+      return bestMatch.answer;
     }
 
-    // Default response
-    return `Thank you for your question! For detailed assistance, please reach out to us at ${siteConfig.email} or visit our Contact page. We'd love to help you plan your stay at Idika.`;
+    // Fallback responses for common intents
+    if (queryLower.includes("hi") || queryLower.includes("hello") || queryLower.includes("hey")) {
+      return "Hello! 👋 Welcome to Idika. How can I help you today? You can ask me about our rooms, prices, location, or how to book!";
+    }
+    
+    if (queryLower.includes("thank") || queryLower.includes("thanks")) {
+      return "You're welcome! 😊 Feel free to ask if you have more questions. We'd love to host you at Idika!";
+    }
+    
+    if (queryLower.includes("bye") || queryLower.includes("goodbye")) {
+      return "Goodbye! 🌿 We hope to see you at Idika soon. Have a wonderful day!";
+    }
+
+    // Default response with helpful suggestions
+    return `I'm not sure about that specific question. Here's what I can help with:\n\n• Room types & prices\n• How to book\n• Location & directions\n• Amenities & facilities\n• Events & celebrations\n\nOr contact us directly:\n📱 WhatsApp: +91 7207357312`;
   };
 
   return (

@@ -864,41 +864,224 @@ export const contactPage = {
 };
 
 export const chatbotConfig = {
-  greeting: "Welcome to Idika! I'm here to help you plan your eco-retreat. What would you like to know?",
+  greeting: "Welcome to Idika! 🌿 I'm here to help you plan your eco-retreat. What would you like to know?",
   quickReplies: [
     "Tell me about Idika",
-    "How do I book?",
-    "What's included?",
-    "Sustainability practices"
+    "Room prices",
+    "How to book?",
+    "Location & directions"
   ],
   faqs: [
+    // About Idika
     {
+      keywords: ["what", "idika", "about", "tell me"],
       question: "What is Idika?",
-      answer: "Idika is an eco-friendly earthbag dome homestay near Hyderabad. We offer a unique blend of sustainable architecture and luxury hospitality, perfect for those seeking a peaceful retreat in nature."
+      answer: "Idika is an eco-luxury earthbag dome homestay near Hyderabad, located close to Ananthagiri Hills. We offer 5 unique domes (Tvara, Neer, Vana, Oorja, Antara) built with sustainable earthbag construction. It's the perfect retreat for couples, families, and groups seeking peace in nature."
     },
     {
-      question: "How do I book a stay?",
-      answer: "You can book directly through our website by visiting the 'Plan Your Stay' page, or contact us via email at hello@idika.in or WhatsApp. We recommend booking at least 2 weeks in advance."
+      keywords: ["why", "special", "unique", "different"],
+      question: "What makes Idika special?",
+      answer: "Idika is unique because of our earthbag dome architecture that maintains 24°C naturally year-round. We're 100% solar powered, practice rainwater harvesting, have organic gardens, and follow zero-waste principles. It's where luxury meets sustainability!"
+    },
+    
+    // Rooms & Pricing
+    {
+      keywords: ["room", "dome", "accommodation", "stay", "types"],
+      question: "What rooms do you have?",
+      answer: "We have 5 domes:\n• Tvara, Neer, Vana, Oorja - Regular domes (2-5 guests) at ₹7,000/night base\n• Antara - Large dome (6-8 guests) at ₹12,000/night base\n\nAll include AC, plush beds, bunk beds, natural bathing tub, and high-speed WiFi."
     },
     {
-      question: "What's included in my stay?",
-      answer: "Your stay includes accommodation in our earthbag dome, breakfast, farm-to-table dinner, access to the natural pool, organic garden, and common areas. Experiences like yoga and nature walks can be added."
+      keywords: ["price", "cost", "rate", "tariff", "charge", "how much", "₹"],
+      question: "What are your prices?",
+      answer: "Room rates:\n• Regular Domes (Tvara/Neer/Vana/Oorja): ₹7,000/night for 2 guests + ₹1,000 per extra guest\n• Large Dome (Antara): ₹12,000/night for 6 guests + ₹1,000 per extra guest\n\n18% GST applicable. Breakfast & dinner included!"
     },
     {
-      question: "How do you practice sustainability?",
-      answer: "Everything at Idika is designed for minimal impact: earthbag construction, 100% solar power, rainwater harvesting, greywater recycling, organic gardens, and a zero-waste kitchen philosophy."
+      keywords: ["tvara"],
+      question: "Tell me about Tvara dome",
+      answer: "Tvara is our air-conditioned Regular Dome featuring plush bedding with bunk bed options, spacious bathroom with natural bathing tub, and high-speed WiFi. Perfect for 2-5 guests at ₹7,000/night (base for 2 guests) + ₹1,000 per extra guest."
     },
     {
+      keywords: ["neer"],
+      question: "Tell me about Neer dome",
+      answer: "Neer (meaning water) offers a calming, water-themed retreat. It's an air-conditioned dome with plush bedding, bunk bed options, and spa-like bathroom with natural bathing tub. Accommodates 2-5 guests at ₹7,000/night base."
+    },
+    {
+      keywords: ["vana"],
+      question: "Tell me about Vana dome",
+      answer: "Vana (meaning forest) is our nature-inspired dome surrounded by lush greenery. Features AC, plush beds with bunk option, natural bathing tub, and WiFi. Perfect for nature lovers! 2-5 guests at ₹7,000/night base."
+    },
+    {
+      keywords: ["oorja"],
+      question: "Tell me about Oorja dome",
+      answer: "Oorja (meaning energy) is designed for rejuvenation and wellness. Air-conditioned dome with plush bedding, bunk bed options, spa-inspired bathroom with natural bathing tub. 2-5 guests at ₹7,000/night base."
+    },
+    {
+      keywords: ["antara", "large", "group", "family", "big"],
+      question: "Tell me about Antara dome",
+      answer: "Antara is our LARGEST dome - perfect for groups and families! Features extra-spacious living areas, large bed + huge bunk bed, AC, and luxurious bathroom. Accommodates 6-8 guests at ₹12,000/night base + ₹1,000 per extra guest."
+    },
+    {
+      keywords: ["guest", "capacity", "people", "how many", "max"],
+      question: "How many guests can stay?",
+      answer: "Guest capacity:\n• Regular Domes (Tvara/Neer/Vana/Oorja): 2-5 guests each\n• Large Dome (Antara): 6-8 guests\n\nTotal property capacity: Up to 28 guests if all 5 domes booked!"
+    },
+    
+    // Amenities
+    {
+      keywords: ["amenity", "amenities", "facilities", "include", "what's included"],
+      question: "What amenities are included?",
+      answer: "All domes include:\n✓ Air conditioning\n✓ Plush beds with bunk bed options\n✓ Natural bathing tub\n✓ High-speed 4G/5G WiFi\n✓ Breakfast & dinner\n✓ Access to organic gardens\n✓ Nature trails\n✓ Common areas & bonfire space"
+    },
+    {
+      keywords: ["wifi", "internet", "connectivity", "network"],
+      question: "Do you have WiFi?",
+      answer: "Yes! All domes have high-speed 4G/5G WiFi connectivity. Stay connected while enjoying nature - perfect for remote work or staying in touch with loved ones."
+    },
+    {
+      keywords: ["ac", "air condition", "cooling", "temperature"],
+      question: "Are the domes air-conditioned?",
+      answer: "Yes, all 5 domes are fully air-conditioned! Plus, our earthbag construction naturally maintains around 24°C, so you'll be comfortable even without AC most of the time."
+    },
+    {
+      keywords: ["food", "meal", "breakfast", "dinner", "lunch", "eat"],
+      question: "What about food/meals?",
+      answer: "Your stay includes:\n✓ Farm-to-table breakfast\n✓ Delicious dinner\n\nWe use fresh ingredients from our organic gardens. Lunch can be arranged on request. We accommodate vegetarian and dietary preferences - just let us know!"
+    },
+    {
+      keywords: ["pool", "swimming"],
+      question: "Is there a swimming pool?",
+      answer: "We have a natural pool that uses plants instead of chemicals for filtration - it's eco-friendly and refreshing! Perfect for a relaxing dip surrounded by nature."
+    },
+    
+    // Booking
+    {
+      keywords: ["book", "booking", "reserve", "reservation", "how to"],
+      question: "How do I book?",
+      answer: "You can book through:\n1. 📱 WhatsApp: +91 7207357312 (fastest!)\n2. 🌐 Website: Click 'Book Now' on any room\n3. 📧 Email: hello@idika.in\n\nWe recommend booking 2 weeks in advance for weekends!"
+    },
+    {
+      keywords: ["whatsapp", "contact", "phone", "call", "number"],
+      question: "What's your contact number?",
+      answer: "📱 WhatsApp/Call: +91 7207357312\n📧 Email: hello@idika.in\n\nWhatsApp is the fastest way to reach us for bookings and inquiries!"
+    },
+    {
+      keywords: ["check in", "check out", "checkin", "checkout", "time", "timing"],
+      question: "What are check-in/check-out times?",
+      answer: "⏰ Check-in: 2:00 PM\n⏰ Check-out: 11:00 AM\n\nEarly check-in or late check-out may be available on request (subject to availability)."
+    },
+    {
+      keywords: ["cancel", "cancellation", "refund", "policy"],
+      question: "What's your cancellation policy?",
+      answer: "Please contact us directly at +91 7207357312 for our cancellation policy. We try to be flexible and accommodate genuine circumstances. Reach out via WhatsApp for the fastest response!"
+    },
+    {
+      keywords: ["payment", "pay", "upi", "card", "cash"],
+      question: "What payment methods do you accept?",
+      answer: "We accept:\n✓ UPI payments\n✓ Bank transfer\n✓ Cash on arrival\n\nA 50% advance is typically required to confirm your booking."
+    },
+    
+    // Location
+    {
+      keywords: ["location", "where", "address", "place", "situated"],
       question: "Where is Idika located?",
-      answer: "We're located near Ananthagiri Hills, approximately 90 minutes from Hyderabad city center. Detailed directions are provided upon booking."
+      answer: "📍 Idika is located near Ananthagiri Hills, approximately 90 minutes (60-70 km) from Hyderabad city center. Detailed directions with Google Maps link are provided upon booking confirmation."
     },
     {
-      question: "Is the dome suitable for couples?",
-      answer: "Absolutely! Idika is perfect for couples seeking a romantic, peaceful getaway. The dome offers complete privacy with stunning views and intimate spaces."
+      keywords: ["direction", "route", "reach", "get there", "how to reach", "travel"],
+      question: "How do I reach Idika?",
+      answer: "From Hyderabad:\n🚗 By car: ~90 minutes via NH 44 towards Ananthagiri Hills\n🚕 Cab: We can help arrange pickup\n\nExact location and Google Maps link shared after booking confirmation. The drive itself is scenic and beautiful!"
     },
     {
+      keywords: ["distance", "far", "km", "kilometer", "hyderabad"],
+      question: "How far is Idika from Hyderabad?",
+      answer: "Idika is approximately 60-70 km from Hyderabad city center, about 90 minutes drive via NH 44. It's near Ananthagiri Hills - a beautiful scenic drive through nature!"
+    },
+    {
+      keywords: ["pickup", "drop", "transport", "cab", "taxi"],
+      question: "Do you provide pickup service?",
+      answer: "We can help arrange cab pickup from Hyderabad on request. Contact us via WhatsApp (+91 7207357312) with your requirements, and we'll coordinate the transport for you."
+    },
+    
+    // Events
+    {
+      keywords: ["event", "party", "celebration", "wedding", "birthday", "corporate"],
+      question: "Can we host events at Idika?",
+      answer: "Yes! We host:\n🎉 Birthday Parties - from ₹12,000\n💍 Weddings - from ₹50,000\n📸 Pre-wedding Shoots - from ₹10,000\n🎊 Private Gatherings - from ₹20,000\n🥳 Parties - from ₹15,000\n\nVisit our Events page or WhatsApp us for customized quotes!"
+    },
+    {
+      keywords: ["wedding", "marriage"],
+      question: "Can we have a wedding at Idika?",
+      answer: "Absolutely! We host intimate weddings starting from ₹50,000. Our beautiful outdoor and indoor spaces are perfect for nature-themed celebrations. Contact us on WhatsApp (+91 7207357312) for customized wedding packages!"
+    },
+    {
+      keywords: ["birthday"],
+      question: "Can we celebrate a birthday at Idika?",
+      answer: "Yes! Birthday celebrations start from ₹12,000. We offer indoor and outdoor venue options, catering, decorations, and bonfire arrangements. Perfect for a memorable celebration in nature! 🎂"
+    },
+    
+    // Sustainability
+    {
+      keywords: ["sustain", "eco", "green", "environment", "solar", "organic"],
+      question: "How is Idika sustainable?",
+      answer: "Idika is built on sustainability:\n🏠 Earthbag construction (natural 24°C)\n☀️ 100% solar powered\n💧 Rainwater harvesting\n♻️ Greywater recycling\n🌱 Organic gardens\n🍽️ Zero-waste kitchen\n\nWe're net-zero and proud of it!"
+    },
+    {
+      keywords: ["earthbag", "construction", "building", "architecture"],
+      question: "What is earthbag construction?",
+      answer: "Our domes are built using earthbag technology - bags filled with local soil, stacked and compressed. This creates thick walls that naturally regulate temperature (staying ~24°C year-round), uses minimal cement, and has very low environmental impact. It's ancient wisdom meets modern comfort!"
+    },
+    
+    // Experiences
+    {
+      keywords: ["experience", "activity", "activities", "things to do", "do there"],
+      question: "What activities are available?",
+      answer: "At Idika you can enjoy:\n🧘 Yoga sessions\n🚶 Nature walks & trails\n🌿 Organic garden tours\n🔥 Bonfire evenings\n⭐ Stargazing\n🏊 Natural pool\n📸 Photography\n\nSome experiences may have additional charges."
+    },
+    {
+      keywords: ["yoga", "meditation", "wellness"],
+      question: "Do you offer yoga sessions?",
+      answer: "Yes! We offer yoga and meditation sessions that can be arranged during your stay. Connect with nature while finding inner peace. Ask us when booking or via WhatsApp to schedule a session."
+    },
+    {
+      keywords: ["bonfire", "campfire", "fire"],
+      question: "Can we have a bonfire?",
+      answer: "Yes! Bonfire evenings can be arranged at Idika. It's perfect for stargazing, storytelling, and creating memories with loved ones. Let us know in advance so we can set it up for you! 🔥"
+    },
+    
+    // Best time & weather
+    {
+      keywords: ["weather", "climate", "season", "best time", "when to visit", "monsoon", "summer", "winter"],
       question: "What's the best time to visit?",
-      answer: "Idika is beautiful year-round. October to March offers pleasant weather, while monsoon season (July-September) brings lush greenery. The earthbag dome maintains a comfortable temperature in all seasons."
+      answer: "Idika is beautiful year-round:\n🍂 Oct-Mar: Pleasant weather, ideal for outdoor activities\n🌧️ Jul-Sep: Lush monsoon greenery, magical atmosphere\n☀️ Apr-Jun: Warm but our domes stay cool at 24°C!\n\nEach season offers a unique experience."
+    },
+    
+    // Couples & families
+    {
+      keywords: ["couple", "romantic", "honeymoon", "anniversary"],
+      question: "Is Idika good for couples?",
+      answer: "Absolutely! Idika is perfect for couples seeking a romantic, peaceful getaway. Our domes offer complete privacy, stunning nature views, and intimate spaces. Ideal for honeymoons, anniversaries, or just quality time together! 💑"
+    },
+    {
+      keywords: ["family", "kid", "child", "children"],
+      question: "Is Idika family-friendly?",
+      answer: "Yes! Families love Idika. Our Antara dome accommodates 6-8 guests, perfect for family trips. Kids enjoy nature walks, organic gardens, and outdoor activities. It's a great way to disconnect from screens and connect with nature! 👨‍👩‍👧‍👦"
+    },
+    {
+      keywords: ["pet", "dog", "animal"],
+      question: "Are pets allowed?",
+      answer: "Please contact us directly at +91 7207357312 regarding pet policies. We evaluate pet requests on a case-by-case basis to ensure comfort for all guests and the local ecosystem."
+    },
+    
+    // Practical
+    {
+      keywords: ["pack", "bring", "carry", "need"],
+      question: "What should I pack/bring?",
+      answer: "We recommend bringing:\n👕 Comfortable clothes\n👟 Walking shoes for nature trails\n🧴 Personal toiletries (we provide basics)\n💊 Personal medications\n📱 Phone charger\n📷 Camera for memories!\n\nWe provide towels, linens, and basic amenities."
+    },
+    {
+      keywords: ["safe", "safety", "secure", "security"],
+      question: "Is Idika safe?",
+      answer: "Yes! Idika is a secure property with staff available on-site. We're located in a peaceful area near Ananthagiri Hills. The property is gated and we prioritize guest safety and privacy."
     }
   ]
 };
