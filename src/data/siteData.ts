@@ -471,11 +471,17 @@ export const rooms: Room[] = [
     ],
     youtubeVideoId: "dQw4w9WgXcQ",
     amenities: [
-      { icon: "Wind", title: "Air-conditioned Dome", description: "Climate controlled comfort" },
-      { icon: "Bed", title: "Plush Bed with Bunk Bed", description: "Comfortable sleeping arrangements" },
-      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" },
-      { icon: "Zap", title: "High-speed 4G/5G Wi-Fi", description: "Stay connected always" }
+      { icon: "Bed", title: "Plush Bed & Thoughtfully Designed Bunk Bed", description: "Comfortable sleeping arrangements for the whole family" },
+      { icon: "Wind", title: "Air-Conditioned Rooms", description: "Complete comfort in all seasons" },
+      { icon: "Zap", title: "High-Speed 4G/5G Wi-Fi", description: "Stay connected with seamless connectivity" },
+      { icon: "Bath", title: "Spacious Bathroom with Natural Bathing Tub", description: "Spa-like experience with well-maintained facilities" },
+      { icon: "Droplet", title: "24-Hour Hot Water Facility", description: "Hot water available round the clock" },
+      { icon: "Shirt", title: "Fresh Linens, Towels & Toiletries", description: "High-quality linens and curated toiletries provided" },
+      { icon: "Coffee", title: "Electric Kettle with Cups", description: "For relaxed in-room moments" },
+      { icon: "Lightbulb", title: "Warm Ambient Lighting", description: "Complements the natural surroundings" }
     ],
+    checkInTime: "2:00 PM",
+    checkOutTime: "11:00 AM",
     maxGuests: 5,
     baseGuests: 2,
     basePrice: 7000,
@@ -514,11 +520,17 @@ export const rooms: Room[] = [
     ],
     youtubeVideoId: "5qap5aO4i9A",
     amenities: [
-      { icon: "Wind", title: "Air-conditioned Dome", description: "Climate controlled comfort" },
-      { icon: "Bed", title: "Plush Bed with Bunk Bed", description: "Comfortable sleeping arrangements" },
-      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" },
-      { icon: "Zap", title: "High-speed 4G/5G Wi-Fi", description: "Stay connected always" }
+      { icon: "Bed", title: "Plush Bed & Thoughtfully Designed Bunk Bed", description: "Comfortable sleeping arrangements for the whole family" },
+      { icon: "Wind", title: "Air-Conditioned Rooms", description: "Complete comfort in all seasons" },
+      { icon: "Zap", title: "High-Speed 4G/5G Wi-Fi", description: "Stay connected with seamless connectivity" },
+      { icon: "Bath", title: "Spacious Bathroom with Natural Bathing Tub", description: "Spa-like experience with well-maintained facilities" },
+      { icon: "Droplet", title: "24-Hour Hot Water Facility", description: "Hot water available round the clock" },
+      { icon: "Shirt", title: "Fresh Linens, Towels & Toiletries", description: "High-quality linens and curated toiletries provided" },
+      { icon: "Coffee", title: "Electric Kettle with Cups", description: "For relaxed in-room moments" },
+      { icon: "Lightbulb", title: "Warm Ambient Lighting", description: "Complements the natural surroundings" }
     ],
+    checkInTime: "2:00 PM",
+    checkOutTime: "11:00 AM",
     maxGuests: 5,
     baseGuests: 2,
     basePrice: 7000,
@@ -557,11 +569,17 @@ export const rooms: Room[] = [
     ],
     youtubeVideoId: "lTxn2BuqyzU",
     amenities: [
-      { icon: "Wind", title: "Air-conditioned Dome", description: "Climate controlled comfort" },
-      { icon: "Bed", title: "Plush Bed with Bunk Bed", description: "Comfortable sleeping arrangements" },
-      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" },
-      { icon: "Zap", title: "High-speed 4G/5G Wi-Fi", description: "Stay connected always" }
+      { icon: "Bed", title: "Plush Bed & Thoughtfully Designed Bunk Bed", description: "Comfortable sleeping arrangements for the whole family" },
+      { icon: "Wind", title: "Air-Conditioned Rooms", description: "Complete comfort in all seasons" },
+      { icon: "Zap", title: "High-Speed 4G/5G Wi-Fi", description: "Stay connected with seamless connectivity" },
+      { icon: "Bath", title: "Spacious Bathroom with Natural Bathing Tub", description: "Spa-like experience with well-maintained facilities" },
+      { icon: "Droplet", title: "24-Hour Hot Water Facility", description: "Hot water available round the clock" },
+      { icon: "Shirt", title: "Fresh Linens, Towels & Toiletries", description: "High-quality linens and curated toiletries provided" },
+      { icon: "Coffee", title: "Electric Kettle with Cups", description: "For relaxed in-room moments" },
+      { icon: "Lightbulb", title: "Warm Ambient Lighting", description: "Complements the natural surroundings" }
     ],
+    checkInTime: "2:00 PM",
+    checkOutTime: "11:00 AM",
     maxGuests: 5,
     baseGuests: 2,
     basePrice: 7000,
@@ -600,11 +618,17 @@ export const rooms: Room[] = [
     ],
     youtubeVideoId: "inpok4MKVLM",
     amenities: [
-      { icon: "Wind", title: "Air-conditioned Dome", description: "Climate controlled comfort" },
-      { icon: "Bed", title: "Plush Bed with Bunk Bed", description: "Comfortable sleeping arrangements" },
-      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" },
-      { icon: "Zap", title: "High-speed 4G/5G Wi-Fi", description: "Stay connected always" }
+      { icon: "Bed", title: "Plush Bed & Thoughtfully Designed Bunk Bed", description: "Comfortable sleeping arrangements for the whole family" },
+      { icon: "Wind", title: "Air-Conditioned Rooms", description: "Complete comfort in all seasons" },
+      { icon: "Zap", title: "High-Speed 4G/5G Wi-Fi", description: "Stay connected with seamless connectivity" },
+      { icon: "Bath", title: "Spacious Bathroom with Natural Bathing Tub", description: "Spa-like experience with well-maintained facilities" },
+      { icon: "Droplet", title: "24-Hour Hot Water Facility", description: "Hot water available round the clock" },
+      { icon: "Shirt", title: "Fresh Linens, Towels & Toiletries", description: "High-quality linens and curated toiletries provided" },
+      { icon: "Coffee", title: "Electric Kettle with Cups", description: "For relaxed in-room moments" },
+      { icon: "Lightbulb", title: "Warm Ambient Lighting", description: "Complements the natural surroundings" }
     ],
+    checkInTime: "2:00 PM",
+    checkOutTime: "11:00 AM",
     maxGuests: 5,
     baseGuests: 2,
     basePrice: 7000,
@@ -643,11 +667,18 @@ export const rooms: Room[] = [
     ],
     youtubeVideoId: "L_LUpnjgPso",
     amenities: [
-      { icon: "Home", title: "Extra-spacious Dome", description: "Perfect for groups" },
-      { icon: "Bed", title: "Large Bed + Huge Bunk Bed", description: "Ample sleeping space" },
-      { icon: "Wind", title: "Air-conditioned Comfort", description: "Climate controlled" },
-      { icon: "Bath", title: "Spacious Bathroom", description: "Natural bathing tub included" }
+      { icon: "Home", title: "Spacious Dome for Groups", description: "Designed to comfortably accommodate groups" },
+      { icon: "Bed", title: "Large Bed & Huge Bunk Bed", description: "Ample sleeping space for everyone" },
+      { icon: "Wind", title: "Air-Conditioned", description: "All-season comfort" },
+      { icon: "Zap", title: "High-Speed 4G/5G Wi-Fi", description: "Stay connected with seamless connectivity" },
+      { icon: "Bath", title: "Spacious Bathroom with Natural Bathing Tub", description: "Well-maintained facilities with spa-like experience" },
+      { icon: "Droplet", title: "24-Hour Hot Water Facility", description: "Hot water available round the clock" },
+      { icon: "Shirt", title: "Fresh Premium Linens, Towels & Toiletries", description: "Premium linens and eco-friendly toiletries provided" },
+      { icon: "Coffee", title: "Electric Kettle with Cups", description: "For relaxed in-room moments" },
+      { icon: "Lightbulb", title: "Soft Ambient Lighting", description: "Blends beautifully with nature" }
     ],
+    checkInTime: "2:00 PM",
+    checkOutTime: "11:00 AM",
     maxGuests: 8,
     baseGuests: 6,
     basePrice: 12000,
@@ -1095,8 +1126,7 @@ export const footer = {
       title: "Explore",
       links: [
         { label: "About", href: "/about" },
-        { label: "Stay", href: "/stay" },
-        { label: "Sustainability", href: "/sustainability" },
+        
         { label: "Experiences", href: "/experiences" }
       ]
     },
@@ -1104,7 +1134,7 @@ export const footer = {
       title: "Connect",
       links: [
         { label: "Gallery", href: "/gallery" },
-        { label: "Reviews", href: "/reviews" },
+        
         { label: "Contact", href: "/contact" }
       ]
     }

@@ -49,6 +49,13 @@ import {
   Flame,
   Leaf,
   Cloud,
+  Coffee,
+  Droplet,
+  Shirt,
+  Lightbulb,
+  Clock,
+  LogIn,
+  LogOut,
 } from "lucide-react";
 
 interface RoomImage {
@@ -78,6 +85,8 @@ export interface Room {
   gstPercentage: number;
   roomType: "regular" | "large";
   highlights?: string[];
+  checkInTime?: string;
+  checkOutTime?: string;
 }
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -104,6 +113,13 @@ const iconMap: Record<string, React.ReactNode> = {
   Zap: <Zap className="w-5 h-5" />,
   Leaf: <Leaf className="w-5 h-5" />,
   Cloud: <Cloud className="w-5 h-5" />,
+  Coffee: <Coffee className="w-5 h-5" />,
+  Droplet: <Droplet className="w-5 h-5" />,
+  Shirt: <Shirt className="w-5 h-5" />,
+  Lightbulb: <Lightbulb className="w-5 h-5" />,
+  Clock: <Clock className="w-5 h-5" />,
+  LogIn: <LogIn className="w-5 h-5" />,
+  LogOut: <LogOut className="w-5 h-5" />,
 };
 
 // Helper function to calculate room price based on guest count
@@ -128,6 +144,7 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [viewingAddOn, setViewingAddOn] = useState<BookingAddOn | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
 
   // Booking form state
   const [bookingForm, setBookingForm] = useState({
@@ -167,18 +184,25 @@ export const RoomCard = ({ room }: RoomCardProps) => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Only play video when more than 50% of card is visible
-          setIsInView(entry.isIntersecting && entry.intersectionRatio > 0.5);
+          // Play video when element is intersecting with the viewport
+          // Using a lower threshold for mobile to trigger earlier
+          if (entry.isIntersecting) {
+            setIsInView(true);
+          } else {
+            setIsInView(false);
+          }
         });
       },
       {
-        threshold: [0, 0.5, 1],
-        rootMargin: "-10% 0px -10% 0px"
+        threshold: [0, 0.1, 0.25],
+        rootMargin: "-5% 0px -5% 0px" // Trigger when 5% from edges
       }
     );
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
+    // Observe the video container if available, otherwise the card
+    const elementToObserve = videoContainerRef.current || cardRef.current;
+    if (elementToObserve) {
+      observer.observe(elementToObserve);
     }
 
     return () => {
@@ -339,9 +363,30 @@ Please confirm availability. Thank you!`;
 
   const displayImages = room.images.slice(0, 5);
 
-  // YouTube embed URL with autoplay (muted for browser compliance)
+  // YouTube embed URL with autoplay (muted for browser compliance on mobile)
   // Using youtube-nocookie.com for privacy-enhanced mode (reduces tracking warnings)
-  const youtubeEmbedUrl = `https://www.youtube-nocookie.com/embed/${room.youtubeVideoId}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${room.youtubeVideoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`;
+  // Note: autoplay requires mute=1 on mobile browsers due to browser policies
+  const youtubeEmbedUrl = useMemo(() => {
+    const baseUrl = `https://www.youtube-nocookie.com/embed/${room.youtubeVideoId}`;
+    const params = new URLSearchParams({
+      autoplay: '1',
+      mute: isMuted ? '1' : '0',
+      loop: '1',
+      playlist: room.youtubeVideoId,
+      controls: '0',
+      showinfo: '0',
+      rel: '0',
+      modestbranding: '1',
+      playsinline: '1',
+      enablejsapi: '1',
+      iv_load_policy: '3', // Hide video annotations
+      fs: '0', // Disable fullscreen button
+    });
+    if (typeof window !== 'undefined') {
+      params.set('origin', window.location.origin);
+    }
+    return `${baseUrl}?${params.toString()}`;
+  }, [room.youtubeVideoId, isMuted]);
 
   return (
     <>
@@ -457,6 +502,26 @@ Please confirm availability. Thank you!`;
                 View All Amenities
               </button>
 
+              {/* Check-in / Check-out Times */}
+              {(room.checkInTime || room.checkOutTime) && (
+                <div className="flex items-center gap-4 mb-4 text-sm">
+                  {room.checkInTime && (
+                    <div className="flex items-center gap-2">
+                      <LogIn className="w-4 h-4 text-primary" />
+                      <span className="text-muted-foreground">Check-in:</span>
+                      <span className="font-medium text-foreground">{room.checkInTime}</span>
+                    </div>
+                  )}
+                  {room.checkOutTime && (
+                    <div className="flex items-center gap-2">
+                      <LogOut className="w-4 h-4 text-primary" />
+                      <span className="text-muted-foreground">Check-out:</span>
+                      <span className="font-medium text-foreground">{room.checkOutTime}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Pricing Section */}
               <div className="mb-4 py-4 border-t border-border">
                 <div className="mb-3">
@@ -515,7 +580,7 @@ Please confirm availability. Thank you!`;
           transition={{ duration: 0.5 }}
         >
           {/* Video/Image Area */}
-          <div className="relative aspect-video group bg-black">
+          <div ref={videoContainerRef} className="relative aspect-video group bg-black">
             {isInView ? (
               <>
                 {/* YouTube Video - Autoplay when in view */}
@@ -638,6 +703,26 @@ Please confirm availability. Thank you!`;
               <Eye className="w-4 h-4" />
               View All Amenities
             </button>
+
+            {/* Check-in / Check-out Times - Mobile */}
+            {(room.checkInTime || room.checkOutTime) && (
+              <div className="flex items-center gap-4 mb-4 text-sm">
+                {room.checkInTime && (
+                  <div className="flex items-center gap-2">
+                    <LogIn className="w-4 h-4 text-primary" />
+                    <span className="text-muted-foreground">Check-in:</span>
+                    <span className="font-medium text-foreground">{room.checkInTime}</span>
+                  </div>
+                )}
+                {room.checkOutTime && (
+                  <div className="flex items-center gap-2">
+                    <LogOut className="w-4 h-4 text-primary" />
+                    <span className="text-muted-foreground">Check-out:</span>
+                    <span className="font-medium text-foreground">{room.checkOutTime}</span>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Guest Selector */}
             <div className="mb-4">
@@ -1110,6 +1195,35 @@ Please confirm availability. Thank you!`;
             </DialogDescription>
           </DialogHeader>
           <div className="overflow-y-auto flex-1 py-4">
+            {/* Check-in / Check-out Times */}
+            {(room.checkInTime || room.checkOutTime) && (
+              <div className="mb-4 p-4 bg-primary/5 rounded-xl border border-primary/10">
+                <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-primary" />
+                  Timings
+                </h4>
+                <div className="grid grid-cols-2 gap-4">
+                  {room.checkInTime && (
+                    <div className="flex items-center gap-2">
+                      <LogIn className="w-4 h-4 text-primary" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Check-in</p>
+                        <p className="font-medium text-foreground">{room.checkInTime}</p>
+                      </div>
+                    </div>
+                  )}
+                  {room.checkOutTime && (
+                    <div className="flex items-center gap-2">
+                      <LogOut className="w-4 h-4 text-primary" />
+                      <div>
+                        <p className="text-xs text-muted-foreground">Check-out</p>
+                        <p className="font-medium text-foreground">{room.checkOutTime}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
             <div className="grid grid-cols-1 gap-3">
               {room.amenities.map((amenity, idx) => (
                 <div
