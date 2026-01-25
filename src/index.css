@@ -249,6 +249,30 @@ html {
 }
 
 @layer utilities {
+  /* Performance Optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  /* Prevent Layout Shift */
+  .contain-layout {
+    contain: layout;
+  }
+  
+  .contain-paint {
+    contain: paint;
+  }
+  
+  /* GPU Acceleration for animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
   /* Fade In Animation */
   .animate-fade-in {
     animation: fadeIn 0.8s ease-out forwards;
@@ -367,6 +391,24 @@ html {
     }
     100% {
       transform: translateX(-50%);
+    }
+  }
+  
+  /* Touch-friendly improvements */
+  @media (hover: none) {
+    .touch-manipulation {
+      touch-action: manipulation;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
   }
 }

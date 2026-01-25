@@ -15,6 +15,8 @@ const About = () => {
             src={aboutPage.hero.image.src}
             alt={aboutPage.hero.image.alt}
             className="w-full h-full object-cover"
+            priority={true}
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background" />
         </div>

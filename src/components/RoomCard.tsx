@@ -146,11 +146,15 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const desktopVideoRef = useRef<HTMLDivElement>(null);
   const mobileVideoRef = useRef<HTMLDivElement>(null);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   // Generate YouTube embed URL with autoplay, mute, and mobile-friendly settings
   const youtubeEmbedUrl = useMemo(() => {
+    // Only generate URL when video should play
+    if (!isInView && !hasInteracted) return '';
+    
     const params = new URLSearchParams({
-      autoplay: isInView ? '1' : '0',
+      autoplay: '1',
       mute: isMuted ? '1' : '0',
       loop: '1',
       playlist: room.youtubeVideoId, // Required for loop to work
@@ -160,10 +164,10 @@ export const RoomCard = ({ room }: RoomCardProps) => {
       showinfo: '0',
       playsinline: '1', // Prevents fullscreen hijack on mobile
       enablejsapi: '1',
-      origin: window.location.origin,
+      origin: typeof window !== 'undefined' ? window.location.origin : '',
     });
     return `https://www.youtube.com/embed/${room.youtubeVideoId}?${params.toString()}`;
-  }, [room.youtubeVideoId, isInView, isMuted]);
+  }, [room.youtubeVideoId, isInView, isMuted, hasInteracted]);
 
   // Booking form state
   const [bookingForm, setBookingForm] = useState({
@@ -435,8 +439,12 @@ Please confirm availability. Thank you!`;
             {/* Left Side - Video/Image Gallery */}
             <div className="w-[55%] p-4 flex flex-col gap-3">
               {/* Main Video/Image Area */}
-              <div ref={desktopVideoRef} className="relative aspect-[16/10] rounded-xl overflow-hidden group bg-black">
-                {isInView ? (
+              <div 
+                ref={desktopVideoRef} 
+                className="relative aspect-[16/10] rounded-xl overflow-hidden group bg-black"
+                onClick={() => !isInView && setHasInteracted(true)}
+              >
+                {(isInView || hasInteracted) && youtubeEmbedUrl ? (
                   <>
                     {/* YouTube Embed - Autoplay when in view */}
                     <iframe
@@ -461,15 +469,15 @@ Please confirm availability. Thank you!`;
                     <img
                       src={`https://img.youtube.com/vi/${room.youtubeVideoId}/maxresdefault.jpg`}
                       alt={displayImages[0]?.alt || room.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover cursor-pointer"
                       loading="lazy"
                       onError={(e) => {
                         // Fallback to hqdefault if maxresdefault doesn't exist
                         (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`;
                       }}
                     />
-                    {/* Play icon overlay - no text, just visual cue */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                    {/* Play icon overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors cursor-pointer">
                       <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                         <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1" />
                       </div>
@@ -624,8 +632,12 @@ Please confirm availability. Thank you!`;
           transition={{ duration: 0.5 }}
         >
           {/* Video/Image Area */}
-          <div ref={mobileVideoRef} className="relative aspect-video group bg-black">
-            {isInView ? (
+          <div 
+            ref={mobileVideoRef} 
+            className="relative aspect-video group bg-black"
+            onClick={() => !isInView && setHasInteracted(true)}
+          >
+            {(isInView || hasInteracted) && youtubeEmbedUrl ? (
               <>
                 {/* YouTube Embed - Autoplay when in view */}
                 <iframe
@@ -650,11 +662,11 @@ Please confirm availability. Thank you!`;
                 <img
                   src={`https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`}
                   alt={displayImages[currentImageIndex]?.alt || room.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover cursor-pointer"
                   loading="lazy"
                 />
                 {/* Play icon overlay for mobile */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors cursor-pointer">
                   <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                     <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-white border-b-[8px] border-b-transparent ml-1" />
                   </div>

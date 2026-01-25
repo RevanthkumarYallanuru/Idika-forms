@@ -3,9 +3,18 @@ import { motion } from "framer-motion";
 import { ArrowRight, Star, CloudRain, Filter, Recycle, Droplets, LucideIcon } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { LazyImage } from "@/components/LazyImage";
-import { Dome3D } from "@/components/Dome3D";
+import { lazy, Suspense } from "react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { homePage, reviews, siteConfig } from "@/data/siteData";
+
+// Lazy load the 3D Dome component - only needed on desktop
+const Dome3D = lazy(() => import("@/components/Dome3D").then(m => ({ default: m.Dome3D })));
+
+const Dome3DFallback = () => (
+  <div className="w-full h-full flex items-center justify-center bg-background-secondary rounded-2xl">
+    <div className="w-16 h-16 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
+  </div>
+);
 
 const heroImage = "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/heros/IMG_5907.JPG";
 
@@ -27,6 +36,8 @@ const Index = () => {
             src={heroImage}
             alt="Idika Earthbag Dome at twilight"
             className="w-full h-full object-cover"
+            priority={true}
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
         </div>
@@ -100,7 +111,9 @@ const Index = () => {
             {/* 3D Dome - Hidden on mobile for performance */}
             <ScrollReveal direction="right" delay={0.2} className="hidden lg:block">
               <div className="aspect-square rounded-2xl overflow-hidden bg-background glow-terracotta">
-                <Dome3D className="w-full h-full" />
+                <Suspense fallback={<Dome3DFallback />}>
+                  <Dome3D className="w-full h-full" />
+                </Suspense>
               </div>
             </ScrollReveal>
           </div>
