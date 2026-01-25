@@ -5,24 +5,6 @@ import { Layout } from "@/components/Layout";
 import { LazyImage } from "@/components/LazyImage";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { galleryImages } from "@/data/siteData";
-import heroDome from "@/assets/hero-dome.jpg";
-import interiorBedroom from "@/assets/interior-bedroom.jpg";
-import naturalPool from "@/assets/natural-pool.jpg";
-import openLawns from "@/assets/open-lawns.jpg";
-import organicGarden from "@/assets/organic-garden.jpg";
-import earthbagTexture from "@/assets/earthbag-texture.jpg";
-
-// Map gallery items to actual images with aspect ratio metadata
-const imageMap: Record<number, { src: string; aspect: "square" | "landscape" | "portrait" }> = {
-  1: { src: heroDome, aspect: "landscape" },
-  2: { src: interiorBedroom, aspect: "portrait" },
-  3: { src: naturalPool, aspect: "landscape" },
-  4: { src: openLawns, aspect: "square" },
-  5: { src: openLawns, aspect: "landscape" },
-  6: { src: organicGarden, aspect: "square" },
-  7: { src: heroDome, aspect: "portrait" },
-  8: { src: earthbagTexture, aspect: "square" },
-};
 
 // Category filter colors
 const categoryColors: Record<string, string> = {
@@ -187,7 +169,6 @@ const Gallery = () => {
               exit="hidden"
             >
               {filteredImages.map((image) => {
-              const imageData = imageMap[image.id];
               return (
                 <motion.div
                   key={image.id}
@@ -201,7 +182,7 @@ const Gallery = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <LazyImage
-                      src={imageData.src}
+                      src={image.src}
                       alt={image.alt}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
@@ -307,7 +288,7 @@ const Gallery = () => {
               <div className="relative bg-black/50 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10">
                 <motion.img
                   key={selectedImage}
-                  src={imageMap[selectedImage].src}
+                  src={selectedItem.src}
                   alt={selectedItem.alt}
                   className="w-full h-auto max-h-[70vh] object-contain"
                   initial={{ scale: 0.95, opacity: 0 }}

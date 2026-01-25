@@ -144,7 +144,26 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
   const [viewingAddOn, setViewingAddOn] = useState<BookingAddOn | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const desktopVideoRef = useRef<HTMLDivElement>(null);
+  const mobileVideoRef = useRef<HTMLDivElement>(null);
+
+  // Generate YouTube embed URL with autoplay, mute, and mobile-friendly settings
+  const youtubeEmbedUrl = useMemo(() => {
+    const params = new URLSearchParams({
+      autoplay: isInView ? '1' : '0',
+      mute: isMuted ? '1' : '0',
+      loop: '1',
+      playlist: room.youtubeVideoId, // Required for loop to work
+      controls: '0',
+      modestbranding: '1',
+      rel: '0',
+      showinfo: '0',
+      playsinline: '1', // Prevents fullscreen hijack on mobile
+      enablejsapi: '1',
+      origin: window.location.origin,
+    });
+    return `https://www.youtube.com/embed/${room.youtubeVideoId}?${params.toString()}`;
+  }, [room.youtubeVideoId, isInView, isMuted]);
 
   // Booking form state
   const [bookingForm, setBookingForm] = useState({
@@ -180,33 +199,77 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   }, [selectedAddOns]);
 
   // Intersection Observer for auto-play video when in view
+  // Device-aware configuration for optimal autoplay behavior
   useEffect(() => {
+    // Determine which element to observe based on screen size
+    // Desktop: observe the desktop video container
+    // Mobile: observe the mobile video container
+    const isDesktop = window.innerWidth >= 1024; // lg breakpoint
+    
+    // Configuration differs based on device type
+    const observerConfig: IntersectionObserverInit = isDesktop
+      ? {
+          // Desktop: trigger when 40% visible, no margin restriction
+          threshold: [0, 0.2, 0.4, 0.6],
+          rootMargin: "0px 0px 0px 0px"
+        }
+      : {
+          // Mobile: trigger when card enters center zone
+          threshold: [0, 0.1, 0.3, 0.5],
+          rootMargin: "-10% 0px -10% 0px"
+        };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // Play video when element is intersecting with the viewport
-          // Using a lower threshold for mobile to trigger earlier
-          if (entry.isIntersecting) {
+          // Desktop: play when 40% visible
+          // Mobile: play when 30% visible (center zone consideration)
+          const playThreshold = isDesktop ? 0.4 : 0.3;
+          
+          if (entry.isIntersecting && entry.intersectionRatio >= playThreshold) {
             setIsInView(true);
-          } else {
+          } else if (!entry.isIntersecting || entry.intersectionRatio < 0.1) {
             setIsInView(false);
           }
         });
       },
-      {
-        threshold: [0, 0.1, 0.25],
-        rootMargin: "-5% 0px -5% 0px" // Trigger when 5% from edges
-      }
+      observerConfig
     );
 
-    // Observe the video container if available, otherwise the card
-    const elementToObserve = videoContainerRef.current || cardRef.current;
-    if (elementToObserve) {
-      observer.observe(elementToObserve);
-    }
+    // Select the appropriate video container based on current viewport
+    // Use a slight delay to ensure refs are properly attached after render
+    const setupObserver = () => {
+      const elementToObserve = isDesktop 
+        ? (desktopVideoRef.current || cardRef.current)
+        : (mobileVideoRef.current || cardRef.current);
+      
+      if (elementToObserve) {
+        observer.observe(elementToObserve);
+      }
+    };
+
+    // Small delay to ensure DOM is ready
+    const timeoutId = setTimeout(setupObserver, 100);
+
+    // Handle resize to switch observer targets
+    const handleResize = () => {
+      observer.disconnect();
+      const newIsDesktop = window.innerWidth >= 1024;
+      const newElement = newIsDesktop 
+        ? (desktopVideoRef.current || cardRef.current)
+        : (mobileVideoRef.current || cardRef.current);
+      
+      if (newElement) {
+        observer.observe(newElement);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
 
     return () => {
+      clearTimeout(timeoutId);
       observer.disconnect();
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -363,31 +426,6 @@ Please confirm availability. Thank you!`;
 
   const displayImages = room.images.slice(0, 5);
 
-  // YouTube embed URL with autoplay (muted for browser compliance on mobile)
-  // Using youtube-nocookie.com for privacy-enhanced mode (reduces tracking warnings)
-  // Note: autoplay requires mute=1 on mobile browsers due to browser policies
-  const youtubeEmbedUrl = useMemo(() => {
-    const baseUrl = `https://www.youtube-nocookie.com/embed/${room.youtubeVideoId}`;
-    const params = new URLSearchParams({
-      autoplay: '1',
-      mute: isMuted ? '1' : '0',
-      loop: '1',
-      playlist: room.youtubeVideoId,
-      controls: '0',
-      showinfo: '0',
-      rel: '0',
-      modestbranding: '1',
-      playsinline: '1',
-      enablejsapi: '1',
-      iv_load_policy: '3', // Hide video annotations
-      fs: '0', // Disable fullscreen button
-    });
-    if (typeof window !== 'undefined') {
-      params.set('origin', window.location.origin);
-    }
-    return `${baseUrl}?${params.toString()}`;
-  }, [room.youtubeVideoId, isMuted]);
-
   return (
     <>
       <div ref={cardRef}>
@@ -397,19 +435,17 @@ Please confirm availability. Thank you!`;
             {/* Left Side - Video/Image Gallery */}
             <div className="w-[55%] p-4 flex flex-col gap-3">
               {/* Main Video/Image Area */}
-              <div className="relative aspect-[16/10] rounded-xl overflow-hidden group bg-black">
+              <div ref={desktopVideoRef} className="relative aspect-[16/10] rounded-xl overflow-hidden group bg-black">
                 {isInView ? (
                   <>
-                    {/* YouTube Video - Autoplay when in view */}
+                    {/* YouTube Embed - Autoplay when in view */}
                     <iframe
                       src={youtubeEmbedUrl}
-                      title={room.name}
                       className="absolute inset-0 w-full h-full"
-                      frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      loading="lazy"
                       allowFullScreen
+                      loading="lazy"
+                      title={`${room.name} video tour`}
                     />
                     {/* Mute/Unmute Button */}
                     <button
@@ -421,14 +457,22 @@ Please confirm availability. Thank you!`;
                   </>
                 ) : (
                   <>
-                    {/* Fallback Image when not in view */}
-                    <LazyImage
-                      src={displayImages[0]?.src || ""}
+                    {/* Poster Image - shows YouTube thumbnail until video loads */}
+                    <img
+                      src={`https://img.youtube.com/vi/${room.youtubeVideoId}/maxresdefault.jpg`}
                       alt={displayImages[0]?.alt || room.name}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      onError={(e) => {
+                        // Fallback to hqdefault if maxresdefault doesn't exist
+                        (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`;
+                      }}
                     />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                      <div className="text-white text-sm">Scroll to play video</div>
+                    {/* Play icon overlay - no text, just visual cue */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                      <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1" />
+                      </div>
                     </div>
                   </>
                 )}
@@ -580,19 +624,17 @@ Please confirm availability. Thank you!`;
           transition={{ duration: 0.5 }}
         >
           {/* Video/Image Area */}
-          <div ref={videoContainerRef} className="relative aspect-video group bg-black">
+          <div ref={mobileVideoRef} className="relative aspect-video group bg-black">
             {isInView ? (
               <>
-                {/* YouTube Video - Autoplay when in view */}
+                {/* YouTube Embed - Autoplay when in view */}
                 <iframe
                   src={youtubeEmbedUrl}
-                  title={room.name}
                   className="absolute inset-0 w-full h-full"
-                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  loading="lazy"
                   allowFullScreen
+                  loading="lazy"
+                  title={`${room.name} video tour`}
                 />
                 {/* Mute/Unmute Button */}
                 <button
@@ -604,11 +646,19 @@ Please confirm availability. Thank you!`;
               </>
             ) : (
               <>
-                <LazyImage
-                  src={displayImages[currentImageIndex]?.src || ""}
+                {/* Poster Image - YouTube thumbnail */}
+                <img
+                  src={`https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`}
                   alt={displayImages[currentImageIndex]?.alt || room.name}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
+                {/* Play icon overlay for mobile */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                  <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-white border-b-[8px] border-b-transparent ml-1" />
+                  </div>
+                </div>
                 {/* Navigation */}
                 <button
                   onClick={handlePreviousImage}

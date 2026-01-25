@@ -62,7 +62,11 @@ export const homePage = {
     {
       title: "The Earth as Substance",
       description: "Our walls are built from the very earth beneath your feet. Each bag filled with local soil creates a structure that's thermal, acoustic, and deeply connected to the land.",
-      highlight: "Natural"
+      highlight: "Natural",
+      image: {
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3901.JPG",
+        alt: "Interior of Idika dome bedroom"
+      }
     },
     {
       title: "Circular Hydrology",
@@ -87,6 +91,10 @@ export const homePage = {
     features: [
       { title: "Open Lawns", description: "Expansive green spaces for yoga, meditation, or simply watching the sky." },
       { title: "Nature-driven Stillness", description: "No television, minimal WiFi zones. Just birdsong, breeze, and the rhythm of nature." }
+    ],
+    images: [
+      { src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/Domess/IMG_5899.JPG", alt: "Natural pool at Idika" },
+      { src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/Domess/IMG_6229.JPG", alt: "Open lawns at Idika" }
     ]
   },
   cta: {
@@ -100,14 +108,22 @@ export const aboutPage = {
   hero: {
     subtitle: "Our Story",
     title: "Living Within the Earth",
-    description: "Idika was born from a simple question: what if luxury meant living in harmony with nature, not despite it?"
+    description: "Idika was born from a simple question: what if luxury meant living in harmony with nature, not despite it?",
+    image: {
+      src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/heros/IMG_5910.JPG",
+      alt: "Idika Earthbag Dome"
+    }
   },
   story: {
     title: "Interior Warmth & Privacy",
     paragraphs: [
       "Every corner of Idika is designed with intention. Natural light filters through strategically placed openings, while earthen walls create intimate, cocoon-like spaces.",
       "Our philosophy is simple: true luxury is found in sustainable living, in waking to birdsong rather than alarms, in spaces that breathe with the earth."
-    ]
+    ],
+    image: {
+      src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3908.JPG",
+      alt: "Interior of Idika dome"
+    }
   },
   values: [
     { title: "Sustainable", description: "Every decision prioritizes the planet" },
@@ -449,24 +465,20 @@ export const rooms: Room[] = [
     fullDescription: "Tvara offers a perfect blend of comfort and nature. This air-conditioned dome features a plush bed with bunk bed options, a spacious bathroom with natural bathing tub, and high-speed Wi-Fi connectivity for your convenience.",
     images: [
       {
-        src: "https://images.unsplash.com/photo-1587061949409-02df41d5e562?w=800&h=600&fit=crop",
-        alt: "Tvara dome exterior"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3906.JPG",
+        alt: "Tvara dome interior"
       },
       {
-        src: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&h=600&fit=crop",
-        alt: "Cozy bedroom with natural lighting"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3907.JPG",
+        alt: "Tvara cozy bedroom"
       },
       {
-        src: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&h=600&fit=crop",
-        alt: "Modern interior with warm tones"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3908.JPG",
+        alt: "Tvara dome details"
       },
       {
-        src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-        alt: "Spacious bedroom with skylight"
-      },
-      {
-        src: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop",
-        alt: "Private deck with garden view"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3917.PNG",
+        alt: "Tvara bathroom"
       }
     ],
     youtubeVideoId: "dQw4w9WgXcQ",
@@ -498,24 +510,24 @@ export const rooms: Room[] = [
     fullDescription: "Neer, meaning water, offers a calming retreat with its soothing ambiance. Enjoy air-conditioned comfort, plush bedding with bunk bed options, and a spa-like bathroom experience with natural bathing tub.",
     images: [
       {
-        src: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=600&fit=crop",
-        alt: "Neer dome exterior"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3915.JPG",
+        alt: "Neer dome interior"
       },
       {
-        src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop",
-        alt: "Resort room with serene view"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3916.PNG",
+        alt: "Neer bedroom view"
       },
       {
-        src: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&h=600&fit=crop",
-        alt: "Peaceful bedroom retreat"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3919.PNG",
+        alt: "Neer dome details"
       },
       {
-        src: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800&h=600&fit=crop",
-        alt: "Natural bathroom design"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3920.PNG",
+        alt: "Neer bathroom"
       },
       {
-        src: "https://images.unsplash.com/photo-1518733057094-95b53143d2a7?w=800&h=600&fit=crop",
-        alt: "Morning deck view"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3922.PNG",
+        alt: "Neer amenities"
       }
     ],
     youtubeVideoId: "5qap5aO4i9A",
@@ -547,24 +559,24 @@ export const rooms: Room[] = [
     fullDescription: "Vana, meaning forest, brings you closer to nature while providing all modern comforts. The air-conditioned dome features plush bedding, bunk bed options, and a luxurious bathroom with natural bathing tub.",
     images: [
       {
-        src: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&h=600&fit=crop",
-        alt: "Vana dome exterior"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3434.PNG",
+        alt: "Vana dome interior"
       },
       {
-        src: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&h=600&fit=crop",
-        alt: "Room with forest view"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3911.JPG",
+        alt: "Vana bedroom"
       },
       {
-        src: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&h=600&fit=crop",
-        alt: "Bedroom with nature views"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5892.JPG",
+        alt: "Vana dome details"
       },
       {
-        src: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&h=600&fit=crop",
-        alt: "Living space with greenery"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5919.JPG",
+        alt: "Vana nature view"
       },
       {
-        src: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&h=600&fit=crop",
-        alt: "Terrace with garden views"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5929.JPG",
+        alt: "Vana exterior"
       }
     ],
     youtubeVideoId: "lTxn2BuqyzU",
@@ -596,24 +608,20 @@ export const rooms: Room[] = [
     fullDescription: "Oorja, meaning energy, is designed to revitalize your senses. This air-conditioned dome offers plush bedding with bunk bed options, a spa-inspired bathroom with natural bathing tub, and seamless connectivity.",
     images: [
       {
-        src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&h=600&fit=crop",
-        alt: "Oorja dome exterior"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3909.JPG",
+        alt: "Oorja dome interior"
       },
       {
-        src: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&h=600&fit=crop",
-        alt: "Wellness corner setup"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3913.JPG",
+        alt: "Oorja bedroom"
       },
       {
-        src: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&h=600&fit=crop",
-        alt: "Luxury room interior"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3923.PNG",
+        alt: "Oorja dome details"
       },
       {
-        src: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=800&h=600&fit=crop",
-        alt: "Bathtub with natural products"
-      },
-      {
-        src: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop",
-        alt: "Dome entrance"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_5893.JPG",
+        alt: "Oorja bathroom"
       }
     ],
     youtubeVideoId: "inpok4MKVLM",
@@ -645,24 +653,24 @@ export const rooms: Room[] = [
     fullDescription: "Antara, meaning inner space, is our most spacious dome designed for groups and families. Featuring extra-large living areas, large bed with huge bunk bed, air-conditioned comfort, and a luxurious bathroom with natural bathing tub.",
     images: [
       {
-        src: "https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=800&h=600&fit=crop",
-        alt: "Antara large dome exterior"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3901.JPG",
+        alt: "Antara large dome interior"
       },
       {
-        src: "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=800&h=600&fit=crop",
-        alt: "Multiple bed arrangement"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3902.JPG",
+        alt: "Antara bedroom"
       },
       {
-        src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-        alt: "Living and gathering area"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3903.JPG",
+        alt: "Antara living area"
       },
       {
-        src: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
-        alt: "Modern bathroom facilities"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3904.JPG",
+        alt: "Antara dome details"
       },
       {
-        src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-        alt: "Outdoor deck for groups"
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_5927.JPG",
+        alt: "Antara exterior view"
       }
     ],
     youtubeVideoId: "L_LUpnjgPso",
@@ -779,51 +787,38 @@ export const experiencesPage = {
 export const galleryImages = [
   {
     id: 1,
-    title: "Dome Exterior at Dusk",
+    title: "Idika Dome View",
     category: "Architecture",
-    alt: "Earthbag dome structure glowing at sunset"
+    alt: "Earthbag dome structure at Idika",
+    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5905.JPG"
   },
   {
     id: 2,
-    title: "Interior Sanctuary",
-    category: "Architecture",
-    alt: "Warm bedroom interior with natural lighting"
+    title: "Sunset at Idika",
+    category: "Views",
+    alt: "Beautiful sunset view at Idika",
+    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5907.JPG"
   },
   {
     id: 3,
-    title: "Natural Pool",
+    title: "Nature Surroundings",
     category: "Amenities",
-    alt: "Chemical-free pool surrounded by native plants"
+    alt: "Natural surroundings at Idika",
+    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5910.JPG"
   },
   {
     id: 4,
-    title: "Open Lawns",
+    title: "Open Spaces",
     category: "Amenities",
-    alt: "Expansive green spaces at golden hour"
+    alt: "Expansive green spaces at Idika",
+    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5914.JPG"
   },
   {
     id: 5,
-    title: "Sunrise View",
-    category: "Views",
-    alt: "Misty sunrise over the Ananthagiri hills"
-  },
-  {
-    id: 6,
-    title: "Organic Garden",
+    title: "Idika Experience",
     category: "Experiences",
-    alt: "Herb and vegetable garden with morning dew"
-  },
-  {
-    id: 7,
-    title: "Evening Gathering",
-    category: "Experiences",
-    alt: "Guests gathered around a fire pit under stars"
-  },
-  {
-    id: 8,
-    title: "Earthen Details",
-    category: "Architecture",
-    alt: "Close-up of earthbag wall texture and craftsmanship"
+    alt: "Experience nature at Idika",
+    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5915.JPG"
   }
 ];
 

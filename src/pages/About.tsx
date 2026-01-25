@@ -4,8 +4,6 @@ import { Layout } from "@/components/Layout";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { LazyImage } from "@/components/LazyImage";
 import { aboutPage, ctaButton } from "@/data/siteData";
-import interiorBedroom from "@/assets/interior-bedroom.jpg";
-import heroDome from "@/assets/hero-dome.jpg";
 
 const About = () => {
   return (
@@ -14,8 +12,8 @@ const About = () => {
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <LazyImage
-            src={heroDome}
-            alt="Idika Earthbag Dome"
+            src={aboutPage.hero.image.src}
+            alt={aboutPage.hero.image.alt}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background" />
@@ -44,8 +42,8 @@ const About = () => {
             <ScrollReveal direction="right" delay={0.2}>
               <div className="relative rounded-2xl overflow-hidden aspect-[4/5]">
                 <LazyImage
-                  src={interiorBedroom}
-                  alt="Interior of Idika dome"
+                  src={aboutPage.story.image.src}
+                  alt={aboutPage.story.image.alt}
                   className="w-full h-full object-cover img-warm"
                 />
               </div>
