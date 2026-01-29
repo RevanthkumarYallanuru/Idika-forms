@@ -41,8 +41,8 @@ export const ctaButton = {
 export const homePage = {
   hero: {
     subtitle: "An Eco-Friendly Earthbag Homestay",
-    title: "Return to Earth",
-    description: "Discover sustainable luxury at Idika — where earthbag architecture meets modern comfort, just moments from Hyderabad.",
+    title: "Idika",
+    description: "Discover sustainable luxury at Idika",
     cta: {
       primary: { label: "Explore Our Stay", href: "/rooms" },
       secondary: { label: "View Gallery", href: "/gallery" }
@@ -145,42 +145,42 @@ export const roomsPage = {
       {
         title: "Beach-themed Swimming Pool",
         description: "Enjoy a refreshing dip in our beautiful beach-themed swimming pool.",
-        icon: "🏊"
+        icon: "Waves"
       },
       {
         title: "Community Kitchen",
         description: "Well-equipped kitchen for self-cooking with all essential amenities.",
-        icon: "👨‍🍳"
+        icon: "ChefHat"
       },
       {
         title: "Spacious Dining Area",
         description: "Comfortable dining space perfect for group meals and conversations.",
-        icon: "🍽️"
+        icon: "UtensilsCrossed"
       },
       {
         title: "Open Lawn",
         description: "Expansive open lawn perfect for relaxation and gatherings.",
-        icon: "🌿"
+        icon: "Leaf"
       },
       {
         title: "Music System",
         description: "Quality music system available in common areas for entertainment.",
-        icon: "🎵"
+        icon: "Music"
       },
       {
         title: "Projector",
         description: "Projector setup for movie nights and group screenings.",
-        icon: "🎬"
+        icon: "Film"
       },
       {
         title: "Indoor Board Games",
         description: "Collection of board games for fun indoor activities.",
-        icon: "🎲"
+        icon: "Gamepad2"
       },
       {
         title: "Outdoor Games",
         description: "Cricket, badminton, and other outdoor games available.",
-        icon: "🏏"
+        icon: "Trophy"
       }
     ]
   },
@@ -201,7 +201,7 @@ export const bookingAddOns: BookingAddOn[] = [
     id: "candle-light-dinner",
     name: "Candle Light Dinner",
     price: 2500,
-    icon: "🕯️",
+    icon: "Flame",
     features: [
       "Romantic setup with candles & flowers",
       "3-course gourmet meal for 2",
@@ -215,7 +215,7 @@ export const bookingAddOns: BookingAddOn[] = [
     id: "birthday-celebration",
     name: "Birthday Celebration",
     price: 3000,
-    icon: "🎂",
+    icon: "Gift",
     features: [
       "Customized birthday decoration",
       "Theme-based balloon setup",
@@ -230,7 +230,7 @@ export const bookingAddOns: BookingAddOn[] = [
     id: "anniversary-decor",
     name: "Anniversary / Special Event Decor",
     price: 3500,
-    icon: "💐",
+    icon: "Heart",
     features: [
       "Elegant floral arrangements",
       "Romantic lighting setup",
@@ -286,7 +286,7 @@ export const eventTypes: EventType[] = [
     id: "parties",
     name: "Parties",
     description: "Host memorable get-togethers with friends and family in our serene natural setting.",
-    icon: "🎉",
+    icon: "PartyPopper",
     image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop",
     tags: ["#PrivateParties", "#NatureEvents"],
     basePrice: 15000,
@@ -296,7 +296,7 @@ export const eventTypes: EventType[] = [
     id: "birthday",
     name: "Birthday Celebrations",
     description: "Make birthdays special with nature as your backdrop. Perfect for all ages.",
-    icon: "🎂",
+    icon: "Gift",
     image: "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=800&h=600&fit=crop",
     tags: ["#BirthdayCelebrations", "#NatureEvents"],
     basePrice: 12000,
@@ -306,7 +306,7 @@ export const eventTypes: EventType[] = [
     id: "pre-wedding",
     name: "Pre-Wedding Shoots",
     description: "Capture your love story amidst lush greenery, rustic domes, and golden sunsets.",
-    icon: "📸",
+    icon: "Camera",
     image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop",
     tags: ["#PreWeddingShoot", "#WeddingsAtIdika"],
     basePrice: 10000,
@@ -316,7 +316,7 @@ export const eventTypes: EventType[] = [
     id: "wedding",
     name: "Wedding Celebrations",
     description: "Exchange vows surrounded by nature. An intimate, earthy celebration of love.",
-    icon: "💒",
+    icon: "Church",
     image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop",
     tags: ["#WeddingsAtIdika", "#NatureEvents"],
     basePrice: 50000,
@@ -326,7 +326,7 @@ export const eventTypes: EventType[] = [
     id: "private-gathering",
     name: "Private Gatherings",
     description: "Corporate retreats, family reunions, or friend circles—find your space here.",
-    icon: "👥",
+    icon: "UsersRound",
     image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop",
     tags: ["#PrivateParties", "#NatureEvents"],
     basePrice: 20000,
@@ -380,7 +380,7 @@ export const eventVenues: EventVenue[] = [
       "Bonfire area available",
       "Ample parking space"
     ],
-    suitableFor: ["Weddings", "Receptions", "Large Celebrations", "Pre-Wedding Shoots"],
+    suitableFor: ["Weddings", "Receptions", "Large Celebrations"],
     basePrice: 45000,
     image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&h=600&fit=crop"
   }
@@ -465,19 +465,19 @@ export const rooms: Room[] = [
     fullDescription: "Tvara offers a perfect blend of comfort and nature. This air-conditioned dome features a plush bed with bunk bed options, a spacious bathroom with natural bathing tub, and high-speed Wi-Fi connectivity for your convenience.",
     images: [
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3906.JPG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3907.JPG",
         alt: "Tvara dome interior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3907.JPG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3917.PNG",
         alt: "Tvara cozy bedroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3908.JPG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3906.JPG",
         alt: "Tvara dome details"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3917.PNG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3908.JPG",
         alt: "Tvara bathroom"
       }
     ],
@@ -510,23 +510,23 @@ export const rooms: Room[] = [
     fullDescription: "Neer, meaning water, offers a calming retreat with its soothing ambiance. Enjoy air-conditioned comfort, plush bedding with bunk bed options, and a spa-like bathroom experience with natural bathing tub.",
     images: [
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3915.JPG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3919.PNG",
         alt: "Neer dome interior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3916.PNG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3922.PNG",
         alt: "Neer bedroom view"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3919.PNG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3916.PNG",
         alt: "Neer dome details"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3920.PNG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3915.JPG",
         alt: "Neer bathroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3922.PNG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3920.PNG",
         alt: "Neer amenities"
       }
     ],
@@ -559,23 +559,29 @@ export const rooms: Room[] = [
     fullDescription: "Vana, meaning forest, brings you closer to nature while providing all modern comforts. The air-conditioned dome features plush bedding, bunk bed options, and a luxurious bathroom with natural bathing tub.",
     images: [
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3434.PNG",
+        //1
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5920.JPG",
         alt: "Vana dome interior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3911.JPG",
+        //2
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3960.PNG",
         alt: "Vana bedroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5892.JPG",
+
+        //3
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5929.JPG",
         alt: "Vana dome details"
       },
       {
+        //4
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5919.JPG",
         alt: "Vana nature view"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5929.JPG",
+        //5
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3911.JPG",
         alt: "Vana exterior"
       }
     ],
@@ -608,19 +614,19 @@ export const rooms: Room[] = [
     fullDescription: "Oorja, meaning energy, is designed to revitalize your senses. This air-conditioned dome offers plush bedding with bunk bed options, a spa-inspired bathroom with natural bathing tub, and seamless connectivity.",
     images: [
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3909.JPG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_5893.JPG",
         alt: "Oorja dome interior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3913.JPG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3923.PNG",
         alt: "Oorja bedroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3923.PNG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3913.JPG",
         alt: "Oorja dome details"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_5893.JPG",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3909.JPG",
         alt: "Oorja bathroom"
       }
     ],

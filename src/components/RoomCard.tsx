@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, ArrowRight, MessageCircle, Maximize2, Volume2, VolumeX, User, Phone, MapPin as MapPinIcon, Users as UsersIcon, Calendar, Check, Eye, Plus, Minus } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ArrowRight, MessageCircle, Maximize2, Volume2, VolumeX, User, Phone, MapPin as MapPinIcon, Users as UsersIcon, Calendar, Check, Eye, Plus, Minus, Gift } from "lucide-react";
 import { LazyImage } from "./LazyImage";
 import {
   Dialog,
@@ -120,6 +120,13 @@ const iconMap: Record<string, React.ReactNode> = {
   Clock: <Clock className="w-5 h-5" />,
   LogIn: <LogIn className="w-5 h-5" />,
   LogOut: <LogOut className="w-5 h-5" />,
+};
+
+// Add-on icons map
+const addOnIconMap: Record<string, React.ReactNode> = {
+  Flame: <Flame className="w-6 h-6" />,
+  Gift: <Gift className="w-6 h-6" />,
+  Heart: <Heart className="w-6 h-6" />,
 };
 
 // Helper function to calculate room price based on guest count
@@ -1024,7 +1031,7 @@ Please confirm availability. Thank you!`;
                             )}
                           </button>
                           <div className="flex items-center gap-1.5 min-w-0">
-                            <span className="text-lg sm:text-xl flex-shrink-0">{addOn.icon}</span>
+                            {addOnIconMap[addOn.icon] || <Gift className="w-5 h-5" />}
                             <span className="font-medium text-xs sm:text-sm truncate">{addOn.name}</span>
                           </div>
                         </div>
@@ -1130,7 +1137,7 @@ Please confirm availability. Thank you!`;
         <DrawerContent className="max-h-[80vh]">
           <DrawerHeader>
             <DrawerTitle className="flex items-center gap-2">
-              <span className="text-2xl">{viewingAddOn?.icon}</span>
+              {addOnIconMap[viewingAddOn?.icon || ""] || <Gift className="w-6 h-6" />}
               {viewingAddOn?.name}
             </DrawerTitle>
             <DrawerDescription>
@@ -1175,7 +1182,7 @@ Please confirm availability. Thank you!`;
 
       {/* Fullscreen Image Gallery Modal */}
       <Dialog open={isImageModalOpen} onOpenChange={setIsImageModalOpen}>
-        <DialogContent className="max-w-6xl w-[95vw] h-[90vh] p-0 bg-black/95 border-none">
+        <DialogContent className="max-w-6xl w-[95vw] h-[90vh] p-0 bg-black/95 border-none" hideCloseButton={true}>
           <DialogHeader className="sr-only">
             <DialogTitle>{room.name} Gallery</DialogTitle>
             <DialogDescription>View room images in fullscreen</DialogDescription>
@@ -1185,6 +1192,7 @@ Please confirm availability. Thank you!`;
           <button
             onClick={() => setIsImageModalOpen(false)}
             className="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-all duration-300"
+            aria-label="Close gallery"
           >
             <X className="w-6 h-6" />
           </button>

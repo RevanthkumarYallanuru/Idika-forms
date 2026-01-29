@@ -7,7 +7,31 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Users, MapPin, Check, MessageCircle, Sparkles, Calendar } from "lucide-react";
+import { 
+  Users, 
+  MapPin, 
+  Check, 
+  MessageCircle, 
+  Sparkles, 
+  Calendar,
+  PartyPopper,
+  Gift,
+  Camera,
+  Church,
+  UsersRound,
+  Building,
+  TreePine,
+  ArrowRight
+} from "lucide-react";
+
+// Icon map for event types
+const eventIconMap: Record<string, React.ReactNode> = {
+  PartyPopper: <PartyPopper className="w-8 h-8 text-primary" />,
+  Gift: <Gift className="w-8 h-8 text-primary" />,
+  Camera: <Camera className="w-8 h-8 text-primary" />,
+  Church: <Church className="w-8 h-8 text-primary" />,
+  UsersRound: <UsersRound className="w-8 h-8 text-primary" />,
+};
 
 const Events = () => {
   const handleWhatsAppInquiry = (eventName: string, venueName?: string) => {
@@ -28,13 +52,13 @@ const Events = () => {
             alt="Events at Idika"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
         </div>
         
-        <div className="container mx-auto px-4 relative z-10 text-center text-white">
+        <div className="relative z-10 container-main text-center pt-20">
           <ScrollReveal>
             <motion.p
-              className="text-idika-accent font-serif text-lg md:text-xl mb-4"
+              className="text-subtitle text-secondary mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -42,7 +66,7 @@ const Events = () => {
               {eventsPage.hero.subtitle}
             </motion.p>
             <motion.h1
-              className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6"
+              className="text-display-xl mb-8 font-bold"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -50,7 +74,7 @@ const Events = () => {
               {eventsPage.hero.title}
             </motion.h1>
             <motion.p
-              className="text-lg md:text-xl max-w-2xl mx-auto text-gray-200"
+              className="text-display-sm font-semibold max-w-2xl mx-auto text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -71,7 +95,7 @@ const Events = () => {
                 <Badge
                   key={index}
                   variant="outline"
-                  className="text-white border-white/30 bg-white/10 backdrop-blur-sm px-3 py-1 text-xs mx-2 flex-shrink-0"
+                  className="text-foreground border-primary/30 bg-primary/10 backdrop-blur-sm px-3 py-1 text-xs mx-2 flex-shrink-0"
                 >
                   {tag}
                 </Badge>
@@ -82,21 +106,21 @@ const Events = () => {
       </section>
 
       {/* Event Types Section */}
-      <section className="py-20 bg-gradient-to-b from-idika-cream to-white">
-        <div className="container mx-auto px-4">
+      <section className="section-padding bg-background-secondary">
+        <div className="container-main">
           <ScrollReveal>
             <div className="text-center mb-16">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Sparkles className="w-5 h-5 text-idika-accent" />
-                <span className="text-idika-accent font-medium uppercase tracking-widest text-sm">
+                <Sparkles className="w-5 h-5 text-primary" />
+                <span className="text-subtitle text-primary">
                   Celebrate Your Way
                 </span>
-                <Sparkles className="w-5 h-5 text-idika-accent" />
+                <Sparkles className="w-5 h-5 text-primary" />
               </div>
-              <h2 className="text-3xl md:text-5xl font-serif text-idika-brown mb-4">
+              <h2 className="text-display-lg mb-4">
                 Events We Host
               </h2>
-              <p className="text-idika-textLight max-w-2xl mx-auto">
+              <p className="text-body-lg max-w-2xl mx-auto">
                 Whether it's an intimate gathering or a grand celebration, Idika offers the perfect backdrop for your special moments.
               </p>
             </div>
@@ -105,42 +129,44 @@ const Events = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {eventTypes.map((event, index) => (
               <ScrollReveal key={event.id} delay={index * 0.1}>
-                <Card className="group overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 h-full">
+                <Card className="group overflow-hidden border-border/50 bg-card hover:shadow-lg transition-all duration-300 h-full">
                   <div className="relative h-48 overflow-hidden">
                     <LazyImage
                       src={event.image}
                       alt={event.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <span className="absolute top-4 left-4 text-4xl">{event.icon}</span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <div className="absolute top-4 left-4 p-3 bg-background/80 backdrop-blur-sm rounded-xl">
+                      {eventIconMap[event.icon] || <PartyPopper className="w-8 h-8 text-primary" />}
+                    </div>
                   </div>
                   <CardHeader className="pb-2">
                     <div className="flex items-start justify-between gap-2">
-                      <CardTitle className="text-xl font-serif text-idika-brown">
+                      <CardTitle className="text-xl font-display text-foreground">
                         {event.name}
                       </CardTitle>
                       <div className="text-right flex-shrink-0">
-                        <p className="text-lg font-bold text-idika-accent">₹{event.basePrice.toLocaleString()}</p>
-                        <p className="text-[10px] text-idika-textLight">onwards</p>
+                        <p className="text-lg font-bold text-secondary">₹{event.basePrice.toLocaleString()}</p>
+                        <p className="text-[10px] text-muted-foreground">onwards</p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2 mt-2">
                       {event.tags.map((tag, i) => (
-                        <Badge key={i} variant="secondary" className="text-xs bg-idika-sand/50 text-idika-brown">
+                        <Badge key={i} variant="secondary" className="text-xs bg-primary/10 text-primary border-primary/20">
                           {tag}
                         </Badge>
                       ))}
                     </div>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <CardDescription className="text-idika-textLight mb-2">
+                    <CardDescription className="text-muted-foreground mb-2">
                       {event.description}
                     </CardDescription>
-                    <p className="text-xs text-idika-accent/80 italic mb-4">{event.priceNote}</p>
+                    <p className="text-xs text-primary/80 italic mb-4">{event.priceNote}</p>
                     <Button
                       onClick={() => handleWhatsAppInquiry(event.name)}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white"
+                      className="w-full btn-primary"
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Inquire on WhatsApp
@@ -156,20 +182,20 @@ const Events = () => {
 
 
       {/* Venues Section */}
-      <section className="py-20 bg-[#010101]">
-        <div className="container mx-auto px-4">
+      <section className="section-padding bg-background">
+        <div className="container-main">
           <ScrollReveal>
             <div className="text-center mb-16">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <MapPin className="w-5 h-5 text-idika-accent" />
-                <span className="text-idika-accent font-medium uppercase tracking-widest text-sm">
+                <MapPin className="w-5 h-5 text-primary" />
+                <span className="text-subtitle text-primary">
                   Our Spaces
                 </span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-serif text-idika-brown mb-4">
+              <h2 className="text-display-lg mb-4">
                 Event Venues
               </h2>
-              <p className="text-idika-textLight max-w-2xl mx-auto">
+              <p className="text-body-lg max-w-2xl mx-auto">
                 Choose from our thoughtfully designed indoor and outdoor spaces, each offering a unique ambiance for your celebration.
               </p>
             </div>
@@ -178,39 +204,43 @@ const Events = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {eventVenues.map((venue, index) => (
               <ScrollReveal key={venue.id} delay={index * 0.15}>
-                <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 h-full">
+                <Card className="overflow-hidden border-border/50 bg-card hover:shadow-lg transition-all duration-300 h-full">
                   <div className="relative h-64 overflow-hidden">
                     <LazyImage
                       src={venue.image}
                       alt={venue.name}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
-                      <Badge className={`mb-2 ${venue.type === 'indoor' ? 'bg-idika-brown' : 'bg-idika-accent'}`}>
-                        {venue.type === 'indoor' ? '🏛️ Indoor' : '🌳 Outdoor'}
+                      <Badge className={`mb-2 ${venue.type === 'indoor' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'}`}>
+                        {venue.type === 'indoor' ? (
+                          <><Building className="w-3 h-3 mr-1" /> Indoor</>
+                        ) : (
+                          <><TreePine className="w-3 h-3 mr-1" /> Outdoor</>
+                        )}
                       </Badge>
-                      <h3 className="text-2xl font-serif text-white">{venue.name}</h3>
+                      <h3 className="text-2xl font-display text-white">{venue.name}</h3>
                     </div>
                   </div>
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="flex items-center gap-2 text-idika-brown">
-                        <Users className="w-5 h-5" />
+                      <div className="flex items-center gap-2 text-foreground">
+                        <Users className="w-5 h-5 text-primary" />
                         <span className="font-semibold">Up to {venue.capacity} guests</span>
                       </div>
-                      <Badge variant="outline" className="text-idika-accent border-idika-accent">
+                      <Badge variant="outline" className="text-secondary border-secondary">
                         Starting ₹{venue.basePrice.toLocaleString()}
                       </Badge>
                     </div>
                     
-                    <p className="text-idika-textLight mb-4">{venue.description}</p>
+                    <p className="text-muted-foreground mb-4">{venue.description}</p>
                     
                     <div className="mb-4">
-                      <p className="font-medium text-idika-brown mb-2 text-sm">Ideal for:</p>
+                      <p className="font-medium text-foreground mb-2 text-sm">Ideal for:</p>
                       <div className="flex flex-wrap gap-2">
                         {venue.suitableFor.map((item, i) => (
-                          <Badge key={i} variant="secondary" className="text-xs bg-idika-accent/20 text-idika-accent border border-idika-accent/30">
+                          <Badge key={i} variant="secondary" className="text-xs bg-secondary/20 text-secondary border border-secondary/30">
                             {item}
                           </Badge>
                         ))}
@@ -219,23 +249,23 @@ const Events = () => {
 
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button variant="outline" className="w-full mb-3 border-idika-brown text-idika-brown hover:bg-idika-brown hover:text-white">
+                        <Button variant="outline" className="w-full mb-3 border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary">
                           View Features
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="sm:max-w-md">
+                      <DialogContent className="sm:max-w-md bg-card border-border">
                         <DialogHeader>
-                          <DialogTitle className="font-serif text-xl">{venue.name}</DialogTitle>
-                          <DialogDescription>
+                          <DialogTitle className="font-display text-xl text-foreground">{venue.name}</DialogTitle>
+                          <DialogDescription className="text-muted-foreground">
                             Capacity: Up to {venue.capacity} guests
                           </DialogDescription>
                         </DialogHeader>
                         <div className="space-y-3 py-4">
-                          <p className="font-medium text-sm text-idika-brown">Included Features:</p>
+                          <p className="font-medium text-sm text-foreground">Included Features:</p>
                           {venue.features.map((feature, i) => (
                             <div key={i} className="flex items-center gap-3">
-                              <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
-                              <span className="text-sm text-idika-textLight">{feature}</span>
+                              <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                              <span className="text-sm text-muted-foreground">{feature}</span>
                             </div>
                           ))}
                         </div>
@@ -244,7 +274,7 @@ const Events = () => {
 
                     <Button
                       onClick={() => handleWhatsAppInquiry("event", venue.name)}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white"
+                      className="w-full btn-primary"
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Book This Venue
@@ -258,60 +288,43 @@ const Events = () => {
       </section>
 
       {/* Add-ons Section */}
-      <section className="py-20 bg-gradient-to-b from-idika-cream to-white">
-        <div className="container mx-auto px-4">
+      <section className="section-padding bg-background-secondary">
+        <div className="container-main">
           <ScrollReveal>
             <div className="text-center mb-16">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Calendar className="w-5 h-5 text-idika-accent" />
-                <span className="text-idika-accent font-medium uppercase tracking-widest text-sm">
+                <Calendar className="w-5 h-5 text-primary" />
+                <span className="text-subtitle text-primary">
                   Customize Your Event
                 </span>
               </div>
-              <h2 className="text-3xl md:text-5xl font-serif text-idika-brown mb-4">
+              <h2 className="text-display-lg mb-4">
                 Optional Add-ons
               </h2>
-              <p className="text-idika-textLight max-w-2xl mx-auto">
+              <p className="text-body-lg max-w-2xl mx-auto">
                 Enhance your celebration with our curated services. Mix and match to create your perfect event.
               </p>
             </div>
           </ScrollReveal>
-      
-          {/*<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {eventAddOns.map((addOn, index) => (
-              <ScrollReveal key={addOn.id} delay={index * 0.05}>
-                <Card className="text-center hover:shadow-lg transition-shadow duration-300 h-full border-idika-sand/50">
-                  <CardContent className="pt-6 pb-4">
-                    <span className="text-4xl mb-4 block">{addOn.icon}</span>
-                    <h3 className="font-semibold text-idika-brown mb-2">{addOn.name}</h3>
-                    <p className="text-sm text-idika-textLight mb-3">{addOn.description}</p>
-                    <Badge className="bg-idika-accent text-white">
-                      {addOn.id === 'catering' ? `₹${addOn.price}/plate` : `₹${addOn.price.toLocaleString()}`}
-                    </Badge>
-                  </CardContent>
-                </Card>
-              </ScrollReveal>
-            ))}
-          </div>*/}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-idika-brown text-white">
-        <div className="container mx-auto px-4">
+      <section className="section-padding bg-primary">
+        <div className="container-main">
           <ScrollReveal>
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-serif mb-6">
+              <h2 className="text-display-lg text-primary-foreground mb-6">
                 Ready to Plan Your Event?
               </h2>
-              <p className="text-lg text-gray-200 mb-8">
+              <p className="text-lg text-primary-foreground/80 mb-8">
                 Let's bring your vision to life. Contact us to discuss your requirements, check availability, and get a customized quote.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   size="lg"
                   onClick={() => handleWhatsAppInquiry("event")}
-                  className="bg-green-600 hover:bg-green-700 text-white text-lg px-8"
+                  className="bg-background text-foreground hover:bg-background/90 text-lg px-8"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Chat on WhatsApp
@@ -319,10 +332,11 @@ const Events = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-idika-brown text-lg px-8"
+                  className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8"
                   onClick={() => window.location.href = '/contact'}
                 >
                   Contact Us
+                  <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Filter, Zap } from "lucide-react";
+import { Filter, Zap, Waves, ChefHat, UtensilsCrossed, Leaf, Music, Film, Gamepad2, Trophy } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { RoomCard } from "@/components/RoomCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -9,6 +9,17 @@ import { roomsPage, rooms as allRooms } from "@/data/siteData";
 import type { Room } from "@/components/RoomCard";
 
 type RoomCategory = "all" | "Regular Dome" | "Large Dome";
+
+const amenityIconMap: Record<string, React.ReactNode> = {
+  Waves: <Waves className="w-12 h-12 text-primary" />,
+  ChefHat: <ChefHat className="w-12 h-12 text-primary" />,
+  UtensilsCrossed: <UtensilsCrossed className="w-12 h-12 text-primary" />,
+  Leaf: <Leaf className="w-12 h-12 text-primary" />,
+  Music: <Music className="w-12 h-12 text-primary" />,
+  Film: <Film className="w-12 h-12 text-primary" />,
+  Gamepad2: <Gamepad2 className="w-12 h-12 text-primary" />,
+  Trophy: <Trophy className="w-12 h-12 text-primary" />,
+};
 
 const Rooms = () => {
   const [selectedCategory, setSelectedCategory] = useState<RoomCategory>("all");
@@ -180,7 +191,7 @@ const Rooms = () => {
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="text-4xl mb-4">{feature.icon}</div>
+                <div className="mb-4">{amenityIconMap[feature.icon] || <Zap className="w-12 h-12 text-primary" />}</div>
                 <h3 className="font-display text-lg text-foreground mb-2">
                   {feature.title}
                 </h3>

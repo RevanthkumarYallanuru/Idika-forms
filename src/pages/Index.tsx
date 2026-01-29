@@ -57,7 +57,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-display-xl mb-8"
+            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-wider leading-none mb-8"
           >
             {homePage.hero.title}
           </motion.h1>
@@ -66,7 +66,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            className="text-body-lg max-w-2xl mx-auto mb-12"
+            className="text-display-sm font-semibold max-w-2xl mx-auto mb-12 text-white"
           >
             {homePage.hero.description}
           </motion.p>
@@ -108,12 +108,15 @@ const Index = () => {
               </div>
             </ScrollReveal>
 
-            {/* 3D Dome - Hidden on mobile for performance */}
+            {/* Gallery Image */}
             <ScrollReveal direction="right" delay={0.2} className="hidden lg:block">
-              <div className="aspect-square rounded-2xl overflow-hidden bg-background glow-terracotta">
-                <Suspense fallback={<Dome3DFallback />}>
-                  <Dome3D className="w-full h-full" />
-                </Suspense>
+              <div className="aspect-square rounded-2xl overflow-hidden">
+                <LazyImage
+                  src="https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5914.JPG"
+                  alt="Idika open spaces"
+                  className="w-full h-full object-cover"
+                  sizes="(max-width: 1024px) 0vw, 50vw"
+                />
               </div>
             </ScrollReveal>
           </div>
