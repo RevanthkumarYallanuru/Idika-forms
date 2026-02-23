@@ -67,7 +67,7 @@ const About = () => {
               <StaggerItem key={index}>
                 <div className="card-luxury p-8 text-center h-full">
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="text-2xl font-display text-primary">{index + 1}</span>
+                    <span className="text-2xl font-semibold text-primary">{index + 1}</span>
                   </div>
                   <h3 className="text-xl font-display mb-4">{value.title}</h3>
                   <p className="text-muted-foreground">{value.description}</p>

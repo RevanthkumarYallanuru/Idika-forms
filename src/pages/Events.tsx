@@ -31,6 +31,7 @@ const eventIconMap: Record<string, React.ReactNode> = {
   Camera: <Camera className="w-8 h-8 text-primary" />,
   Church: <Church className="w-8 h-8 text-primary" />,
   UsersRound: <UsersRound className="w-8 h-8 text-primary" />,
+  Sparkles: <Sparkles className="w-8 h-8 text-primary" />,
 };
 
 const Events = () => {
@@ -146,9 +147,14 @@ const Events = () => {
                       <CardTitle className="text-xl font-display text-foreground">
                         {event.name}
                       </CardTitle>
+                      {/* Price Display */}
                       <div className="text-right flex-shrink-0">
-                        <p className="text-lg font-bold text-secondary">₹{event.basePrice.toLocaleString()}</p>
-                        <p className="text-[10px] text-muted-foreground">onwards</p>
+                        {event.priceRange ? (
+                          <p className="text-lg font-semibold text-secondary">{event.priceRange}</p>
+                        ) : (
+                          <p className="text-lg font-semibold text-secondary">₹{event.basePrice.toLocaleString()}</p>
+                        )}
+                        {!event.priceRange && <p className="text-[10px] text-muted-foreground">onwards</p>}
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2 mt-2">
@@ -159,18 +165,62 @@ const Events = () => {
                       ))}
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-0">
-                    <CardDescription className="text-muted-foreground mb-2">
+                  <CardContent className="pt-0 flex-grow flex flex-col">
+                    <CardDescription className="text-muted-foreground mb-4">
                       {event.description}
                     </CardDescription>
-                    <p className="text-xs text-primary/80 italic mb-4">{event.priceNote}</p>
-                    <Button
-                      onClick={() => handleWhatsAppInquiry(event.name)}
-                      className="w-full btn-primary"
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Inquire on WhatsApp
-                    </Button>
+                    
+                    {/* Capacities Section */}
+                    {event.capacities && (
+                      <div className="mb-4 space-y-2 text-sm">
+                        <div className="flex items-start gap-2">
+                          <Users className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                          <div>
+                            <span className="font-semibold text-foreground">Stay: </span>
+                            <span className="text-muted-foreground">{event.capacities.stay}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <UsersRound className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                          <div>
+                            <span className="font-semibold text-foreground">Gathering: </span>
+                            <span className="text-muted-foreground">{event.capacities.gathering}</span>
+                          </div>
+                        </div>
+                        {event.capacities.details && (
+                          <p className="text-xs text-muted-foreground ml-6 italic">{event.capacities.details}</p>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Includes Section */}
+                    {event.includes && (
+                      <div className="mb-4">
+                        <p className="text-sm font-semibold mb-2">Package Includes:</p>
+                        <ul className="space-y-1">
+                          {event.includes.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                              <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className="mt-auto">
+                        <p className="text-xs text-primary/80 italic mb-4 font-medium flex items-center gap-1">
+                            <Sparkles className="w-3 h-3" />
+                            {event.priceNote}
+                        </p>
+                        <Button
+                        onClick={() => handleWhatsAppInquiry(event.name)}
+                        className="w-full btn-primary"
+                        >
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        Chat on WhatsApp
+                        </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </ScrollReveal>

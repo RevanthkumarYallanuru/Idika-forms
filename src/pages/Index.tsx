@@ -6,6 +6,13 @@ import { LazyImage } from "@/components/LazyImage";
 import { lazy, Suspense } from "react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { homePage, reviews, siteConfig } from "@/data/siteData";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 // Lazy load the 3D Dome component - only needed on desktop
 const Dome3D = lazy(() => import("@/components/Dome3D").then(m => ({ default: m.Dome3D })));
@@ -98,10 +105,10 @@ const Index = () => {
               <h2 className="text-display-lg mb-6">{homePage.intro.title}</h2>
               <p className="text-body-lg mb-10">{homePage.intro.description}</p>
 
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6">
+              <div className="flex flex-wrap justify-between gap-4 md:gap-8">
                 {homePage.intro.stats.map((stat, index) => (
-                  <div key={index} className="text-center px-1 sm:px-2">
-                    <p className="stat-value">{stat.value}</p>
+                  <div key={index} className="text-center flex-1 min-w-[100px]">
+                    <p className="stat-value whitespace-nowrap">{stat.value}</p>
                     <p className="stat-label">{stat.label}</p>
                   </div>
                 ))}
@@ -237,35 +244,51 @@ const Index = () => {
             <h2 className="text-display-lg">What Our Guests Say</h2>
           </ScrollReveal>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {reviews.slice(0, 3).map((review) => (
-              <StaggerItem key={review.id}>
-                <div className="card-luxury p-8 h-full flex flex-col">
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: review.rating }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        className="fill-secondary text-secondary"
-                      />
-                    ))}
-                  </div>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full max-w-7xl mx-auto px-4 sm:px-12"
+          >
+            <CarouselContent className="-ml-4 pb-4">
+              {reviews.map((review) => (
+                <CarouselItem key={review.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                  <div className="card-luxury p-8 h-full flex flex-col select-none">
+                    {/* Stars */}
+                    <div className="flex gap-1 mb-4">
+                      {Array.from({ length: review.rating }).map((_, i) => (
+                        <Star
+                          key={i}
+                          size={16}
+                          className="fill-secondary text-secondary"
+                        />
+                      ))}
+                    </div>
 
-                  {/* Quote */}
-                  <p className="text-foreground/90 leading-relaxed flex-1 mb-6">
-                    "{review.text}"
-                  </p>
+                    {/* Quote */}
+                    <p className="text-foreground/90 leading-relaxed flex-1 mb-6">
+                      "{review.text}"
+                    </p>
 
-                  {/* Author */}
-                  <div className="pt-4 border-t border-border/30">
-                    <p className="font-medium">{review.name}</p>
-                    <p className="text-sm text-muted-foreground">{review.location}</p>
+                    {/* Author */}
+                    <div className="pt-4 border-t border-border/30">
+                      <p className="font-medium">{review.name}</p>
+                      <p className="text-sm text-muted-foreground">{review.location}</p>
+                    </div>
                   </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-4 mt-8 sm:hidden">
+              <CarouselPrevious className="static transform-none" />
+              <CarouselNext className="static transform-none" />
+            </div>
+            <div className="hidden sm:block">
+              <CarouselPrevious className="left-0" />
+              <CarouselNext className="right-0" />
+            </div>
+          </Carousel>
         </div>
       </section>
 

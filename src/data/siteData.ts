@@ -184,7 +184,7 @@ export const roomsPage = {
       }
     ]
   },
-  gstPercentage: 18
+  gstPercentage: 5
 };
 
 // Booking Add-Ons Configuration
@@ -198,50 +198,126 @@ export interface BookingAddOn {
 
 export const bookingAddOns: BookingAddOn[] = [
   {
-    id: "candle-light-dinner",
-    name: "Candle Light Dinner",
-    price: 2500,
+    id: "candlelight-dinner",
+    name: "Candlelight Dinner",
+    price: 1000,
     icon: "Flame",
     features: [
-      "Romantic setup with candles & flowers",
-      "3-course gourmet meal for 2",
-      "Premium non-alcoholic beverages",
-      "Dedicated service staff",
-      "Personalized menu options available",
-      "Scenic outdoor or private deck location"
+      "Intimate dining experience under the stars",
+      "Beautiful poolside setup",
+      "Adorned with roses and candlelight",
+      "Surrounded by nature",
+      "Perfect setting for a magical evening"
     ]
   },
   {
-    id: "birthday-celebration",
-    name: "Birthday Celebration",
-    price: 3000,
-    icon: "Gift",
-    features: [
-      "Customized birthday decoration",
-      "Theme-based balloon setup",
-      "Premium birthday cake (1 kg)",
-      "Photo props & accessories",
-      "Birthday banner with name",
-      "Confetti & party poppers",
-      "Birthday cap for the guest of honor"
-    ]
-  },
-  {
-    id: "anniversary-decor",
-    name: "Anniversary / Special Event Decor",
-    price: 3500,
+    id: "basic-anniversary-decor",
+    name: "Basic Anniversary Décor",
+    price: 500,
     icon: "Heart",
     features: [
-      "Elegant floral arrangements",
-      "Romantic lighting setup",
-      "Heart-shaped balloon decoration",
-      "Rose petal bed decoration",
-      "Customized banner",
-      "Champagne or sparkling juice",
-      "Photo corner setup",
-      "Complimentary couple photoshoot (30 mins)"
+      "Celebrate your special milestone",
+      "Thoughtfully styled room",
+      "\"Happy Anniversary\" written on bed",
+      "Elegant decorative touches"
     ]
-  }
+  },
+  {
+    id: "basic-birthday-decor",
+    name: "Basic Birthday Décor",
+    price: 500,
+    icon: "Gift",
+    features: [
+      "Make birthdays memorable",
+      "Beautifully arranged room setup",
+      "\"Happy Birthday\" styled on bed",
+      "Festive decorative touches"
+    ]
+  },
+  {
+    id: "romantic-rose-decor",
+    name: "Romantic Rose Décor",
+    price: 1500,
+    icon: "Sparkles",
+    features: [
+      "Elevated romantic experience",
+      "Hanging roses throughout",
+      "Petals spread across the room",
+      "Flowers placed in the bathtub",
+      "Luxurious, dreamy ambiance"
+    ]
+  },
+  {
+    id: "bonfire-barbecue",
+    name: "Bonfire & Barbecue Setup",
+    price: 1500,
+    icon: "Flame",
+    features: [
+      "Cozy evening by the bonfire",
+      "Delightful barbecue experience",
+      "Under the open sky",
+      "Perfect for groups and couples"
+    ]
+  },
+  {
+    id: "picnic-decor",
+    name: "Picnic Décor",
+    price: 1500,
+    icon: "TreePine",
+    features: [
+      "Charming outdoor picnic setup",
+      "Complete picnic table arrangement",
+      "Glasses and elegant tablecloth",
+      "Fresh flowers decoration",
+      "Perfect for a relaxed, intimate escape"
+    ]
+  },
+ /* {
+    id: "private-party-gathering",
+    name: "Parties & Corporate Gatherings",
+    price: 40000,
+    icon: "UsersRound",
+    features: [
+      "Access to all 5 domes",
+      "Spacious lawn area",
+      "Beach-themed swimming pool",
+      "Dining area",
+      "Community kitchen access",
+      "Stay capacity: 25-30 guests",
+      "Gathering capacity: Up to 150 guests"
+    ]
+  },
+  {
+    id: "birthday-anniversary-event",
+    name: "Birthday / Anniversary Event Package",
+    price: 40000,
+    icon: "Gift",
+    features: [
+      "Access to all 5 domes",
+      "Beach-themed pool",
+      "Lawn & dining area",
+      "Indoor AC hall",
+      "Community kitchen access",
+      "Stay capacity: 25-30 guests",
+      "Gathering capacity: Up to 150 guests"
+    ]
+  },
+  {
+    id: "pre-wedding-event",
+    name: "Pre-Wedding Event Package",
+    price: 50000,
+    icon: "Sparkles", 
+    features: [
+      "Haldi, Mehendi, Sangeet, Engagement etc.",
+      "Access to all 5 domes",
+      "Indoor AC hall (50 guests)",
+      "Garden & stage area (100 guests)",
+      "Beach-themed pool",
+      "Lawn & dining spaces",
+      "Stay capacity: 25-30 guests",
+      "Gathering capacity: Up to 150 guests"
+    ]
+  }*/
 ];
 
 // Events Page Configuration
@@ -278,59 +354,83 @@ export interface EventType {
   image: string;
   tags: string[];
   basePrice: number;
+  priceRange?: string;
   priceNote: string;
+  includes?: string[];
+  capacities?: {
+    stay: string;
+    gathering: string;
+    details?: string;
+  };
 }
 
 export const eventTypes: EventType[] = [
   {
-    id: "parties",
-    name: "Parties",
-    description: "Host memorable get-togethers with friends and family in our serene natural setting.",
-    icon: "PartyPopper",
-    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop",
-    tags: ["#PrivateParties", "#NatureEvents"],
-    basePrice: 15000,
-    priceNote: "Basic package • Customizations available"
-  },
-  {
-    id: "birthday",
-    name: "Birthday Celebrations",
-    description: "Make birthdays special with nature as your backdrop. Perfect for all ages.",
+    id: "birthdays-anniversaries",
+    name: "Birthdays / Anniversaries",
+    description: "Celebrate your special moments in a private and peaceful setting.",
     icon: "Gift",
-    image: "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=800&h=600&fit=crop",
-    tags: ["#BirthdayCelebrations", "#NatureEvents"],
-    basePrice: 12000,
-    priceNote: "Basic package • Customizations available"
+    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop",
+    tags: ["#PrivateParties", "#NatureEvents", "#Celebrations"],
+    basePrice: 40000,
+    priceRange: "₹40,000 - ₹75,000",
+    priceNote: "Customizations Available",
+    includes: [
+      "Access to all 5 domes",
+      "Beach-themed pool",
+      "Lawn & dining area",
+      "Indoor AC hall",
+      "Community kitchen access"
+    ],
+    capacities: {
+      stay: "25–30 guests",
+      gathering: "Up to 150 guests",
+      details: "(Indoor AC Hall: up to 50 guests | Garden & Stage: up to 100 guests)"
+    }
   },
   {
     id: "pre-wedding",
-    name: "Pre-Wedding Shoots",
-    description: "Capture your love story amidst lush greenery, rustic domes, and golden sunsets.",
-    icon: "Camera",
+    name: "Pre-Wedding Events",
+    description: "Host intimate and elegant pre-wedding celebrations like Haldi, Mehendi, Sangeet with full property access.",
+    icon: "Sparkles", 
     image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop",
-    tags: ["#PreWeddingShoot", "#WeddingsAtIdika"],
-    basePrice: 10000,
-    priceNote: "Location fee only • Customizations available"
-  },
-  {
-    id: "wedding",
-    name: "Wedding Celebrations",
-    description: "Exchange vows surrounded by nature. An intimate, earthy celebration of love.",
-    icon: "Church",
-    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop",
-    tags: ["#WeddingsAtIdika", "#NatureEvents"],
+    tags: ["#Haldi", "#Mehendi", "#Sangeet", "#Engagement"],
     basePrice: 50000,
-    priceNote: "Basic package • Customizations available"
+    priceRange: "₹50,000 - ₹75,000",
+    priceNote: "Customizations Available",
+    includes: [
+      "Access to all 5 domes",
+      "Indoor AC hall (up to 50 guests)",
+      "Garden & stage area (up to 100 guests)",
+      "Beach-themed pool",
+      "Lawn & dining spaces"
+    ],
+    capacities: {
+      stay: "25–30 guests",
+      gathering: "Up to 150 guests"
+    }
   },
   {
-    id: "private-gathering",
-    name: "Private Gatherings",
-    description: "Corporate retreats, family reunions, or friend circles—find your space here.",
+    id: "corporate-parties",
+    name: "Parties & Corporate Gatherings",
+    description: "Perfect for team outings, private parties, and group celebrations in a relaxed setting.",
     icon: "UsersRound",
     image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop",
-    tags: ["#PrivateParties", "#NatureEvents"],
-    basePrice: 20000,
-    priceNote: "Basic package • Customizations available"
+    tags: ["#CorporateEvents", "#TeamOutings", "#PrivateParties"],
+    basePrice: 40000,
+    priceRange: "₹40,000 - ₹75,000",
+    priceNote: "Customizations Available",
+    includes: [
+      "Access to all 5 domes",
+      "Spacious lawn area",
+      "Beach-themed swimming pool",
+      "Dining area",
+       "Community kitchen with basic equipment"
+    ],
+    capacities: {
+      stay: "25–30 guests",
+      gathering: "Up to 150 guests" // Changed from "Total gathering capacity" to match interface key
+    }
   }
 ];
 
@@ -479,6 +579,14 @@ export const rooms: Room[] = [
       {
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3908.JPG",
         alt: "Tvara bathroom"
+      },
+      {
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3907.JPG",
+        alt: "Tvara overview"
+      },
+      {
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3917.PNG",
+        alt: "Tvara bedroom view"
       }
     ],
     youtubeVideoId: "dQw4w9WgXcQ",
@@ -498,7 +606,7 @@ export const rooms: Room[] = [
     baseGuests: 2,
     basePrice: 7000,
     extraGuestCharge: 1000,
-    gstPercentage: 18,
+    gstPercentage: 5,
     roomType: "regular",
     highlights: ["Air-conditioned", "Bunk bed option", "Natural bathing tub", "High-speed Wi-Fi"]
   },
@@ -509,26 +617,30 @@ export const rooms: Room[] = [
     description: "Immerse yourself in serenity with our water-themed dome featuring premium amenities.",
     fullDescription: "Neer, meaning water, offers a calming retreat with its soothing ambiance. Enjoy air-conditioned comfort, plush bedding with bunk bed options, and a spa-like bathroom experience with natural bathing tub.",
     images: [
-      {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3919.PNG",
-        alt: "Neer dome interior"
-      },
-      {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3922.PNG",
-        alt: "Neer bedroom view"
-      },
-      {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3916.PNG",
-        alt: "Neer dome details"
-      },
-      {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3915.JPG",
-        alt: "Neer bathroom"
-      },
-      {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3920.PNG",
-        alt: "Neer amenities"
-      }
+        {
+          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3919.PNG",
+          alt: "Neer dome interior"
+        },
+        {
+          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3922.PNG",
+          alt: "Neer bedroom view"
+        },
+        {
+          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3916.PNG",
+          alt: "Neer dome details"
+        },
+        {
+          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3915.JPG",
+          alt: "Neer bathroom"
+        },
+        {
+          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3920.PNG",
+          alt: "Neer amenities"
+        },
+        {
+          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3919.PNG",
+          alt: "Neer view"
+        }
     ],
     youtubeVideoId: "5qap5aO4i9A",
     amenities: [
@@ -547,7 +659,7 @@ export const rooms: Room[] = [
     baseGuests: 2,
     basePrice: 7000,
     extraGuestCharge: 1000,
-    gstPercentage: 18,
+    gstPercentage: 5,
     roomType: "regular",
     highlights: ["Air-conditioned", "Bunk bed option", "Natural bathing tub", "High-speed Wi-Fi"]
   },
@@ -559,30 +671,28 @@ export const rooms: Room[] = [
     fullDescription: "Vana, meaning forest, brings you closer to nature while providing all modern comforts. The air-conditioned dome features plush bedding, bunk bed options, and a luxurious bathroom with natural bathing tub.",
     images: [
       {
-        //1
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5920.JPG",
         alt: "Vana dome interior"
       },
       {
-        //2
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3960.PNG",
         alt: "Vana bedroom"
       },
       {
-
-        //3
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5929.JPG",
         alt: "Vana dome details"
       },
       {
-        //4
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5919.JPG",
         alt: "Vana nature view"
       },
       {
-        //5
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3911.JPG",
         alt: "Vana exterior"
+      },
+      {
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5920.JPG",
+        alt: "Vana overview"
       }
     ],
     youtubeVideoId: "lTxn2BuqyzU",
@@ -602,7 +712,7 @@ export const rooms: Room[] = [
     baseGuests: 2,
     basePrice: 7000,
     extraGuestCharge: 1000,
-    gstPercentage: 18,
+    gstPercentage: 5,
     roomType: "regular",
     highlights: ["Air-conditioned", "Bunk bed option", "Natural bathing tub", "High-speed Wi-Fi"]
   },
@@ -628,6 +738,14 @@ export const rooms: Room[] = [
       {
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3909.JPG",
         alt: "Oorja bathroom"
+      },
+      {
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_5893.JPG",
+        alt: "Oorja overview"
+      },
+      {
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3923.PNG",
+        alt: "Oorja bed view"
       }
     ],
     youtubeVideoId: "inpok4MKVLM",
@@ -647,7 +765,7 @@ export const rooms: Room[] = [
     baseGuests: 2,
     basePrice: 7000,
     extraGuestCharge: 1000,
-    gstPercentage: 18,
+    gstPercentage: 5,
     roomType: "regular",
     highlights: ["Air-conditioned", "Bunk bed option", "Natural bathing tub", "High-speed Wi-Fi"]
   },
@@ -669,6 +787,10 @@ export const rooms: Room[] = [
       {
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3903.JPG",
         alt: "Antara living area"
+      },
+      {
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3901.JPG",
+        alt: "Antara overview"
       },
       {
         src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3904.JPG",
@@ -697,7 +819,7 @@ export const rooms: Room[] = [
     baseGuests: 6,
     basePrice: 12000,
     extraGuestCharge: 1000,
-    gstPercentage: 18,
+    gstPercentage: 5,
     roomType: "large",
     highlights: ["Extra spacious", "Up to 8 guests", "Group friendly", "Large bunk bed"]
   }
@@ -927,7 +1049,7 @@ export const chatbotConfig = {
     {
       keywords: ["price", "cost", "rate", "tariff", "charge", "how much", "₹"],
       question: "What are your prices?",
-      answer: "Room rates:\n• Regular Domes (Tvara/Neer/Vana/Oorja): ₹7,000/night for 2 guests + ₹1,000 per extra guest\n• Large Dome (Antara): ₹12,000/night for 6 guests + ₹1,000 per extra guest\n\n18% GST applicable. Breakfast & dinner included!"
+      answer: "Room rates:\n• Regular Domes (Tvara/Neer/Vana/Oorja): ₹7,000/night for 2 guests + ₹1,000 per extra guest\n• Large Dome (Antara): ₹12,000/night for 6 guests + ₹1,000 per extra guest\n\n5% GST applicable. Breakfast & dinner included!"
     },
     {
       keywords: ["tvara"],

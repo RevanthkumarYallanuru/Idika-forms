@@ -239,8 +239,8 @@ html {
 
   /* Stats */
   .stat-value {
-    font-family: var(--font-display);
-    @apply text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light text-secondary leading-tight;
+    font-family: var(--font-body);
+    @apply text-3xl sm:text-4xl md:text-5xl font-semibold text-secondary leading-tight tracking-tight;
   }
 
   .stat-label {

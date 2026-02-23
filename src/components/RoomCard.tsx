@@ -287,14 +287,14 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   const handlePreviousImage = (e: React.MouseEvent) => {
     e.stopPropagation();
     setCurrentImageIndex((prev) =>
-      prev === 0 ? Math.min(room.images.length, 5) - 1 : prev - 1
+      prev === 0 ? Math.min(room.images.length, 6) - 1 : prev - 1
     );
   };
 
   const handleNextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
     setCurrentImageIndex((prev) =>
-      prev === Math.min(room.images.length, 5) - 1 ? 0 : prev + 1
+      prev === Math.min(room.images.length, 6) - 1 ? 0 : prev + 1
     );
   };
 
@@ -435,7 +435,7 @@ Please confirm availability. Thank you!`;
     setIsMuted(!isMuted);
   };
 
-  const displayImages = room.images.slice(0, 5);
+  const displayImages = room.images.slice(0, 6);
 
   return (
     <>
@@ -493,8 +493,8 @@ Please confirm availability. Thank you!`;
                 )}
               </div>
 
-              {/* Thumbnail Grid - 5 images in a row (clickable for fullscreen) */}
-              <div className="grid grid-cols-5 gap-2">
+              {/* Thumbnail Grid - 6 images in a row (clickable for fullscreen) */}
+              <div className="grid grid-cols-6 gap-2">
                 {displayImages.map((image, index) => (
                   <button
                     key={index}
@@ -587,9 +587,9 @@ Please confirm availability. Thank you!`;
                   <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
                     {room.roomType === "large" ? `Up to ${room.baseGuests} Guests` : `${room.baseGuests} Guests`}
                   </p>
-                  <p className="text-2xl font-display">
+                  <p className="text-2xl font-semibold">
                     <span className="text-secondary">₹{room.basePrice.toLocaleString("en-IN")}</span>
-                    <span className="text-sm text-muted-foreground">/night</span>
+                    <span className="text-sm text-muted-foreground font-normal">/night</span>
                   </p>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -700,7 +700,7 @@ Please confirm availability. Thank you!`;
           </div>
 
           {/* Image Thumbnails - Clickable for fullscreen */}
-          <div className="grid grid-cols-5 gap-1 p-2 bg-background-secondary">
+          <div className="grid grid-cols-6 gap-1 p-2 bg-background-secondary">
             {displayImages.map((image, index) => (
               <button
                 key={index}
@@ -847,7 +847,7 @@ Please confirm availability. Thank you!`;
               </div>
               <div className="border-t border-border pt-2 flex justify-between items-center">
                 <span className="font-semibold text-foreground">Total:</span>
-                <span className="text-xl font-display text-secondary">
+                <span className="text-xl font-semibold text-secondary">
                   ₹{Math.round(currentPrice.total).toLocaleString("en-IN")}
                 </span>
               </div>
@@ -1099,7 +1099,7 @@ Please confirm availability. Thank you!`;
                   </div>
                   <div className="border-t border-border pt-1.5 sm:pt-2 flex justify-between">
                     <span className="font-semibold text-foreground">Total Amount:</span>
-                    <span className="text-base sm:text-lg font-display text-secondary">₹{Math.round(bookingPrice.total).toLocaleString("en-IN")}</span>
+                    <span className="text-base sm:text-lg font-semibold text-secondary">₹{Math.round(bookingPrice.total).toLocaleString("en-IN")}</span>
                   </div>
                 </div>
               </div>
