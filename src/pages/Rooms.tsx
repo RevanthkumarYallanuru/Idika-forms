@@ -4,9 +4,12 @@ import { Filter, Zap, Waves, ChefHat, UtensilsCrossed, Leaf, Music, Film, Gamepa
 import { Layout } from "@/components/Layout";
 import { RoomCard } from "@/components/RoomCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { LazyImage } from "@/components/LazyImage";
 import { Button } from "@/components/ui/button";
 import { roomsPage, rooms as allRooms } from "@/data/siteData";
 import type { Room } from "@/components/RoomCard";
+
+const roomsHeroImage = "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865435/2_compressed_rtbpjc.jpg";
 
 type RoomCategory = "all" | "Regular Dome" | "Large Dome";
 
@@ -42,7 +45,14 @@ const Rooms = () => {
     <Layout>
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20 pb-12">
-        <div className="absolute inset-0 bg-background-secondary" />
+        <div className="absolute inset-0">
+          <LazyImage
+            src={roomsHeroImage}
+            alt="Rooms at Idika"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background" />
+        </div>
 
         <div className="relative z-10 container-main">
           <ScrollReveal>

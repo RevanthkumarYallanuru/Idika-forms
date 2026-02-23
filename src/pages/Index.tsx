@@ -23,7 +23,7 @@ const Dome3DFallback = () => (
   </div>
 );
 
-const heroImage = "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/heros/IMG_5907.JPG";
+const heroImage = "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865401/12_rehydo.jpg";
 
 const iconMap: Record<string, LucideIcon> = {
   CloudRain,

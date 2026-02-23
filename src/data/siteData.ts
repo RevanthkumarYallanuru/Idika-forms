@@ -64,7 +64,7 @@ export const homePage = {
       description: "Our walls are built from the very earth beneath your feet. Each bag filled with local soil creates a structure that's thermal, acoustic, and deeply connected to the land.",
       highlight: "Natural",
       image: {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3901.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865430/1_mczacs.jpg",
         alt: "Interior of Idika dome bedroom"
       }
     },
@@ -110,7 +110,7 @@ export const aboutPage = {
     title: "Living Within the Earth",
     description: "Idika was born from a simple question: what if luxury meant living in harmony with nature, not despite it?",
     image: {
-      src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/heros/IMG_5910.JPG",
+      src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865402/11_b69qsq.jpg",
       alt: "Idika Earthbag Dome"
     }
   },
@@ -121,7 +121,7 @@ export const aboutPage = {
       "Our philosophy is simple: true luxury is found in sustainable living, in waking to birdsong rather than alarms, in spaces that breathe with the earth."
     ],
     image: {
-      src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3908.JPG",
+      src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865432/1_t3k7lc.jpg",
       alt: "Interior of Idika dome"
     }
   },
@@ -565,27 +565,27 @@ export const rooms: Room[] = [
     fullDescription: "Tvara offers a perfect blend of comfort and nature. This air-conditioned dome features a plush bed with bunk bed options, a spacious bathroom with natural bathing tub, and high-speed Wi-Fi connectivity for your convenience.",
     images: [
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3907.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865432/1_t3k7lc.jpg",
         alt: "Tvara dome interior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3917.PNG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865431/2_compressed_dbljtk.jpg",
         alt: "Tvara cozy bedroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3906.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865432/3_k282bo.jpg",
         alt: "Tvara dome details"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3908.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865431/4_compressed_yjoqip.jpg",
         alt: "Tvara bathroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3907.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865432/5_gxnedc.jpg",
         alt: "Tvara overview"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Tvara/IMG_3917.PNG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865432/6_cgnzqg.png",
         alt: "Tvara bedroom view"
       }
     ],
@@ -618,27 +618,27 @@ export const rooms: Room[] = [
     fullDescription: "Neer, meaning water, offers a calming retreat with its soothing ambiance. Enjoy air-conditioned comfort, plush bedding with bunk bed options, and a spa-like bathroom experience with natural bathing tub.",
     images: [
         {
-          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3919.PNG",
+          src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865435/1_compressed_rlikns.jpg",
           alt: "Neer dome interior"
         },
         {
-          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3922.PNG",
+          src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865435/2_compressed_rtbpjc.jpg",
           alt: "Neer bedroom view"
         },
         {
-          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3916.PNG",
+          src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865436/3_zv7ows.png",
           alt: "Neer dome details"
         },
         {
-          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3915.JPG",
+          src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865435/4_compressed_fx1fmp.jpg",
           alt: "Neer bathroom"
         },
         {
-          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3920.PNG",
+          src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865436/5_compressed_y1wpkm.jpg",
           alt: "Neer amenities"
         },
         {
-          src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Neer/IMG_3919.PNG",
+          src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865435/6_ntzp95.jpg",
           alt: "Neer view"
         }
     ],
@@ -671,27 +671,27 @@ export const rooms: Room[] = [
     fullDescription: "Vana, meaning forest, brings you closer to nature while providing all modern comforts. The air-conditioned dome features plush bedding, bunk bed options, and a luxurious bathroom with natural bathing tub.",
     images: [
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5920.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865410/1_compressed_phxtqq.jpg",
         alt: "Vana dome interior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3960.PNG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865410/2_compressed_ca6sox.jpg",
         alt: "Vana bedroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5929.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865411/3_sple3j.png",
         alt: "Vana dome details"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5919.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865408/4_compressed_cnftab.jpg",
         alt: "Vana nature view"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_3911.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865410/5_compressed_lscl35.jpg",
         alt: "Vana exterior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Vana/IMG_5920.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865409/6_compressed_wpjfwt.jpg",
         alt: "Vana overview"
       }
     ],
@@ -724,27 +724,27 @@ export const rooms: Room[] = [
     fullDescription: "Oorja, meaning energy, is designed to revitalize your senses. This air-conditioned dome offers plush bedding with bunk bed options, a spa-inspired bathroom with natural bathing tub, and seamless connectivity.",
     images: [
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_5893.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865427/1_tzjlo3.jpg",
         alt: "Oorja dome interior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3923.PNG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865427/2_dqjqu0.jpg",
         alt: "Oorja bedroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3913.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865427/4_compressed_k9sofi.jpg",
         alt: "Oorja dome details"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3909.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865426/5_compressed_appzxy.jpg",
         alt: "Oorja bathroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_5893.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865426/6_compressed_grbfso.jpg",
         alt: "Oorja overview"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/IMG_3923.PNG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865425/7_compressed_mu2evf.jpg",
         alt: "Oorja bed view"
       }
     ],
@@ -777,27 +777,27 @@ export const rooms: Room[] = [
     fullDescription: "Antara, meaning inner space, is our most spacious dome designed for groups and families. Featuring extra-large living areas, large bed with huge bunk bed, air-conditioned comfort, and a luxurious bathroom with natural bathing tub.",
     images: [
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3901.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865430/1_mczacs.jpg",
         alt: "Antara large dome interior"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3902.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865430/2_rqq5uy.jpg",
         alt: "Antara bedroom"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3903.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865429/3_fhomb9.png",
         alt: "Antara living area"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3901.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865428/4_compressed_iapmde.jpg",
         alt: "Antara overview"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_3904.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865428/5_compressed_lmakpt.jpg",
         alt: "Antara dome details"
       },
       {
-        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Antara/IMG_5927.JPG",
+        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865429/6_rqhayj.jpg",
         alt: "Antara exterior view"
       }
     ],
@@ -876,38 +876,50 @@ export const experiencesPage = {
   hero: {
     subtitle: "Curated Moments",
     title: "Experiences at Idika",
-    description: "Whether you seek stillness or exploration, every experience at Idika is designed to reconnect you with nature and yourself."
+    description: "More than all these, it's the stillness you feel, the warmth of our stay, and the quiet, homely charm of Idika that becomes the experience you carry with you long after you leave."
   },
   experiences: [
     {
-      title: "Sunrise Yoga",
-      description: "Begin your day on our open lawn as the sun rises over the hills.",
-      duration: "90 minutes"
+      title: "Slow Living",
+      description: "Unplug from the rush of everyday life, embrace a slower rhythm, and reconnect with yourself in a space designed for calm and clarity.",
+      icon: "Leaf",
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865411/1_wav44p.png"
     },
     {
-      title: "Farm-to-Table Cooking",
-      description: "Harvest from our garden and learn to prepare traditional Telangana cuisine.",
-      duration: "3 hours"
+      title: "Natural Bathing Tubs",
+      description: "Relax and rejuvenate in our natural bathing tubs, created for deep soaking, serenity, and complete unwinding.",
+      icon: "Bath",
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865413/2_vwtjha.png"
     },
     {
-      title: "Nature Walks",
-      description: "Guided walks through the surrounding forests, identifying native flora and fauna.",
-      duration: "2 hours"
+      title: "Candlelight Dinner Under the Stars",
+      description: "Experience an intimate evening beneath the open sky, surrounded by the soft glow of candlelight — set beautifully by the pool for a truly magical ambiance.",
+      icon: "Sparkles",
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865413/3_jes3ev.png"
     },
     {
-      title: "Stargazing",
-      description: "No light pollution means crystal-clear night skies. Telescope provided.",
-      duration: "Open-ended"
+      title: "Thoughtfully Curated Bunk Bed",
+      description: "Climb up, switch off, share a laugh. A cozy corner that brings back simple joys.",
+      icon: "BedDouble",
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865412/4_qpxxhb.png"
     },
     {
-      title: "Pottery Workshop",
-      description: "Work with local clay to create your own earthen vessel to take home.",
-      duration: "2 hours"
+      title: "Beach Themed Pool",
+      description: "Calm waters, easy sunshine. A little beach escape, right where you are.",
+      icon: "Waves",
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865413/5_chcmya.png"
     },
     {
-      title: "Digital Detox",
-      description: "Lock away your devices and rediscover presence. Journaling materials provided.",
-      duration: "Full stay"
+      title: "Picnic on the Lawn",
+      description: "Enjoy a beautifully curated picnic set against lush greenery — where simple pleasures become lasting memories.",
+      icon: "TreePine",
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865414/6_gkrxkv.png"
+    },
+    {
+      title: "Movie Night",
+      description: "End your day with a cozy movie night, where comfort and atmosphere come together for the perfect evening.",
+      icon: "Film",
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865413/7_dy4y2l.png"
     }
   ]
 };

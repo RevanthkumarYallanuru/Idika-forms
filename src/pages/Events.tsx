@@ -49,7 +49,7 @@ const Events = () => {
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <LazyImage
-            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&h=1080&fit=crop"
+            src="https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto,c_fill,ar_16:9/v1771865421/IMG_6283_fjrzzp.jpg"
             alt="Events at Idika"
             className="w-full h-full object-cover"
           />
