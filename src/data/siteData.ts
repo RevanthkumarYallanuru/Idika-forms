@@ -925,40 +925,149 @@ export const experiencesPage = {
 };
 
 export const galleryImages = [
+  // Architecture
   {
     id: 1,
-    title: "Idika Dome View",
+    title: "Earthbag Dome Structure",
     category: "Architecture",
-    alt: "Earthbag dome structure at Idika",
-    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5905.JPG"
+    alt: "Beautiful earthbag dome architecture at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865406/3_fqw9jh.jpg"
   },
   {
     id: 2,
-    title: "Sunset at Idika",
-    category: "Views",
-    alt: "Beautiful sunset view at Idika",
-    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5907.JPG"
+    title: "Dome Interior Design",
+    category: "Architecture",
+    alt: "Stunning interior design of Idika dome",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865404/15_ea2hdx.jpg"
   },
   {
     id: 3,
-    title: "Nature Surroundings",
-    category: "Amenities",
-    alt: "Natural surroundings at Idika",
-    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5910.JPG"
+    title: "Natural Construction",
+    category: "Architecture",
+    alt: "Natural earthbag construction technique",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865402/11_b69qsq.jpg"
   },
   {
     id: 4,
-    title: "Open Spaces",
-    category: "Amenities",
-    alt: "Expansive green spaces at Idika",
-    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5914.JPG"
+    title: "Dome Exterior",
+    category: "Architecture",
+    alt: "Idika dome exterior view",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865401/2_vh6hya.jpg"
   },
   {
     id: 5,
+    title: "Sustainable Architecture",
+    category: "Architecture",
+    alt: "Sustainable dome architecture at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865430/1_mczacs.jpg"
+  },
+  // Amenities
+  {
+    id: 6,
+    title: "Cozy Interiors",
+    category: "Amenities",
+    alt: "Cozy interior amenities at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865416/DSC09792_compressed_bdaah3.jpg"
+  },
+  {
+    id: 7,
+    title: "Comfortable Living Space",
+    category: "Amenities",
+    alt: "Comfortable living space inside dome",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865416/DSC09795_compressed_fvllqv.jpg"
+  },
+  {
+    id: 8,
+    title: "Natural Decor",
+    category: "Amenities",
+    alt: "Natural decor and furnishings",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865416/IMG_3436_fabdmk.jpg"
+  },
+  {
+    id: 9,
+    title: "Relaxation Space",
+    category: "Amenities",
+    alt: "Relaxation space at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865415/DSC09802_compressed_bwutys.jpg"
+  },
+  {
+    id: 10,
+    title: "Eco-Friendly Features",
+    category: "Amenities",
+    alt: "Eco-friendly amenities",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865405/6_hvy5hf.png"
+  },
+  // Views
+  {
+    id: 11,
+    title: "Nature Views",
+    category: "Views",
+    alt: "Beautiful nature views from Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865401/8_tnxrbe.jpg"
+  },
+  {
+    id: 12,
+    title: "Scenic Landscape",
+    category: "Views",
+    alt: "Scenic landscape surrounding Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865421/edf29dd0-8693-4fd8-84fb-69cabac6773d_ctvs2t.jpg"
+  },
+  {
+    id: 13,
+    title: "Green Surroundings",
+    category: "Views",
+    alt: "Lush green surroundings at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865436/5_compressed_y1wpkm.jpg"
+  },
+  {
+    id: 14,
+    title: "Natural Beauty",
+    category: "Views",
+    alt: "Natural beauty of Idika grounds",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865402/11_b69qsq.jpg"
+  },
+  {
+    id: 15,
+    title: "Outdoor Vista",
+    category: "Views",
+    alt: "Beautiful outdoor vista",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865401/2_vh6hya.jpg"
+  },
+  // Experiences
+  {
+    id: 16,
     title: "Idika Experience",
     category: "Experiences",
-    alt: "Experience nature at Idika",
-    src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/gallery/IMG_5915.JPG"
+    alt: "Unique experiences at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865422/IMG_4814_nwpg2x.jpg"
+  },
+  {
+    id: 17,
+    title: "Nature Activities",
+    category: "Experiences",
+    alt: "Nature activities at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865430/1_mczacs.jpg"
+  },
+  {
+    id: 18,
+    title: "Outdoor Adventures",
+    category: "Experiences",
+    alt: "Outdoor adventures at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865423/IMG_6384_jhutsw.jpg"
+  },
+  {
+    id: 19,
+    title: "Peaceful Retreat",
+    category: "Experiences",
+    alt: "Peaceful retreat experience",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865421/IMG_4962_nvobrw.jpg"
+  },
+  {
+    id: 20,
+    title: "Memorable Moments",
+    category: "Experiences",
+    alt: "Memorable moments at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865417/IMG_4964_nhykoj.jpg"
   }
 ];
 
