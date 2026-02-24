@@ -51,3 +51,36 @@ hero_sections{
 
 }
 
+galleryPage:{
+  architecture:{
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865406/3_fqw9jh.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865404/15_ea2hdx.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865402/11_b69qsq.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865401/2_vh6hya.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865430/1_mczacs.jpg
+  }
+
+  amenities:{
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865416/DSC09792_compressed_bdaah3.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865416/DSC09795_compressed_fvllqv.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865416/IMG_3436_fabdmk.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865415/DSC09802_compressed_bwutys.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865405/6_hvy5hf.png
+  }
+
+  views:{
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865401/8_tnxrbe.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865421/edf29dd0-8693-4fd8-84fb-69cabac6773d_ctvs2t.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865436/5_compressed_y1wpkm.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865402/11_b69qsq.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865401/2_vh6hya.jpg
+  }
+
+  Experiences:{
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865422/IMG_4814_nwpg2x.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865430/1_mczacs.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865423/IMG_6384_jhutsw.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865421/IMG_4962_nvobrw.jpg
+    https://res.cloudinary.com/danxmgylf/image/upload/v1771865417/IMG_4964_nhykoj.jpg
+  }
+}

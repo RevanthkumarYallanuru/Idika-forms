@@ -138,7 +138,7 @@ const Rooms = () => {
                   Direct Booking Available
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Click "Book via WhatsApp" to connect with our team instantly. We'll confirm your reservation and help with any special requests.
+                  
                 </p>
               </div>
             </div>
