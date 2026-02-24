@@ -114,11 +114,11 @@ const Experiences = () => {
                   className="grid grid-cols-1 md:grid-cols-2 gap-0 cursor-grab active:cursor-grabbing"
                 >
                   {/* Image Side */}
-                  <div className="relative aspect-[4/3] md:aspect-[3/4] lg:aspect-square overflow-hidden">
+                  <div className="relative aspect-[4/3] md:aspect-auto overflow-hidden max-h-[400px] md:max-h-[500px]">
                     <LazyImage
                       src={currentExperience.image || ""}
                       alt={currentExperience.title}
-                      className="w-full h-full object-cover pointer-events-none"
+                      className="w-full h-full object-cover object-center pointer-events-none"
                     />
                   </div>
 

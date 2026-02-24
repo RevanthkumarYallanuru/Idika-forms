@@ -1,10 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Filter, Zap, Waves, ChefHat, UtensilsCrossed, Leaf, Music, Film, Gamepad2, Trophy } from "lucide-react";
 import { Layout } from "@/components/Layout";
-import { RoomCard } from "@/components/RoomCard";
+import { MemoizedRoomCard } from "@/components/RoomCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { LazyImage } from "@/components/LazyImage";
+import { LazyImage, preloadImages } from "@/components/LazyImage";
 import { Button } from "@/components/ui/button";
 import { roomsPage, rooms as allRooms } from "@/data/siteData";
 import type { Room } from "@/components/RoomCard";
@@ -34,6 +34,17 @@ const Rooms = () => {
     }
     return allRooms.filter((room) => room.category === selectedCategory);
   }, [selectedCategory]);
+
+  // Preload all room images on initial mount for smoother scrolling
+  useEffect(() => {
+    const allImageSrcs: string[] = [];
+    allRooms.forEach(room => {
+      // Preload first 3 images per room and YouTube thumbnails
+      room.images.slice(0, 3).forEach(img => allImageSrcs.push(img.src));
+      allImageSrcs.push(`https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`);
+    });
+    preloadImages(allImageSrcs);
+  }, []);
 
   const categories: { value: RoomCategory; label: string }[] = [
     { value: "all", label: "All Domes" },
@@ -142,20 +153,15 @@ const Rooms = () => {
             <motion.div
               key={selectedCategory}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6 lg:gap-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
             >
-              {filteredRooms.map((room, index) => (
-                <motion.div
-                  key={room.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <RoomCard room={room} />
-                </motion.div>
+              {filteredRooms.map((room) => (
+                <div key={room.id}>
+                  <MemoizedRoomCard room={room} />
+                </div>
               ))}
             </motion.div>
           </AnimatePresence>

@@ -370,7 +370,7 @@ export const eventTypes: EventType[] = [
     name: "Birthdays / Anniversaries",
     description: "Celebrate your special moments in a private and peaceful setting.",
     icon: "Gift",
-    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop",
+    image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865418/IMG_4960_ltuffh.jpg",
     tags: ["#PrivateParties", "#NatureEvents", "#Celebrations"],
     basePrice: 40000,
     priceRange: "₹40,000 - ₹75,000",
@@ -393,7 +393,7 @@ export const eventTypes: EventType[] = [
     name: "Pre-Wedding Events",
     description: "Host intimate and elegant pre-wedding celebrations like Haldi, Mehendi, Sangeet with full property access.",
     icon: "Sparkles", 
-    image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop",
+    image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865420/IMG_4965_l6khjq.jpg",
     tags: ["#Haldi", "#Mehendi", "#Sangeet", "#Engagement"],
     basePrice: 50000,
     priceRange: "₹50,000 - ₹75,000",
@@ -415,7 +415,7 @@ export const eventTypes: EventType[] = [
     name: "Parties & Corporate Gatherings",
     description: "Perfect for team outings, private parties, and group celebrations in a relaxed setting.",
     icon: "UsersRound",
-    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop",
+    image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865420/IMG_4961_cm92hj.jpg",
     tags: ["#CorporateEvents", "#TeamOutings", "#PrivateParties"],
     basePrice: 40000,
     priceRange: "₹40,000 - ₹75,000",
@@ -889,25 +889,25 @@ export const experiencesPage = {
       title: "Natural Bathing Tubs",
       description: "Relax and rejuvenate in our natural bathing tubs, created for deep soaking, serenity, and complete unwinding.",
       icon: "Bath",
-      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865413/2_vwtjha.png"
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865408/4_compressed_cnftab.jpg"
     },
     {
       title: "Candlelight Dinner Under the Stars",
       description: "Experience an intimate evening beneath the open sky, surrounded by the soft glow of candlelight — set beautifully by the pool for a truly magical ambiance.",
       icon: "Sparkles",
-      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865413/3_jes3ev.png"
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865422/IMG_6458_k8aecm.jpg"
     },
     {
       title: "Thoughtfully Curated Bunk Bed",
       description: "Climb up, switch off, share a laugh. A cozy corner that brings back simple joys.",
       icon: "BedDouble",
-      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865412/4_qpxxhb.png"
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865411/3_sple3j.png"
     },
     {
       title: "Beach Themed Pool",
       description: "Calm waters, easy sunshine. A little beach escape, right where you are.",
       icon: "Waves",
-      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865413/5_chcmya.png"
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865415/IMG_4967_lvrnv3.jpg"
     },
     {
       title: "Picnic on the Lawn",
@@ -919,7 +919,7 @@ export const experiencesPage = {
       title: "Movie Night",
       description: "End your day with a cozy movie night, where comfort and atmosphere come together for the perfect evening.",
       icon: "Film",
-      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865413/7_dy4y2l.png"
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865405/14_emxmzj.jpg"
     }
   ]
 };

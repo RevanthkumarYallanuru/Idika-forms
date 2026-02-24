@@ -1,7 +1,7 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, memo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, ArrowRight, MessageCircle, Maximize2, Volume2, VolumeX, User, Phone, MapPin as MapPinIcon, Users as UsersIcon, Calendar, Check, Eye, Plus, Minus, Gift } from "lucide-react";
-import { LazyImage } from "./LazyImage";
+import { LazyImage, preloadImages } from "./LazyImage";
 import {
   Dialog,
   DialogContent,
@@ -155,26 +155,44 @@ export const RoomCard = ({ room }: RoomCardProps) => {
   const mobileVideoRef = useRef<HTMLDivElement>(null);
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Generate YouTube embed URL with autoplay, mute, and mobile-friendly settings
+  // Track if iframe has been loaded at least once
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+
+  // Generate YouTube embed URL - only change mute state, keep iframe alive
   const youtubeEmbedUrl = useMemo(() => {
-    // Only generate URL when video should play
-    if (!isInView && !hasInteracted) return '';
-    
     const params = new URLSearchParams({
       autoplay: '1',
       mute: isMuted ? '1' : '0',
       loop: '1',
-      playlist: room.youtubeVideoId, // Required for loop to work
+      playlist: room.youtubeVideoId,
       controls: '0',
       modestbranding: '1',
       rel: '0',
       showinfo: '0',
-      playsinline: '1', // Prevents fullscreen hijack on mobile
+      playsinline: '1',
       enablejsapi: '1',
       origin: typeof window !== 'undefined' ? window.location.origin : '',
     });
     return `https://www.youtube.com/embed/${room.youtubeVideoId}?${params.toString()}`;
-  }, [room.youtubeVideoId, isInView, isMuted, hasInteracted]);
+  }, [room.youtubeVideoId, isMuted]);
+
+  // Preload all room images on first render
+  useEffect(() => {
+    const imageSrcs = room.images.slice(0, 6).map(img => img.src);
+    // Also preload YouTube thumbnail
+    imageSrcs.push(`https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`);
+    preloadImages(imageSrcs);
+  }, [room.images, room.youtubeVideoId]);
+
+  // Track when video should be visible
+  const shouldShowVideo = (isInView || hasInteracted) && (hasLoadedOnce || isInView || hasInteracted);
+  
+  // Mark as loaded once when first shown
+  useEffect(() => {
+    if ((isInView || hasInteracted) && !hasLoadedOnce) {
+      setHasLoadedOnce(true);
+    }
+  }, [isInView, hasInteracted, hasLoadedOnce]);
 
   // Booking form state
   const [bookingForm, setBookingForm] = useState({
@@ -451,46 +469,43 @@ Please confirm availability. Thank you!`;
                 className="relative aspect-[16/10] rounded-xl overflow-hidden group bg-black"
                 onClick={() => !isInView && setHasInteracted(true)}
               >
-                {(isInView || hasInteracted) && youtubeEmbedUrl ? (
-                  <>
-                    {/* YouTube Embed - Autoplay when in view */}
-                    <iframe
-                      src={youtubeEmbedUrl}
-                      className="absolute inset-0 w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                      title={`${room.name} video tour`}
-                    />
-                    {/* Mute/Unmute Button */}
-                    <button
-                      onClick={toggleMute}
-                      className="absolute bottom-3 right-3 z-10 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-all duration-300"
-                    >
-                      {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    {/* Poster Image - shows YouTube thumbnail until video loads */}
-                    <img
-                      src={`https://img.youtube.com/vi/${room.youtubeVideoId}/maxresdefault.jpg`}
-                      alt={displayImages[0]?.alt || room.name}
-                      className="w-full h-full object-cover cursor-pointer"
-                      loading="lazy"
-                      onError={(e) => {
-                        // Fallback to hqdefault if maxresdefault doesn't exist
-                        (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`;
-                      }}
-                    />
-                    {/* Play icon overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors cursor-pointer">
-                      <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1" />
-                      </div>
+                {/* YouTube Embed - Keep mounted once loaded, control visibility */}
+              {hasLoadedOnce && (
+                <iframe
+                  src={youtubeEmbedUrl}
+                  className={`absolute inset-0 w-full h-full transition-opacity duration-300 ${shouldShowVideo ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                  title={`${room.name} video tour`}
+                />
+              )}
+              {/* Mute/Unmute Button */}
+              {shouldShowVideo && (
+                <button
+                  onClick={toggleMute}
+                  className="absolute bottom-3 right-3 z-20 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-all duration-300"
+                >
+                  {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                </button>
+              )}
+              {/* Poster Image - shows until video plays */}
+              {!shouldShowVideo && (
+                <>
+                  <img
+                    src={`https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`}
+                    alt={displayImages[0]?.alt || room.name}
+                    className="w-full h-full object-cover cursor-pointer"
+                    loading="eager"
+                  />
+                  {/* Play icon overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors cursor-pointer">
+                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1" />
                     </div>
-                  </>
-                )}
+                  </div>
+                </>
+              )}
               </div>
 
               {/* Thumbnail Grid - 6 images in a row (clickable for fullscreen) */}
@@ -631,12 +646,8 @@ Please confirm availability. Thank you!`;
         </div>
 
         {/* Mobile/Tablet Layout - Vertical Card */}
-        <motion.div 
+        <div 
           className="lg:hidden bg-card border border-border rounded-2xl overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
         >
           {/* Video/Image Area */}
           <div 
@@ -644,33 +655,34 @@ Please confirm availability. Thank you!`;
             className="relative aspect-video group bg-black"
             onClick={() => !isInView && setHasInteracted(true)}
           >
-            {(isInView || hasInteracted) && youtubeEmbedUrl ? (
+            {/* YouTube Embed - Keep mounted once loaded */}
+            {hasLoadedOnce && (
+              <iframe
+                src={youtubeEmbedUrl}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-300 ${shouldShowVideo ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+                title={`${room.name} video tour`}
+              />
+            )}
+            {/* Mute/Unmute Button */}
+            {shouldShowVideo && (
+              <button
+                onClick={toggleMute}
+                className="absolute bottom-2 right-2 z-20 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-all duration-300"
+              >
+                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+              </button>
+            )}
+            {/* Poster Image - shows until video plays */}
+            {!shouldShowVideo && (
               <>
-                {/* YouTube Embed - Autoplay when in view */}
-                <iframe
-                  src={youtubeEmbedUrl}
-                  className="absolute inset-0 w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                  title={`${room.name} video tour`}
-                />
-                {/* Mute/Unmute Button */}
-                <button
-                  onClick={toggleMute}
-                  className="absolute bottom-2 right-2 z-10 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition-all duration-300"
-                >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-              </>
-            ) : (
-              <>
-                {/* Poster Image - YouTube thumbnail */}
                 <img
                   src={`https://img.youtube.com/vi/${room.youtubeVideoId}/hqdefault.jpg`}
                   alt={displayImages[currentImageIndex]?.alt || room.name}
                   className="w-full h-full object-cover cursor-pointer"
-                  loading="lazy"
+                  loading="eager"
                 />
                 {/* Play icon overlay for mobile */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors cursor-pointer">
@@ -857,17 +869,15 @@ Please confirm availability. Thank you!`;
             </div>
 
             {/* Book Now Button */}
-            <motion.button
+            <button
               onClick={openBookingForm}
-              className="w-full btn-primary flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              className="w-full btn-primary flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-transform"
             >
               <MessageCircle size={18} />
               Book via WhatsApp
-            </motion.button>
+            </button>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Booking Form Modal */}
@@ -1331,3 +1341,8 @@ Please confirm availability. Thank you!`;
     </>
   );
 };
+
+// Memoize RoomCard to prevent unnecessary re-renders
+export const MemoizedRoomCard = memo(RoomCard, (prevProps, nextProps) => {
+  return prevProps.room.id === nextProps.room.id;
+});
