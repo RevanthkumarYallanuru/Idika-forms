@@ -206,7 +206,7 @@ const Gallery = () => {
                       whileHover={{ y: 0, opacity: 1 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <p className="font-display text-lg leading-tight mb-1">{image.title}</p>
+                      
                       <p className="text-sm text-white/80">{image.alt}</p>
                     </motion.div>
 
@@ -241,25 +241,33 @@ const Gallery = () => {
             className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4"
             onClick={() => setSelectedImage(null)}
           >
-            {/* Close Button */}
+            {/* Close Button - Responsive for mobile */}
             <motion.button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-300 backdrop-blur-md border border-white/20"
+              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-300 backdrop-blur-md border border-white/20 z-[60] md:w-12 md:h-12 md:top-6 md:right-6 sm:w-11 sm:h-11 sm:top-4 sm:right-4"
+              style={{
+                touchAction: 'manipulation',
+                minWidth: 44,
+                minHeight: 44,
+                zIndex: 60,
+                background: 'rgba(0,0,0,0.7)',
+                border: '2px solid #fff',
+                color: '#fff',
+              }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <X size={24} />
+              <X size={28} />
             </motion.button>
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons - Responsive for mobile */}
             <motion.button
               onClick={(e) => {
                 e.stopPropagation();
                 handlePrevious();
               }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-300 backdrop-blur-md border border-white/20"
-              whileHover={{ scale: 1.1, x: -4 }}
-              whileTap={{ scale: 0.95 }}
+              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white backdrop-blur-md border border-white/20 z-[50] md:w-12 md:h-12 md:left-6 sm:w-11 sm:h-11 sm:left-4"
+              style={{ touchAction: 'manipulation', zIndex: 50, transition: 'none', transform: 'translateY(-50%)', margin: 0, padding: 0 }}
             >
               <ChevronLeft size={24} />
             </motion.button>
@@ -269,9 +277,8 @@ const Gallery = () => {
                 e.stopPropagation();
                 handleNext();
               }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors duration-300 backdrop-blur-md border border-white/20"
-              whileHover={{ scale: 1.1, x: 4 }}
-              whileTap={{ scale: 0.95 }}
+              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white backdrop-blur-md border border-white/20 z-[50] md:w-12 md:h-12 md:right-6 sm:w-11 sm:h-11 sm:right-4"
+              style={{ touchAction: 'manipulation', zIndex: 50, transition: 'none', transform: 'translateY(-50%)', margin: 0, padding: 0 }}
             >
               <ChevronRight size={24} />
             </motion.button>
@@ -295,7 +302,9 @@ const Gallery = () => {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.95, opacity: 0 }}
                   transition={{ duration: 0.3 }}
+                  style={{ touchAction: 'pan-x' }}
                 />
+                {/* Pagination Dots REMOVED for mobile fullscreen */}
               </div>
 
               {/* Image Info */}
@@ -305,7 +314,6 @@ const Gallery = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.3, delay: 0.1 }}
               >
-                <p className="text-2xl font-display mb-2">{selectedItem.title}</p>
                 <div className="flex items-center justify-center gap-2">
                   <span className={`px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r ${categoryColors[selectedItem.category]} text-white`}>
                     {selectedItem.category}
@@ -315,9 +323,9 @@ const Gallery = () => {
               </motion.div>
             </motion.div>
 
-            {/* Keyboard Navigation Hint */}
+            {/* Keyboard Navigation Hint - Desktop Only */}
             <motion.div
-              className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-sm"
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-sm hidden md:block"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}

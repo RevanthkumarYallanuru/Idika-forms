@@ -137,6 +137,9 @@ const Rooms = () => {
                 <p className="font-semibold text-foreground mb-1">
                   Direct Booking Available
                 </p>
+                <p>
+                 Call/WhatsApp +91 7207357312 for Direct Bookings
+                </p>
                 <p className="text-sm text-muted-foreground">
                   
                 </p>
