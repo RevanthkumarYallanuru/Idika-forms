@@ -12,7 +12,7 @@ const categoryColors: Record<string, string> = {
   "Interiors": "from-rose-500 to-pink-500",
   "Amenities": "from-blue-500 to-cyan-500",
   "Grounds": "from-green-500 to-emerald-500",
-  "Views": "from-purple-500 to-indigo-500",
+  "Events": "from-purple-500 to-indigo-500",
   "Sustainability": "from-lime-500 to-green-500",
   "Experiences": "from-yellow-500 to-amber-500",
 };
@@ -23,7 +23,7 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [filter, setFilter] = useState<CategoryFilter>("all");
 
-  const categories = ["all", "Architecture", "Amenities", "Views", "Experiences"];
+  const categories = ["all", "Architecture", "Amenities", "Events", "Experiences"];
   
   const filteredImages = useMemo(() => {
     if (filter === "all") return galleryImages;

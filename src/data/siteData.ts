@@ -934,146 +934,122 @@ export const galleryImages = [
   // Architecture
   {
     id: 1,
-    
     category: "Architecture",
-    alt: "Beautiful earthbag dome architecture at Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865406/3_fqw9jh.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861733/1_jbjauc.jpg"
   },
   {
     id: 2,
-    
     category: "Architecture",
-    alt: "Stunning interior design of Idika dome",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865404/15_ea2hdx.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861746/11_sbx4vv.jpg"
   },
   {
     id: 3,
-   
     category: "Architecture",
-    alt: "Natural earthbag construction technique",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865402/11_b69qsq.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861752/12_ac75in.jpg"
   },
   {
     id: 4,
-   
     category: "Architecture",
-    alt: "Idika dome exterior view",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865401/2_vh6hya.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861727/8_lp5k40.jpg"
   },
   {
     id: 5,
-   
     category: "Architecture",
-    alt: "Sustainable dome architecture at Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865430/1_mczacs.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861728/9_lnnzjs.jpg"
   },
   // Amenities
   {
     id: 6,
     
     category: "Amenities",
-    alt: "Cozy interior amenities at Idika",
     src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865416/DSC09792_compressed_bdaah3.jpg"
   },
   {
     id: 7,
    
     category: "Amenities",
-    alt: "Comfortable living space inside dome",
     src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865416/DSC09795_compressed_fvllqv.jpg"
   },
   {
     id: 8,
    
     category: "Amenities",
-    alt: "Natural decor and furnishings",
     src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865416/IMG_3436_fabdmk.jpg"
   },
   {
     id: 9,
   
     category: "Amenities",
-    alt: "Relaxation space at Idika",
     src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865415/DSC09802_compressed_bwutys.jpg"
   },
   {
     id: 10,
    
     category: "Amenities",
-    alt: "Eco-friendly amenities",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865405/6_hvy5hf.png"
+    
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1772861473/IMG_5451_kixbpr.heic"
   },
-  // Views
+  // Events
   {
     id: 11,
-    
-    category: "Views",
-    alt: "Beautiful nature views from Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865401/8_tnxrbe.jpg"
+    category: "Events",
+    alt: "Events at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1772861451/IMG_4959_ut4qyf.jpg"
   },
   {
     id: 12,
-    
-    category: "Views",
-    alt: "Scenic landscape surrounding Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865421/edf29dd0-8693-4fd8-84fb-69cabac6773d_ctvs2t.jpg"
+    category: "Events",
+    alt: "Events at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1772861450/IMG_4960_k92lis.jpg"
   },
   {
     id: 13,
-   
-    category: "Views",
-    alt: "Lush green surroundings at Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865436/5_compressed_y1wpkm.jpg"
+    category: "Events",
+    alt: "Events at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1772861454/IMG_4962_vxx3bi.jpg"
   },
   {
     id: 14,
-    
-    category: "Views",
-    alt: "Natural beauty of Idika grounds",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865402/11_b69qsq.jpg"
+    category: "Events",
+    alt: "Events at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1772861455/IMG_4964_bvet7w.jpg"
   },
   {
     id: 15,
-   
-    category: "Views",
-    alt: "Beautiful outdoor vista",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865401/2_vh6hya.jpg"
+    category: "Events",
+    alt: "Events at Idika",
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1772861449/IMG_4965_fctpxu.jpg"
   },
   // Experiences
   {
     id: 16,
     
     category: "Experiences",
-    alt: "Unique experiences at Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865422/IMG_4814_nwpg2x.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861399/Beach_themed_pool_g5xn5x.jpg"
   },
   {
     id: 17,
    
     category: "Experiences",
-    alt: "Nature activities at Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865430/1_mczacs.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861398/Bunk_bed_mkmzlw.jpg"
   },
   {
     id: 18,
    
     category: "Experiences",
-    alt: "Outdoor adventures at Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865423/IMG_6384_jhutsw.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861401/Candle_light_dinner_hnjcfh.jpg"
   },
   {
     id: 19,
     
     category: "Experiences",
-    alt: "Peaceful retreat experience",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865421/IMG_4962_nvobrw.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861401/Picnic_on_the_lawn_r8behd.jpg"
   },
   {
     id: 20,
     
     category: "Experiences",
-    alt: "Memorable moments at Idika",
-    src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865417/IMG_4964_nhykoj.jpg"
+    src: "https://res.cloudinary.com/danxmgylf/image/upload/v1772861403/Slow_living_w4mu42.jpg"
   }
 ];
 
