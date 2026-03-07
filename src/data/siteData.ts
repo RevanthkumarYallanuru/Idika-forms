@@ -683,15 +683,15 @@ export const rooms: Room[] = [
         alt: "Vana dome details"
       },
       {
-        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865408/4_compressed_cnftab.jpg",
+        src: "https://cdn.jsdelivr.net/gh/RevanthkumarYallanuru/assets@main/rooms/Vana/4.jpeg",
         alt: "Vana nature view"
       },
       {
-        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865410/5_compressed_lscl35.jpg",
+        src: "https://cdn.jsdelivr.net/gh/RevanthkumarYallanuru/assets@main/rooms/Vana/5.jpeg",
         alt: "Vana exterior"
       },
       {
-        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865409/6_compressed_wpjfwt.jpg",
+        src: "https://cdn.jsdelivr.net/gh/RevanthkumarYallanuru/assets@main/rooms/Vana/6.jpeg",
         alt: "Vana overview"
       }
     ],
@@ -744,7 +744,7 @@ export const rooms: Room[] = [
         alt: "Oorja overview"
       },
       {
-        src: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865425/7_compressed_mu2evf.jpg",
+        src: "https://cdn.jsdelivr.net/gh/RevanthkumarYallanuru/assets@main/rooms/Oorja/6.jpeg",
         alt: "Oorja bed view"
       }
     ],
@@ -907,19 +907,25 @@ export const experiencesPage = {
       title: "Beach Themed Pool",
       description: "Calm waters, easy sunshine. A little beach escape, right where you are.",
       icon: "Waves",
-      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865415/IMG_4967_lvrnv3.jpg"
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865413/5_chcmya.png"
     },
     {
       title: "Picnic on the Lawn",
       description: "Enjoy a beautifully curated picnic set against lush greenery — where simple pleasures become lasting memories.",
       icon: "TreePine",
-      image: "https://res.cloudinary.com/danxmgylf/image/upload/f_auto,q_auto/v1771865414/6_gkrxkv.png"
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865414/6_gkrxkv.png"
     },
     {
       title: "Movie Night",
       description: "End your day with a cozy movie night, where comfort and atmosphere come together for the perfect evening.",
       icon: "Film",
       image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865405/14_emxmzj.jpg"
+    },
+    {
+      title: "The Essence of Idika",
+      description: "More than all these, it's the stillness you feel, the warmth of our stay, and the quiet, homely charm of Idika that becomes the experience you carry with you long after you leave.",
+      icon: "Sparkles",
+      image: "https://res.cloudinary.com/danxmgylf/image/upload/v1771865413/7_dy4y2l.png"
     }
   ]
 };
