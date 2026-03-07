@@ -15,9 +15,9 @@ export const ScrollReveal = ({
   children,
   className = "",
   delay = 0,
-  duration = 0.6,
+  duration = 0.5,
   direction = "up",
-  distance = 40,
+  distance = 24,
   once = true,
 }: ScrollRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -153,11 +153,11 @@ export const ParallaxImage = ({
       <motion.img
         src={src}
         alt={alt}
-        className="w-full h-full object-cover scale-110"
+        className="w-full h-full object-cover"
         initial={{ y: 0 }}
-        whileInView={{ y: -30 * speed }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        viewport={{ once: false }}
+        whileInView={{ y: -20 * speed }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
       />
     </div>
   );

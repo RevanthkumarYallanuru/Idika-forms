@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks, ctaButton, siteConfig } from "@/data/siteData";
 import logo from "@/assets/idika-logo.png";
@@ -36,11 +36,8 @@ export const Navigation = () => {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 will-change-transform ${
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "glass-strong py-3"
             : "bg-transparent py-5"
@@ -97,7 +94,7 @@ export const Navigation = () => {
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </nav>
-      </motion.header>
+      </header>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -127,36 +124,25 @@ export const Navigation = () => {
               className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-background-secondary border-l border-border/30 p-8 pt-24"
             >
               <div className="flex flex-col gap-6">
-                {navLinks.map((link, index) => (
-                  <motion.div
+                {navLinks.map((link) => (
+                  <Link
                     key={link.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 + 0.1 }}
+                    to={link.href}
+                    className={`text-2xl font-display font-light tracking-wide transition-colors ${
+                      location.pathname === link.href
+                        ? "text-primary"
+                        : "text-foreground hover:text-primary"
+                    }`}
                   >
-                    <Link
-                      to={link.href}
-                      className={`text-2xl font-display font-light tracking-wide transition-colors ${
-                        location.pathname === link.href
-                          ? "text-primary"
-                          : "text-foreground hover:text-primary"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
+                    {link.label}
+                  </Link>
                 ))}
 
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="pt-8 mt-4 border-t border-border/30"
-                >
+                <div className="pt-8 mt-4 border-t border-border/30">
                   <Link to={ctaButton.href} className="btn-primary w-full text-center">
                     {ctaButton.label}
                   </Link>
-                </motion.div>
+                </div>
               </div>
             </motion.nav>
           </motion.div>

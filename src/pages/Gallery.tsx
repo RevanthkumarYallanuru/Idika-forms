@@ -69,21 +69,7 @@ const Gallery = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
+        staggerChildren: 0.04,
       },
     },
   };
@@ -91,12 +77,7 @@ const Gallery = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-b from-background-secondary to-background overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-primary/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
-        </div>
-        
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-background-secondary to-background overflow-hidden">        
         <div className="container-main text-center relative z-10">
           <ScrollReveal>
             <motion.p 
@@ -138,19 +119,17 @@ const Gallery = () => {
             transition={{ duration: 0.6 }}
           >
             {categories.map((category) => (
-              <motion.button
+              <button
                 key={category}
                 onClick={() => setFilter(category)}
-                className={`px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
+                className={`px-6 py-2.5 rounded-full font-medium transition-all duration-200 ${
                   filter === category
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30 scale-105"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105"
                 }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 {category === "all" ? "All" : category}
-              </motion.button>
+              </button>
             ))}
           </motion.div>
         </div>
@@ -163,23 +142,20 @@ const Gallery = () => {
             <motion.div 
               key={filter}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-[280px]"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
             >
               {filteredImages.map((image) => {
               return (
-                <motion.div
+                <div
                   key={image.id}
-                  variants={itemVariants}
                   className="aspect-auto"
                 >
-                  <motion.button
+                  <button
                     onClick={() => setSelectedImage(image.id)}
-                    className="relative w-full h-full overflow-hidden rounded-2xl group cursor-pointer"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
+                    className="relative w-full h-full overflow-hidden rounded-2xl group cursor-pointer hover:scale-[1.02] transition-transform duration-300"
                   >
                     <LazyImage
                       src={image.src}
@@ -191,38 +167,30 @@ const Gallery = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
                     {/* Category Badge */}
-                    <motion.div
+                    <div
                       className={`absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${categoryColors[image.category] || "from-gray-500 to-gray-600"} shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                      initial={{ scale: 0.8 }}
-                      whileInView={{ scale: 1 }}
                     >
                       {image.category}
-                    </motion.div>
+                    </div>
 
                     {/* Content */}
-                    <motion.div 
-                      className="absolute bottom-0 left-0 right-0 p-5 text-white"
-                      initial={{ y: 20, opacity: 0 }}
-                      whileHover={{ y: 0, opacity: 1 }}
-                      transition={{ duration: 0.3 }}
+                    <div 
+                      className="absolute bottom-0 left-0 right-0 p-5 text-white translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
                     >
                       
                       <p className="text-sm text-white/80">{image.alt}</p>
-                    </motion.div>
+                    </div>
 
                     {/* Play Icon */}
-                    <motion.div
-                      className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      whileHover={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.3 }}
+                    <div
+                      className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
                       <div className="w-14 h-14 rounded-full border-2 border-white/60 flex items-center justify-center backdrop-blur-sm bg-white/10">
                         <div className="w-0 h-0 border-l-8 border-l-white border-t-5 border-t-transparent border-b-5 border-b-transparent ml-1" />
                       </div>
-                    </motion.div>
-                  </motion.button>
-                </motion.div>
+                    </div>
+                  </button>
+                </div>
               );
             })}
           </motion.div>

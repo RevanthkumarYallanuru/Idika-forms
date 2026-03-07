@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ArrowRight, Star, CloudRain, Filter, Recycle, Droplets, LucideIcon } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { LazyImage } from "@/components/LazyImage";
@@ -51,38 +50,27 @@ const Index = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 container-main text-center pt-20">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-subtitle text-secondary mb-6"
-          >
+          <p className="text-subtitle text-secondary mb-6 animate-fade-in" style={{ animationDelay: '0.1s', opacity: 0, animationFillMode: 'forwards' }}>
             {homePage.hero.subtitle}
-          </motion.p>
+          </p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-wider leading-none mb-8"
+          <h1
+            className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-wider leading-none mb-8 animate-fade-in-up"
+            style={{ animationDelay: '0.2s', opacity: 0, animationFillMode: 'forwards' }}
           >
             {homePage.hero.title}
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="text-display-sm font-semibold max-w-2xl mx-auto mb-12 text-white"
+          <p
+            className="text-display-sm font-semibold max-w-2xl mx-auto mb-12 text-white animate-fade-in"
+            style={{ animationDelay: '0.35s', opacity: 0, animationFillMode: 'forwards' }}
           >
             {homePage.hero.description}
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          <div
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in"
+            style={{ animationDelay: '0.5s', opacity: 0, animationFillMode: 'forwards' }}
           >
             <Link to={homePage.hero.cta.primary.href} className="btn-primary">
               {homePage.hero.cta.primary.label}
@@ -91,7 +79,7 @@ const Index = () => {
             <Link to={homePage.hero.cta.secondary.href} className="btn-secondary">
               {homePage.hero.cta.secondary.label}
             </Link>
-          </motion.div>
+          </div>
         </div>
 
       </section>
@@ -294,11 +282,6 @@ const Index = () => {
 
       {/* Final CTA Section */}
       <section className="section-padding relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />
-        </div>
-
         <div className="container-main relative z-10">
           <ScrollReveal className="text-center max-w-2xl mx-auto">
             <h2 className="text-display-lg mb-6">{homePage.cta.title}</h2>

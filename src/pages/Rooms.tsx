@@ -61,6 +61,8 @@ const Rooms = () => {
             src={roomsHeroImage}
             alt="Rooms at Idika"
             className="w-full h-full object-cover"
+            priority={true}
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/70 to-background" />
         </div>
@@ -68,68 +70,44 @@ const Rooms = () => {
         <div className="relative z-10 container-main">
           <ScrollReveal>
             <div className="text-center mb-12">
-              <motion.p
-                className="text-subtitle text-primary mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
+              <p className="text-subtitle text-primary mb-4">
                 {roomsPage.hero.subtitle}
-              </motion.p>
-              <motion.h1
-                className="text-display-xl mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
+              </p>
+              <h1 className="text-display-xl mb-6">
                 {roomsPage.hero.title}
-              </motion.h1>
-              <motion.p
-                className="text-body-lg max-w-2xl mx-auto text-muted-foreground"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
+              </h1>
+              <p className="text-body-lg max-w-2xl mx-auto text-muted-foreground">
                 {roomsPage.hero.description}
-              </motion.p>
+              </p>
             </div>
           </ScrollReveal>
 
           {/* Filter Section */}
-          <motion.div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 flex-wrap mb-12">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Filter size={18} />
               <span className="text-sm font-medium">Filter:</span>
             </div>
             <div className="flex flex-wrap gap-2 justify-center">
               {categories.map((category) => (
-                <motion.button
+                <button
                   key={category.value}
                   onClick={() => setSelectedCategory(category.value)}
-                  className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 ${
+                  className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-200 ${
                     selectedCategory === category.value
                       ? "bg-secondary text-secondary-foreground shadow-lg"
-                      : "bg-background-secondary text-foreground hover:bg-secondary/20 border border-border"
+                      : "bg-background-secondary text-foreground hover:bg-secondary/20 border border-border hover:scale-105"
                   }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   {category.label}
-                </motion.button>
+                </button>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Info Banner */}
-          <motion.div
+          <div
             className="bg-primary/10 border border-primary/20 rounded-xl p-4 mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
           >
             <div className="flex items-start gap-3">
               <Zap className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
@@ -145,7 +123,7 @@ const Rooms = () => {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

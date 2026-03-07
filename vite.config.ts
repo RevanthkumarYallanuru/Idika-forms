@@ -18,6 +18,10 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    target: 'esnext',
+    minify: 'esbuild',
+    cssMinify: true,
+    sourcemap: false,
     // Code splitting for better mobile performance
     rollupOptions: {
       output: {
