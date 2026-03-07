@@ -744,7 +744,7 @@ export const rooms: Room[] = [
         alt: "Oorja overview"
       },
       {
-        src: "https://cdn.jsdelivr.net/gh/RevanthkumarYallanuru/assets@main/rooms/Oorja/6.jpeg",
+        src: "https://raw.githubusercontent.com/RevanthkumarYallanuru/assets/main/rooms/Oorja/7.jpeg",
         alt: "Oorja bed view"
       }
     ],
